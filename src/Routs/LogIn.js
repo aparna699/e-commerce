@@ -21,9 +21,9 @@ const LogIn = () => {
 
 
     
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
+    // useEffect(() => {
+    //     userRef.current.focus();
+    // }, [])
 
     useEffect(() => {
         setErrMsg('');
@@ -52,6 +52,7 @@ const LogIn = () => {
             setAuth({email, password, accessToken})
             setEmail('')
             setPwd("")
+            
             navigate(from,{replace: true})
         }catch(err){
             if(!err?.response){
@@ -63,9 +64,8 @@ const LogIn = () => {
             } else {
                 setErrMsg("LogIn failed")
             }
-            // console.log(pass);
             console.log(err);
-            errRef.current.focus();
+            // errRef.current.focus();
         }
     }
 
@@ -113,9 +113,10 @@ const LogIn = () => {
                     <div class="col">
                     <a href="#!">Forgot password?</a>
                     </div>
+                    <button type="submit" class="btn btn-primary btn-block">Log-In</button>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                
 
                 <div class="text-center">
                     <p>Not a member? <a href="#!">Register</a></p>
