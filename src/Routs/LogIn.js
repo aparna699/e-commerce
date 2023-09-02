@@ -35,8 +35,10 @@ const LogIn = () => {
             const LOGIN_URL = '/auth'
             const body = JSON.stringify({email: email,password:password});
             const header = {
-                headers: {'Content-Type': 'application/json'},
-                withCredentials: true
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true,
             }
             const response = await axios.post(
                 LOGIN_URL,
@@ -46,9 +48,11 @@ const LogIn = () => {
 
             const accessToken = response?.data?.accessToken
             const role = response?.data?.role
+            const id = response?.data?.id
             console.log(response?.data)
             Cookies.set('token', accessToken, {expires: 1/48})
             Cookies.set('role', role, {expires: 1/48})
+            Cookies.set('userId', id, {expires: 1/48})
             setAuth({email, password, accessToken})
             setEmail('')
             setPwd("")

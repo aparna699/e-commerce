@@ -5,7 +5,6 @@ import axios from "../api/axios";
 const CategoryDropdown = () => {
   const [category, setCategory] = useState([]);
   const token = Cookies.get("token");
-  const role = Cookies.get("role");
 
   useEffect(() => {
     let isMounted = true;
@@ -13,10 +12,10 @@ const CategoryDropdown = () => {
     
     const getCategory = async () => {
      
-      console.log("log");
+      console.log("get Category");
       try {
         const header = {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         };
         const response = await axios.get("/api/category", {
@@ -40,9 +39,14 @@ const CategoryDropdown = () => {
   return (
     <div>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a className="dropdown-item" href="/">
+                All
+              </a>
+            </li>
         {category.map((key) => {
           return (
-            <li>
+            <li id= {key.id}>
               <a className="dropdown-item" href="#">
                 {key.categoryName}
               </a>

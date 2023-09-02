@@ -2,27 +2,21 @@ import Cookies from "js-cookie";
 // import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-//MUI
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
-// import axios from "../api/axios";
+import { padding } from "@mui/system";
+import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
 import AddressSelect from "../Component/AddressSelect";
 
 const Navbar = () => {
   const cartQty = 1;
+  // const user = token?jwtDecode(token): null
 
+  // const role = 'ROLE_ADMIN'
   const token = Cookies.get("token");
   const role = Cookies.get("role");
-
-  const user = ["My Order"];
-  const admin = ["Products", "Orders", "Users"];
-
-  const navbar =
-    role == "ROLE_CUSTOMER" ? user : role == "ROLE_ADMIN" ? admin : [];
 
   const logout = () => {
     Cookies.remove("token");
@@ -57,15 +51,11 @@ const Navbar = () => {
                   Home
                 </a>
               </li>
-              {navbar.map((key) => {
-                return (
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      {key}
-                    </a>
-                  </li>
-                );
-              })}
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  My Orders
+                </a>
+              </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -78,6 +68,9 @@ const Navbar = () => {
                   Categories
                 </a>
                 <CategoryDropdown />
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
               </li>
             </ul>
 
@@ -106,7 +99,8 @@ const Navbar = () => {
                     href="login"
                     onClick={logout}
                   >
-                    login
+                    {" "}
+                    login{" "}
                   </a>
                 ) : (
                   <a
@@ -118,7 +112,8 @@ const Navbar = () => {
                     href="login"
                     onClick={logout}
                   >
-                    logout
+                    {" "}
+                    logout{" "}
                   </a>
                 )}
               </li>
@@ -127,11 +122,6 @@ const Navbar = () => {
                   <Badge badgeContent={cartQty} color="primary">
                     <ShoppingCartIcon />
                   </Badge>
-                </a>
-              </li>
-              <li>
-                <a class="nav-link active" aria-current="page" href="#">
-                  <AccountCircleIcon/>
                 </a>
               </li>
             </ul>
