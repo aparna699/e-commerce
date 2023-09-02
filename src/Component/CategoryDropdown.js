@@ -47,7 +47,7 @@ const CategoryDropdown = () => {
         {category.map((key) => {
           return (
             <li id= {key.id}>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href={key.categoryName}>
                 {key.categoryName}
               </a>
             </li>

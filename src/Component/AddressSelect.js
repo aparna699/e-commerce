@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "../api/axios";
+import HomeIcon from '@mui/icons-material/Home';
 
 const AddressSelect = () => {
   const [address, setAddress] = useState([]);
@@ -38,13 +39,18 @@ const AddressSelect = () => {
   },[])
 
   return (
-    <div class="px-2">
-      <select class="form-select" style={{ width: "200px" }}>
+    <div class="d-flex py-2" style={{'width': '250px'}}>
+      <div class= "px-2" style={{'margin-top':'auto', 'margin-bottom': 'auto'}}>
+        <a href="/address">
+        <HomeIcon />
+        </a>
+      </div>
+      <select class="form-select me-2">
         <option selected>Select Address </option>
         {address.map((key) => {
           return (
             <option value={key.id}>
-              Deliver to {key.unit} {key.line1}
+              {key.unit} {key.line1}
             </option>
           );
         })}

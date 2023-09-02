@@ -6,7 +6,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 // import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
@@ -18,7 +18,7 @@ const Navbar = () => {
   const token = Cookies.get("token");
   const role = Cookies.get("role");
 
-  const user = ["My Order"];
+  const user = ["MyOrders"];
   const admin = ["Products", "Orders", "Users"];
 
   const navbar =
@@ -53,14 +53,14 @@ const Navbar = () => {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a class="nav-link active" aria-current="page" href="/">
                   Home
                 </a>
               </li>
               {navbar.map((key) => {
                 return (
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href={`${key}`}>
                       {key}
                     </a>
                   </li>
@@ -81,7 +81,7 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <form class="d-flex">
+            <form class="d-flex px-2">
               <input
                 class="form-control me-2"
                 type="search"
@@ -93,12 +93,26 @@ const Navbar = () => {
               </button>
             </form>
             {/* Address */}
-            {role === undefined ? <div></div> : <AddressSelect />}
+            {
+              role === "ROLE_CUSTOMER" ? <AddressSelect /> : <div> </div>
+            }
             <ul class="navbar-nav">
+              <li>
+                <a class="nav-link active px-2" aria-current="page" href="/cart">
+                  <Badge badgeContent={cartQty} color="primary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link active px-2" aria-current="page" href="/profile">
+                  <AccountCircleIcon />
+                </a>
+              </li>
               <li>
                 {role === undefined ? (
                   <a
-                    class="nav-link active"
+                    class="nav-link active px-2"
                     aria-current="page"
                     style={{
                       color: " #8c9aca",
@@ -110,7 +124,7 @@ const Navbar = () => {
                   </a>
                 ) : (
                   <a
-                    class="nav-link active"
+                    class="nav-link active px-2"
                     aria-current="page"
                     style={{
                       color: " #8c9aca",
@@ -121,18 +135,6 @@ const Navbar = () => {
                     logout
                   </a>
                 )}
-              </li>
-              <li>
-                <a class="nav-link active" aria-current="page" href="#">
-                  <Badge badgeContent={cartQty} color="primary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </a>
-              </li>
-              <li>
-                <a class="nav-link active" aria-current="page" href="#">
-                  <AccountCircleIcon/>
-                </a>
               </li>
             </ul>
           </div>

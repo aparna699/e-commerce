@@ -9,12 +9,12 @@ const RequireAuth = ({allowedRoles}) => {
     const location = useLocation();
     const token = Cookies.get('token')
     // const user = token?jwtDecode(token): null
-    // const role = user?.role
+    const role = Cookies.get('role')
     console.log(token)
 
     
     return (
-        user === null
+        role === undefined
             ? <Navigate to="/login" state={{from: location}} replace/>
             :allowedRoles?.find(r =>role.includes(r))
                 ?<Outlet/>
