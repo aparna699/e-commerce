@@ -50,9 +50,9 @@ const LogIn = () => {
             const role = response?.data?.role
             const id = response?.data?.id
             console.log(response?.data)
-            Cookies.set('token', accessToken, {expires: 1/48})
-            Cookies.set('role', role, {expires: 1/48})
-            Cookies.set('userId', id, {expires: 1/48})
+            Cookies.set('token', accessToken)
+            Cookies.set('role', role)
+            Cookies.set('userId', id)
             setAuth({email, password, accessToken})
             setEmail('')
             setPwd("")
