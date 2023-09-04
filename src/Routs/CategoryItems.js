@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Items = (props) => {
+const CategoryItems = (props) => {
   return (
     <div>{props.category}</div>
   )
 }
 
-export default Items;
+export default CategoryItems;

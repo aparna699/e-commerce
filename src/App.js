@@ -10,7 +10,7 @@ import RequireAuth from "./Component/RequireAuth";
 import Products from "./Routs/Products";
 import Orders from "./Routs/Orders";
 import Users from "./Routs/Users";
-import Items from "./Routs/Items";
+import CategoryItems from "./Routs/CategoryItems";
 import Cart from "./Routs/Cart"
 import Profile from "./Routs/Profile";
 import axios from "./api/axios";
@@ -72,7 +72,7 @@ function App() {
             return (
               <Route
                 path={`/${key.categoryName}`}
-                element={<Items category={`${key.categoryName}`} />}
+                element={<CategoryItems category={`${key.categoryName}`} />}
               />
             );
           })}

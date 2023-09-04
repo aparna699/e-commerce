@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HomeIcon from '@mui/icons-material/Home';
 
 // import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
@@ -93,19 +94,37 @@ const Navbar = () => {
               </button>
             </form>
             {/* Address */}
-            {
-              role === "ROLE_CUSTOMER" ? <AddressSelect /> : <div> </div>
-            }
+            {role === "ROLE_CUSTOMER" ? (
+              <div
+                class="px-2"
+                style={{ "margin-top": "auto", "margin-bottom": "auto" }}
+              >
+                <a href="/address">
+                  <HomeIcon />
+                </a>
+              </div>
+              // <AddressSelect />
+            ) : (
+              <div> </div>
+            )}
             <ul class="navbar-nav">
               <li>
-                <a class="nav-link active px-2" aria-current="page" href="/cart">
+                <a
+                  class="nav-link active px-2"
+                  aria-current="page"
+                  href="/cart"
+                >
                   <Badge badgeContent={cartQty} color="primary">
                     <ShoppingCartIcon />
                   </Badge>
                 </a>
               </li>
               <li>
-                <a class="nav-link active px-2" aria-current="page" href="/profile">
+                <a
+                  class="nav-link active px-2"
+                  aria-current="page"
+                  href="/profile"
+                >
                   <AccountCircleIcon />
                 </a>
               </li>

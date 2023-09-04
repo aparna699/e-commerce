@@ -31,3 +31,12 @@
 a.nav-link:hover {
   color: rgb(0, 0, 0);
 }
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.scroller {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

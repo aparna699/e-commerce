@@ -1,8 +1,10 @@
+import Cookies from 'js-cookie';
 import React from 'react'
 
 const Cart = () => {
+    const addressId = Cookies.get('addressId')
   return (
-    <div>Cart</div>
+    <div>Cart: {`${addressId}`}</div>
   )
 }
 
