@@ -7,7 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 
 // import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
@@ -37,7 +37,7 @@ const Navbar = () => {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             E-Commerce
           </a>
           <button
@@ -103,31 +103,39 @@ const Navbar = () => {
                   <HomeIcon />
                 </a>
               </div>
-              // <AddressSelect />
             ) : (
+              // <AddressSelect />
               <div> </div>
             )}
             <ul class="navbar-nav">
-              <li>
-                <a
-                  class="nav-link active px-2"
-                  aria-current="page"
-                  href="/cart"
-                >
-                  <Badge badgeContent={cartQty} color="primary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="nav-link active px-2"
-                  aria-current="page"
-                  href="/profile"
-                >
-                  <AccountCircleIcon />
-                </a>
-              </li>
+              {role === "ROLE_CUSTOMER" ? (
+                <li>
+                  <a
+                    class="nav-link active px-2"
+                    aria-current="page"
+                    href="/cart"
+                  >
+                    <Badge badgeContent={cartQty} color="primary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </a>
+                </li>
+              ) : (
+                <div></div>
+              )}
+              {role === undefined ? (
+                <li>
+                  <a
+                    class="nav-link active px-2"
+                    aria-current="page"
+                    href="/profile"
+                  >
+                    <AccountCircleIcon />
+                  </a>
+                </li>
+              ) : (
+                <div></div>
+              )}
               <li>
                 {role === undefined ? (
                   <a
