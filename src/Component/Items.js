@@ -15,7 +15,7 @@ const Items = (props) => {
     const getItems = async () => {
       try {
         const header = {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         };
         const response = await axios.get(url, {
