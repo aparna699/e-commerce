@@ -14,7 +14,7 @@ import CategoryDropdown from "../Component/CategoryDropdown";
 import AddressSelect from "../Component/AddressSelect";
 
 const Navbar = () => {
-  const cartQty = 1;
+  const cartQty = localStorage.getItem('totalQty');
 
   const token = Cookies.get("token");
   const role = Cookies.get("role");

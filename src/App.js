@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LogIn from "./Routs/LogIn";
@@ -11,13 +12,57 @@ import Products from "./Routs/Products";
 import Orders from "./Routs/Orders";
 import Users from "./Routs/Users";
 import CategoryItems from "./Routs/CategoryItems";
-import Cart from "./Routs/Cart"
+import Cart from "./Routs/Cart";
 import Profile from "./Routs/Profile";
 import axios from "./api/axios";
 import Address from "./Routs/Address";
 
 function App() {
   const [category, setCategory] = useState([]);
+
+  const userId = Cookies.get("userId");
+  const token = Cookies.get("token");
+  const [items, setItems] = useState([]);
+  let count = 0;
+
+  useEffect(() => {
+    // localStorage.setItem("cart", JSON.stringify("cart"));
+    let isMounted = true;
+    const controller = new AbortController();
+    const url = `/api/cart-item/user/${userId}`;
+
+    const getCartItems = async () => {
+      try {
+        const header = {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        };
+        const response = await axios.get(url, {
+          header: header,
+        });
+        console.log(response.data);
+        isMounted && localStorage.setItem("cart", JSON.stringify(response.data));
+        
+        // count = response.data.length
+        response.data.map((key) => {
+          count = count + key.qty
+        })
+        localStorage.setItem("totalQty",count)
+        count =0
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getCartItems();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, [items]);
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -52,8 +97,8 @@ function App() {
         <Route path="/" element={<Navbar />}>
           <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
             <Route path="/MyOrders" element={<MyOrders />} />
-            <Route path= '/cart' element={<Cart/>} />
-            <Route path= '/address' element={<Address/>} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/address" element={<Address />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>
             <Route path="/Products" element={<Products />} />
@@ -65,7 +110,7 @@ function App() {
               <RequireAuth allowedRoles={["ROLE_CUSTOMER", "ROLE_ADMIN"]} />
             }
           >
-            <Route path= '/profile' element={<Profile/>} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/" element={<Home />} />
           {category.map((key) => {
