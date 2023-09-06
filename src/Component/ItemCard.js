@@ -1,10 +1,21 @@
 import { ConstructionOutlined } from "@mui/icons-material";
 import Cookies from "js-cookie";
-import React from "react";
+import React, { useEffect , useState} from "react";
+import { EditeQtyButton } from "./EditeQtyButton";
 
 const ItemCard = (props) => {
   const item = props.item;
   const role = Cookies.get('role')
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    console.log("cart");
+    const items = JSON.parse(localStorage.getItem("cart"));
+    if (items) {
+      setCart(items);
+    }
+
+  }, [localStorage.getItem("cart")]);
 
   const addToCart = (e) => {
     e.preventDefault()
@@ -29,7 +40,14 @@ const ItemCard = (props) => {
               {
                 (role == 'ROLE_CUSTOMER')?
                 (
-                  <button className="btn btn-dark" onClick={addToCart}>Add To Cart</button>
+                  (cart.find((c) => c.itemId.id === item.id))?(
+                    <EditeQtyButton cart= {cart.find((c) => c.itemId.id === item.id)} />
+                  ):(
+                    <div className="d-flex justify-content-end">
+                      <button className="btn btn-dark " onClick={addToCart}>Add To Cart</button>
+                    </div>
+                  )
+                  // <button className="btn btn-dark" onClick={addToCart}>Add To Cart</button>
                 ):(
                   <div></div>
                 )
