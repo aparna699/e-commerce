@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "../api/axios";
+import { useState } from "react";
+import { EditeQtyButton } from "./EditeQtyButton";
 
 const CartItemCard = (props) => {
-  const item = props.item;
-  const qty = props.qty;
-  // console.log(Item)
+  const item = props.cart.itemId;
+  const qty = props.cart.qty;
+  const token = Cookies.get("token");
+  const url = `/api/cart-item/${props.cart.id}`;
+
+  const deleteItem = async (e) => {
+    e.preventDefault()
+    let isMounted = true
+    try {
+        const header = {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        };
+        const response = await axios.delete(url , {
+          headers: header,
+          withCredentials: false
+        });
+        console.log(response.data);
+        isMounted && window.location.reload(true);
+        console.log("delete");
+      } catch (err) {
+        console.log(err);
+      }
+    return "deleted";
+  };
+
   return (
     <div className="col-md-12 px-5">
       <div className="card m-2">
@@ -20,11 +47,15 @@ const CartItemCard = (props) => {
             <div className="card-body">
               <h5>{item.productName}</h5>
               <h7>Qty: {qty}</h7>
-              <div className="d-flex justify-content-end" >
-                <button className="btn btn-outline-dark btn-sm" style={{"height":"30px"}}>-</button>
-                <div className=" mx-2 my-1 "> {qty} </div>
-                <button className="btn btn-outline-dark btn-sm" style={{"height":"30px"}}>+</button>
-                <button className="btn btn-dark btn-sm mx-2" style={{"height":"30px"}}>Delete</button>
+              <div className="d-flex justify-content-end">
+                <EditeQtyButton cart={props.cart} />
+                <button
+                  className="btn btn-dark btn-sm mx-2"
+                  onClick={deleteItem}
+                  style={{ height: "30px" }}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>

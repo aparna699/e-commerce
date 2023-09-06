@@ -32,6 +32,7 @@ function App() {
     const url = `/api/cart-item/user/${userId}`;
 
     const getCartItems = async () => {
+      let isMounted = true
       try {
         const header = {
           Authorization: `Bearer ${token}`,
@@ -47,7 +48,7 @@ function App() {
         response.data.map((key) => {
           count = count + key.qty
         })
-        localStorage.setItem("totalQty",count)
+        isMounted && localStorage.setItem("totalQty",count)
         count =0
 
       } catch (err) {
