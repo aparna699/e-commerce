@@ -57,7 +57,7 @@ export const EditeQtyButton = (props) => {
     e.preventDefault();
     const newQty = qty === totalQty ? "OutOfStock" : qty + 1;
     if (newQty === "OutOfStock") {
-      console.log("OutOfStock");
+        alert("Out of Stock")
     } else {
       editeCart(newQty);
       console.log("add");
@@ -85,7 +85,7 @@ export const EditeQtyButton = (props) => {
   };
 
   return (
-    <div className="d-flex justify-content-end">
+    <div className="d-flex justify-content-end" >
       <button
         className="btn btn-outline-dark btn-sm"
         onClick={removeItem}

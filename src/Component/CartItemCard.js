@@ -32,20 +32,21 @@ const CartItemCard = (props) => {
   };
 
   return (
-    <div className="col-md-12 px-5">
-      <div className="card m-2">
+    <div className="col-md-12 px-5 my-2">
+      <div className="card " style={{ height: "100%" }}>
         <div className="row">
           <div className="col-md-3">
             <img
               src={item.imgUrl[0]}
-              class="card-img-top"
+              class="card-img-top overflow-hidden"
               alt="..."
               style={{ height: "150px" }}
             />
           </div>
           <div className="col-md-9">
-            <div className="card-body">
-              <h5>{item.productName}</h5>
+            
+            <div className="card-body my-3 ">
+              <h5 className="fw-bolder">{item.productName}</h5>
               <h7>Qty: {qty}</h7>
               <div className="d-flex justify-content-end">
                 <EditeQtyButton cart={props.cart} />

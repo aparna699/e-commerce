@@ -6,11 +6,13 @@ const CategoryCards = (props) => {
       {/* CategoryCards: {`${props.categoryId} ${props.categoryName}`} */}
       <div class="card" style={{"width": "auto"}}>
         <a href={`/${props.categoryName}`} >
-        <img 
-            src={`${props.img}`} 
-            class="card-img-top" alt="..." 
-            style={{"height": "200px"}}
-        />
+        <div className="card-img">
+          <img 
+              src={`${props.img}`} 
+              class="card-img-top" alt="..." 
+              style={{"height": "200px"}}
+          />
+        </div>
         <div 
             class= "card-img-overlay text-white bg-dark bg-opacity-10 d-flex flex-column justify-content-end"
             // style= {{"--bs-bg-opacity": ".1"}}   

@@ -17,7 +17,7 @@ const Cart = () => {
 
   return (
     <div className="container">
-      <h1>My Cart</h1>
+      <h1 className="fw-bolder">My Cart</h1>
       <div className="row">
         {cart.map((key) => {
           return <CartItemCard cart={key} />;
