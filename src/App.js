@@ -118,7 +118,7 @@ function App() {
             return (
               <Route
                 path={`/${key.categoryName}`}
-                element={<CategoryItems category={`${key.categoryName}`} />}
+                element={<CategoryItems category={key} />}
               />
             );
           })}

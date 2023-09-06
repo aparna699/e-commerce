@@ -32,15 +32,15 @@ const CartItemCard = (props) => {
   };
 
   return (
-    <div className="col-md-12 px-5 my-2">
-      <div className="card " style={{ height: "100%" }}>
+    <div className="col-md-12 px-5 m-2" >
+      <div className="card m-1" >
         <div className="row">
           <div className="col-md-3">
             <img
               src={item.imgUrl[0]}
-              class="card-img-top overflow-hidden"
+              class="card-img-top"
               alt="..."
-              style={{ height: "150px" }}
+              style={{ height: "150px" , overflow: "hidden"}}
             />
           </div>
           <div className="col-md-9">
