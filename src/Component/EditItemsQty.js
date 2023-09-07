@@ -1,7 +1,11 @@
 import React from "react";
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
-const EditeItemsQty = (props) => {
-  const qty = props.qty;
+const EditItemsQty = (props) => {
+  const items = props.items;
+  const qty = items.qty;
+
   return (
     <div>
       <div className="d-flex justify-content-end">
@@ -21,16 +25,12 @@ const EditeItemsQty = (props) => {
           +
         </button>
       </div>
-      <div>
-        <button className="btn btn-dark btn-sm">
-            Edite
-        </button>
-        <button className="btn btn-outline-dark btn-sm m-1">
-            Delete
-        </button>
+      <div className="d-flex">
+        <EditButton items={items} />
+        <DeleteButton items={items}/>
       </div>
     </div>
   );
 };
 
-export default EditeItemsQty;
+export default EditItemsQty;

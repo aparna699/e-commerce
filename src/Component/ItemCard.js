@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { EditeQtyButton } from "./EditeQtyButton";
+import { EditQtyButton } from "./EditQtyButton";
 import axios from "../api/axios";
 
 const ItemCard = (props) => {
@@ -68,7 +68,7 @@ const ItemCard = (props) => {
           </p>
           {role == "ROLE_CUSTOMER" ? (
             cart.find((c) => c.itemId.id === item.id) ? (
-              <EditeQtyButton
+              <EditQtyButton
                 cart={cart.find((c) => c.itemId.id === item.id)}
               />
             ) : (

@@ -2,8 +2,7 @@ import React from "react";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
-import ItemCard from "./ItemCard";
-import EditeItemsQty from "./EditeItemsQty";
+import EditItemsQty from "./EditItemsQty";
 
 const ProductEditeCard = (props) => {
     const item = props.item;
@@ -14,7 +13,6 @@ const ProductEditeCard = (props) => {
     const url = "api/cart-item";
   
     useEffect(() => {
-      console.log("cart");
       const items = JSON.parse(localStorage.getItem("cart"));
       if (items) {
         setCart(items);
@@ -65,10 +63,13 @@ const ProductEditeCard = (props) => {
           </a>
           <div className="card-body ">
             <h5 className="card-title fw-bolder">{`${item.productName}`}</h5>
-            <p className="card-text overflow-hidden" style={{ height: "50px" }}>
+            <p className="card-text overflow-hidden fw-bold" style={{ height: "50px" }}>
               {`${item.description}`}
             </p>
-            <EditeItemsQty qty={item.qty}/>
+            <p className="fw-light">
+                {'Rs ' + item.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            </p>
+            <EditItemsQty items={item}/>
           </div>
         </div>
       </div>

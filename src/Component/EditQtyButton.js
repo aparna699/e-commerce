@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import axios from "../api/axios";
 import { useState } from "react";
 
-export const EditeQtyButton = (props) => {
+export const EditQtyButton = (props) => {
   const item = props.cart.itemId;
   const qty = props.cart.qty;
 
@@ -11,7 +11,7 @@ export const EditeQtyButton = (props) => {
   const [errMsg, setErrMsg] = useState("");
   const totalQty = item.qty;
   const url = `/api/cart-item/${props.cart.id}`;
-  const editeCart = async (newQty) => {
+  const editCart = async (newQty) => {
     let isMounted = true;
     const data = JSON.stringify({
       qty: newQty,
@@ -48,7 +48,7 @@ export const EditeQtyButton = (props) => {
     if (newQty === "deleted") {
       console.log("deleted");
     } else {
-      editeCart(newQty);
+      editCart(newQty);
       console.log("remove");
     }
   };
@@ -59,7 +59,7 @@ export const EditeQtyButton = (props) => {
     if (newQty === "OutOfStock") {
         alert("Out of Stock")
     } else {
-      editeCart(newQty);
+      editCart(newQty);
       console.log("add");
     }
   };

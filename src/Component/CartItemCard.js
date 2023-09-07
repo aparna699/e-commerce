@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "../api/axios";
 import { useState } from "react";
-import { EditeQtyButton } from "./EditeQtyButton";
+import { EditQtyButton } from "./EditQtyButton";
 
 const CartItemCard = (props) => {
   const item = props.cart.itemId;
@@ -49,7 +49,7 @@ const CartItemCard = (props) => {
               <h5 className="fw-bolder">{item.productName}</h5>
               <h7>Qty: {qty}</h7>
               <div className="d-flex justify-content-end">
-                <EditeQtyButton cart={props.cart} />
+                <EditQtyButton cart={props.cart} />
                 <button
                   className="btn btn-dark btn-sm mx-2"
                   onClick={deleteItem}
