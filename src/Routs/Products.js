@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import ItemCard from '../Component/ItemCard';
 import ProductEditeCard from '../Component/ProductEditeCard';
+import { AddItem } from '../Component/AddItem';
 
 const Products = () => {
   const [items, setItems] = useState([]);
@@ -40,6 +41,9 @@ const Products = () => {
 
   return (
     <div>
+      <div className='row px-5'>
+        <AddItem/>
+      </div>
       <div className="row px-5">
         {items.map((key) => {
           return <ProductEditeCard item={key} />;

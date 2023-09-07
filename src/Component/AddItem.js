@@ -1,70 +1,50 @@
-import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
-import Popup from "reactjs-popup";
-import axios from "../api/axios";
+import React, { useState , useEffect} from "react";
 
-const EditButton = (props) => {
-  const item = props.items;
-  const itemId = item.id;
-  console.log(item.id);
-
-  const url = `/api/items/${itemId}`;
-  const token = Cookies.get("token");
-
+export const AddItem = () => {
   const [productName, setProductName] = useState();
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
   const [qty, setQty] = useState();
   const [imgUrl, setImgUrl] = useState();
   const [categoryId, setCategoryId] = useState();
+  const [category, setCategory] = useState([]);
 
-  const edit = async (e) => {
-    e.preventDefault();
-    let isMounted = true;
-    const data = JSON.stringify({
-      productName: productName,
-      price: price,
-      description: description,
-      qty: qty,
-      imgUrl: imgUrl,
-      categoryId: categoryId,
-    });
-    const header = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await axios.put(url, data, {
-        headers: header,
-        withCredentials: true,
-      });
-      console.log(response);
-
-      isMounted && window.location.reload(true);
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    console.log("category");
+    const items = JSON.parse(localStorage.getItem("category"));
+    if (items) {
+        setCategory(items);
     }
+  }, [localStorage.getItem("category")]);  
 
-    console.log("Edit: " + item.id);
+  const addItem = (e) => {
+    e.preventDefault();
+    const data = JSON.stringify({
+        productName: productName,
+        price: price,
+        description: description,
+        qty: qty,
+        imgUrl: imgUrl,
+        categoryId: categoryId,
+      });
+    console.log("Add Item");
     console.log(data);
   };
 
   return (
     <div>
-      {/* Button trigger modal  */}
       <button
         type="button"
-        class="btn btn-dark btn-sm"
+        className="btn btn-dark col-md-2"
         data-bs-toggle="modal"
-        data-bs-target={`#Edit${item.id}`}
+        data-bs-target="#Add"
       >
-        Edit
+        Add Item
       </button>
-      {/* Modal */}
+
       <div
         class="modal fade"
-        id={`Edit${item.id}`}
+        id="Add"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -72,7 +52,7 @@ const EditButton = (props) => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Edit Product {`${item.id}`}</h5>
+              <h5 class="modal-title"> Add Item </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -82,7 +62,7 @@ const EditButton = (props) => {
             </div>
 
             <div class="modal-body">
-              <form onSubmit={edit}>
+              <form onSubmit={addItem}>
                 <div className="container-fluid">
                   <div className="row my-2">
                     <label className="col-md-4">Product Name: </label>
@@ -91,7 +71,6 @@ const EditButton = (props) => {
                       type="text"
                       onChange={(e) => setProductName(e.target.value)}
                       value={productName}
-                      defaultValue={item.productName}
                     />
                   </div>
                   <div className="row my-2">
@@ -101,7 +80,6 @@ const EditButton = (props) => {
                       type="text"
                       onChange={(e) => setPrice(e.target.value)}
                       value={price}
-                      defaultValue={item.price}
                     />
                   </div>
                   <div className="row my-2">
@@ -111,7 +89,6 @@ const EditButton = (props) => {
                       type="text"
                       onChange={(e) => setQty(e.target.value)}
                       value={qty}
-                      defaultValue={item.qty}
                     />
                   </div>
                   <div className="row">
@@ -121,8 +98,22 @@ const EditButton = (props) => {
                       type="text"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
-                      defaultValue={item.description}
                     />
+                  </div>
+                  <div>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" 
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    >
+                    {
+                        category.map((key) => {
+                            return <option value={`${key.id}`}> {`${key.categoryName}`} </option>
+                        })
+                    }
+                    {/* <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option> */}
+                    </select>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -142,5 +133,3 @@ const EditButton = (props) => {
     </div>
   );
 };
-
-export default EditButton;

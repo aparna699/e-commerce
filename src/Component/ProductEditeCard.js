@@ -66,6 +66,7 @@ const ProductEditeCard = (props) => {
             <p className="card-text overflow-hidden fw-bold" style={{ height: "50px" }}>
               {`${item.description}`}
             </p>
+            <p className="">Qty: {item.qty}</p>
             <p className="fw-light">
                 {'Rs ' + item.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             </p>

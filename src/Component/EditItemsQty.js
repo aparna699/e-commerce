@@ -9,25 +9,8 @@ const EditItemsQty = (props) => {
   return (
     <div>
       <div className="d-flex justify-content-end">
-        <button
-          className="btn btn-outline-dark btn-sm"
-          // onClick={removeItem}
-          style={{ height: "30px" }}
-        >
-          -
-        </button>
-        <div className=" mx-2 my-1 "> {qty} </div>
-        <button
-          className="btn btn-outline-dark btn-sm"
-          // onClick={addItem}
-          style={{ height: "30px" }}
-        >
-          +
-        </button>
-      </div>
-      <div className="d-flex">
         <EditButton items={items} />
-        <DeleteButton items={items}/>
+        <DeleteButton itemId={items.id}/>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import axios from "../api/axios";
 const CategoryDropdown = () => {
   const [category, setCategory] = useState([]);
   const token = Cookies.get("token");
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -22,6 +23,7 @@ const CategoryDropdown = () => {
           header: header,
         });
         console.log(response.data);
+        localStorage.setItem("category", JSON.stringify(response.data));
         isMounted && setCategory(response.data);
       } catch (err) {
         console.log(err);
