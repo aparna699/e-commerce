@@ -38,7 +38,7 @@ const Items = (props) => {
   }, []);
 
   return (
-      <div className="row flex-row flex-nowrap px-5">
+      <div className="row px-5">
         {items.map((key) => {
           return <ItemCard item={key} />;
         })}
