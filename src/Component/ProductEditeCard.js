@@ -11,13 +11,13 @@ const ProductEditeCard = (props) => {
     const token = Cookies.get("token");
     const userId = Cookies.get("userId")
     const url = "api/cart-item";
-  
-    useEffect(() => {
-      const items = JSON.parse(localStorage.getItem("cart"));
-      if (items) {
-        setCart(items);
-      }
-    }, [localStorage.getItem("cart")]);
+    
+    // useEffect(() => {
+    //   const items = JSON.parse(localStorage.getItem("cart"));
+    //   if (items) {
+    //     setCart(items);
+    //   }
+    // }, [localStorage.getItem("cart")]);
   
     const addToCart = async (e) => {
       e.preventDefault();

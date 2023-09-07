@@ -1,11 +1,12 @@
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 
 const EditButton = (props) => {
   const item = props.items;
   const itemId = item.id;
-
+  console.log(item.id)
+  
   const url = `/api/items/${itemId}`;
   const token = Cookies.get("token");
 
@@ -27,21 +28,21 @@ const EditButton = (props) => {
       categoryId: categoryId,
     });
 
-    console.log("Edit");
+    console.log("Edit: "+item.id);
     console.log(data);
   };
   return (
     <div>
     {/* Button trigger modal  */}
-      <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target={`#${item.id}`}>
         Edit
       </button>
     {/* Modal */}
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id={`${item.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Edit Product</h5>
+            <h5 class="modal-title">Edit Product {`${item.id}`}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
