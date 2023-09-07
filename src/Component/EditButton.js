@@ -31,14 +31,15 @@ const EditButton = (props) => {
     console.log("Edit: "+item.id);
     console.log(data);
   };
+  console.log(`#${item.id}`)
   return (
     <div>
     {/* Button trigger modal  */}
-      <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target={`#${item.id}`}>
+      <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target={`#Edit${item.id}`}>
         Edit
       </button>
     {/* Modal */}
-      <div class="modal fade" id={`${item.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id={`Edit${item.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
