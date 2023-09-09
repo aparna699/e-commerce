@@ -114,32 +114,16 @@ const LogIn = () => {
                     </div>
                     </div>
 
-                    <div class="col">
+                    {/* <div class="col">
                     <a href="#!">Forgot password?</a>
-                    </div>
+                    </div> */}
                     <button type="submit" class="btn btn-primary btn-block">Log-In</button>
                 </div>
 
                 
 
                 <div class="text-center">
-                    <p>Not a member? <a href="#!">Register</a></p>
-                    <p>or sign up with:</p>
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                    </button>
+                    <p>Not a member? <a href="/register">Register</a></p>
                 </div>
             </form>
         </section>

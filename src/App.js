@@ -16,6 +16,7 @@ import Cart from "./Routs/Cart";
 import Profile from "./Routs/Profile";
 import axios from "./api/axios";
 import Address from "./Routs/Address";
+import Register from "./Routs/Register";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -56,7 +57,9 @@ function App() {
       }
     };
 
-    getCartItems();
+    if(userId != undefined){
+      getCartItems();
+    }
 
     return () => {
       isMounted = false;
@@ -125,6 +128,7 @@ function App() {
         </Route>
         {/* public routs */}
         <Route path="/login" element={<LogIn />} />
+        <Route path="register" element={<Register/>} />
         {/* <Route path= '/unauthorized' element= { <Unauthirized/>} />    */}
       </Routes>
     </BrowserRouter>

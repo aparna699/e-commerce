@@ -7,7 +7,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import HomeIcon from "@mui/icons-material/Home";
+// import HomeIcon from "@mui/icons-material/Home";
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 // import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
@@ -100,7 +101,7 @@ const Navbar = () => {
                 style={{ "margin-top": "auto", "margin-bottom": "auto" }}
               >
                 <a href="/address">
-                  <HomeIcon />
+                  <FmdGoodIcon />
                 </a>
               </div>
             ) : (
