@@ -17,6 +17,15 @@ const EditButton = (props) => {
   const [qty, setQty] = useState();
   const [imgUrl, setImgUrl] = useState();
   const [categoryId, setCategoryId] = useState();
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    console.log("category");
+    const items = JSON.parse(localStorage.getItem("category"));
+    if (items) {
+      setCategory(items);
+    }
+  }, [localStorage.getItem("category")]);
 
   const edit = async (e) => {
     e.preventDefault();
@@ -26,7 +35,7 @@ const EditButton = (props) => {
       price: price,
       description: description,
       qty: qty,
-      imgUrl: imgUrl,
+      imgUrl: (imgUrl)?([imgUrl]):(item.imgUrl),
       categoryId: categoryId,
     });
     const header = {
@@ -83,47 +92,84 @@ const EditButton = (props) => {
 
             <div class="modal-body">
               <form onSubmit={edit}>
-                <div className="container-fluid">
-                  <div className="row my-2">
-                    <label className="col-md-4">Product Name: </label>
-                    <input
-                      className="col-md-8 px-2"
-                      type="text"
-                      onChange={(e) => setProductName(e.target.value)}
-                      value={productName}
-                      defaultValue={item.productName}
-                    />
-                  </div>
-                  <div className="row my-2">
-                    <label className="col-md-4"> Price: </label>
-                    <input
-                      className="col-md-8 px-2"
-                      type="text"
-                      onChange={(e) => setPrice(e.target.value)}
-                      value={price}
-                      defaultValue={item.price}
-                    />
-                  </div>
-                  <div className="row my-2">
-                    <label className="col-md-4"> Quantity: </label>
-                    <input
-                      className="col-md-8 px-2"
-                      type="text"
-                      onChange={(e) => setQty(e.target.value)}
-                      value={qty}
-                      defaultValue={item.qty}
-                    />
-                  </div>
-                  <div className="row">
-                    <label className="col-md-4">Description: </label>
-                    <textarea
-                      className="col-md-8 px-2"
-                      type="text"
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
-                      defaultValue={item.description}
-                    />
-                  </div>
+                <div className="row my-2">
+                  <input
+                    className="col-sm-12 opacity-60 p-2"
+                    type="text"
+                    onChange={(e) => setProductName(e.target.value)}
+                    value={productName}
+                    placeholder="Product Name"
+                    defaultValue={item.productName}
+                    required
+                  />
+                </div>
+                <div className="row my-2">
+                  <input
+                    className="col-sm-12 opacity-60 p-2"
+                    type="number"
+                    step={500}
+                    onChange={(e) => setPrice(e.target.value)}
+                    value={price}
+                    placeholder="Price"
+                    defaultValue={item.price}
+                    required
+                  />
+                </div>
+                <div className="row my-2">
+                  <input
+                    className="col-sm-12 opacity-60 p-2"
+                    type="number"
+                    onChange={(e) => setQty(e.target.value)}
+                    value={qty}
+                    placeholder="Quantity"
+                    defaultValue={item.qty}
+                    required
+                  />
+                </div>
+                <div className="row my-2">
+                  <input
+                    className="col-sm-12 opacity-60 p-2"
+                    type="text"
+                    onChange={(e) => setImgUrl(e.target.value)}
+                    value={imgUrl}
+                    defaultValue={item.imgUrl}
+                    placeholder="Image"
+                  />
+                </div>
+                <div className="row my-2">
+                  <textarea
+                    className="col-sm-12 opacity-60 p-2"
+                    type="text"
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    defaultValue={item.description}
+                    placeholder="Description"
+                  />
+                </div>
+                <div className="row">
+                  <select
+                    class=" col-sm-12 opacity-60 p-2"
+                    aria-label=".form-select-sm example"
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    defaultValue={item.categoryId}
+                    required
+                  >
+                    <option className="col-sm-12"> Select Category </option>
+                    {category.map((key) => {
+                      return (
+                        (key.id === item.id)?(
+                          <option selected className="col-sm-12" value={`${key.id}`}>
+                            {`${key.categoryName}`}
+                          </option>
+                        ):(
+                          <option className="col-sm-12" value={`${key.id}`}>
+                            {`${key.categoryName}`}
+                          </option>
+                        )
+                      );
+                        })}
+                  </select>
                 </div>
                 <div class="modal-footer">
                   <button

@@ -78,49 +78,34 @@ const LogIn = () => {
             <form className="Auth-form" onSubmit={handleSubmit}>
                 <h1>Log-In</h1>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example1">Email </label>
                     <input 
                     type="email"
                     id="email"
                     ref={userRef}
                     onChange= {(e) => setEmail(e.target.value)}
                     value= {email}
-                    autoComplete= "off"
-                    className="form-control"
+                    className="col-sm-12 border-start border-top border-end opacity-70 p-2"
                     placeholder="Enter email"
                     required
                     />            
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example2">Password</label>
                     <input 
                     type="password"
                     id="password"
                     onChange= {(e) => setPwd(e.target.value)}
                     value= {password}
                     autoComplete= "off"
-                    className="form-control"
+                    className="col-sm-12 border-start border-top border-end opacity-70 p-2"
                     placeholder="Enter password"
                     required
                     />
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                        <label class="form-check-label" for="form2Example31"> Remember me </label>
-                    </div>
-                    </div>
-
-                    {/* <div class="col">
-                    <a href="#!">Forgot password?</a>
-                    </div> */}
-                    <button type="submit" class="btn btn-primary btn-block">Log-In</button>
+                    <button type="submit" class="btn btn-dark btn-block">Log-In</button>
                 </div>
-
-                
 
                 <div class="text-center">
                     <p>Not a member? <a href="/register">Register</a></p>

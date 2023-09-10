@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
 import Input from "react-phone-number-input/input";
 import  { isValidPhoneNumber } from "react-phone-number-input";
+import { useNavigate} from "react-router-dom";
+import axios from "../api/axios";
 
 const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
 
+  const navigator = useNavigate();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -13,7 +16,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPwd] = useState();
   const [dob, setDob] = useState();
   const [phoneNum, setPhoneNum] = useState();
-  
+  const url = "/api/users"
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -21,7 +24,7 @@ const Register = () => {
   const year = today.getFullYear();
   const month = today.getMonth();
   const date = today.getDate();
-  const maxDate = `${year}${"-"}${month < 10 ? `0${month}` : `${month}`}${"-"}${
+  const maxDate = `${year-13}${"-"}${month < 10 ? `0${month}` : `${month}`}${"-"}${
     date < 10 ? `0${date}` : `${date}`
   }`;
   const handleValidate = (value) => {
@@ -45,7 +48,22 @@ const Register = () => {
                 phoneNumber: phoneNum,
                 role: "ROLE_CUSTOMER"
             }
-            console.log("Register")
+            const header = {
+                'Content-Type': 'application/json'
+            }
+            try {
+                const response = await axios.post(
+                    url,
+                    data,
+                    {headers: header}
+                )
+                console.log(response)
+                console.log("Register")
+                navigator('/login')
+            }catch(err){
+                console.log(err)
+            }
+            
         }else{
             alert("Password Mismatch")
         }
@@ -66,8 +84,7 @@ const Register = () => {
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
               autoComplete="off"
-              className="col-sm-12 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}
+              className="col-sm-12 border-start border-top border-end opacity-70 p-2"
               placeholder="Enter First Name"
               required
             />
@@ -81,8 +98,8 @@ const Register = () => {
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
               autoComplete="off"
-              className="col-sm-12 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}              placeholder="Enter Last Name"
+              className="col-sm-12 border-start border-top border-end opacity-70 p-2"             
+              placeholder="Enter Last Name"
               required
             />
           </div>
@@ -95,8 +112,8 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               autoComplete="off"
-              className="col-sm-12 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}              placeholder="Enter email"
+              className="col-sm-12 border-start border-top border-end opacity-70 p-2"
+              placeholder="Enter email"
               required
             />
           </div>
@@ -108,8 +125,8 @@ const Register = () => {
               onChange={(e) => setPwd(e.target.value)}
               value={password}
               autoComplete="off"
-              className="col-sm-12 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}              placeholder="Enter password"
+              className="col-sm-12 border-start border-top border-end opacity-70 p-2"
+              placeholder="Enter password"
               required
             />
           </div>
@@ -122,7 +139,7 @@ const Register = () => {
               value={confirmPassword}
               autoComplete="off"
               className="col-sm-12 border-start border-top border-end opacity-70 p-2"
-              placeholder="Enter password"
+              placeholder="Confirm password"
               required
             />
           </div>
@@ -135,8 +152,7 @@ const Register = () => {
               type="date"
               onChange={(e) => setDob(e.target.value)}
               value={dob}
-              className="col-sm-8 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}
+              className="col-sm-8 border-start border-top border-end opacity-70 p-2"
               max = {maxDate}
               required
             />
@@ -147,8 +163,7 @@ const Register = () => {
               placeholder="Enter phone number"
               value={phoneNum}
               onChange={setPhoneNum}
-              className="col-sm-12 focus-ring focus-ring-dark border-start border-top border-end opacity-70 p-2"
-              style={{"--bs-focus-ring-blur": "4px"}}              error={phoneNum ? (isValidPhoneNumber(phoneNum) ? undefined : 'Invalid phone number') : 'Phone number'}
+              className="col-sm-12 border-start border-top border-end opacity-70 p-2"
             />
             
           </div>

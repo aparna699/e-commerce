@@ -5,6 +5,7 @@ import axios from "../api/axios";
 import ItemCard from '../Component/ItemCard';
 import ProductEditeCard from '../Component/ProductEditeCard';
 import { AddItem } from '../Component/AddItem';
+import AddCategory from '../Component/AddCategory';
 
 const Products = () => {
   const [items, setItems] = useState([]);
@@ -41,8 +42,9 @@ const Products = () => {
 
   return (
     <div>
-      <div className='row px-5'>
+      <div className='row px-5 my-2'>
         <AddItem/>
+        <AddCategory/>
       </div>
       <div className="row px-5">
         {items.map((key) => {

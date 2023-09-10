@@ -62,12 +62,12 @@ const ProductEditeCard = (props) => {
             </div>
           </a>
           <div className="card-body ">
-            <h5 className="card-title fw-bolder">{`${item.productName}`}</h5>
-            <p className="card-text overflow-hidden fw-bold" style={{ height: "50px" }}>
+            <h6 className="card-title fw-bolder" >{`${item.productName}`}</h6>
+            <p className="card-text overflow-hidden " style={{ height: "50px" }}>
               {`${item.description}`}
             </p>
-            <p className="">Qty: {item.qty}</p>
-            <p className="fw-light">
+            <p> <span className="fw-bold">Qty:</span> {item.qty}</p>
+            <p className="fw-bold">
                 {'Rs ' + item.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             </p>
             <EditItemsQty items={item}/>

@@ -1,4 +1,5 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../api/axios";
 
 export const AddItem = () => {
   const [productName, setProductName] = useState();
@@ -8,34 +9,44 @@ export const AddItem = () => {
   const [imgUrl, setImgUrl] = useState();
   const [categoryId, setCategoryId] = useState();
   const [category, setCategory] = useState([]);
+  const url = "/api/items";
 
   useEffect(() => {
     console.log("category");
     const items = JSON.parse(localStorage.getItem("category"));
     if (items) {
-        setCategory(items);
+      setCategory(items);
     }
-  }, [localStorage.getItem("category")]);  
+  }, [localStorage.getItem("category")]);
 
-  const addItem = (e) => {
+  const addItem = async (e) => {
     e.preventDefault();
-    const data = JSON.stringify({
-        productName: productName,
-        price: price,
-        description: description,
-        qty: qty,
-        imgUrl: imgUrl,
-        categoryId: categoryId,
-      });
-    console.log("Add Item");
+    const data = {
+      productName: productName,
+      price: price,
+      description: description,
+      qty: qty,
+      imgUrl: [imgUrl],
+      categoryId: categoryId,
+    };
     console.log(data);
+    const header = {
+      "Content-Type": "application/json",
+    };
+    try {
+      const response = await axios.post(url, data, { headers: header });
+      console.log(response);
+      console.log("Add Item");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <div>
+    <div className="col-sm-6 col-md-3">
       <button
         type="button"
-        className="btn btn-dark col-md-2"
+        className="btn btn-dark col-sm-12"
         data-bs-toggle="modal"
         data-bs-target="#Add"
       >
@@ -65,64 +76,81 @@ export const AddItem = () => {
               <form onSubmit={addItem}>
                 <div className="container-fluid">
                   <div className="row my-2">
-                    <label className="col-md-4">Product Name: </label>
                     <input
-                      className="col-md-8 px-2"
+                      className="col-sm-12 opacity-60 p-2"
                       type="text"
                       onChange={(e) => setProductName(e.target.value)}
                       value={productName}
+                      placeholder="Product Name"
+                      required
                     />
                   </div>
                   <div className="row my-2">
-                    <label className="col-md-4"> Price: </label>
                     <input
-                      className="col-md-8 px-2"
-                      type="text"
+                      className="col-sm-12 opacity-60 p-2"
+                      type="number"
+                      step={500}
                       onChange={(e) => setPrice(e.target.value)}
                       value={price}
+                      placeholder="Price"
+                      required
                     />
                   </div>
                   <div className="row my-2">
-                    <label className="col-md-4"> Quantity: </label>
                     <input
-                      className="col-md-8 px-2"
-                      type="text"
+                      className="col-sm-12 opacity-60 p-2"
+                      type="number"
                       onChange={(e) => setQty(e.target.value)}
                       value={qty}
+                      placeholder="Quantity"
+                      required
                     />
                   </div>
-                  <div className="row">
-                    <label className="col-md-4">Description: </label>
+                  <div className="row my-2">
+                    <input
+                      className="col-sm-12 opacity-60 p-2"
+                      type="text"
+                      onChange={(e) => setImgUrl(e.target.value)}
+                      value={imgUrl}
+                      placeholder="Image"
+                    />
+                  </div>
+                  <div className="row my-2">
                     <textarea
-                      className="col-md-8 px-2"
+                      className="col-sm-12 opacity-60 p-2"
                       type="text"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
+                      placeholder="Description"
                     />
                   </div>
-                  <div>
-                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" 
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)}
+                  <div className="row">
+                    <select
+                      class=" col-sm-12 opacity-60 p-2"
+                      aria-label=".form-select-sm example"
+                      value={categoryId}
+                      onChange={(e) => setCategoryId(e.target.value)}
+                      required
                     >
-                    {
-                        category.map((key) => {
-                            return <option value={`${key.id}`}> {`${key.categoryName}`} </option>
-                        })
-                    }
-                    {/* <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option> */}
+                      <option className="col-sm-12"> Select Category </option>
+                      {category.map((key) => {
+                        return (
+                          <option className="col-sm-12" value={`${key.id}`}>
+                            {" "}
+                            {`${key.categoryName}`}{" "}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-dark"
                     data-bs-dismiss="modal"
                   >
-                    Save changes
+                    Add Item
                   </button>
                 </div>
               </form>
