@@ -6,6 +6,7 @@ const Cart = () => {
   const userId = Cookies.get("userId");
   const token = Cookies.get("token");
   const [cart, setCart] = useState([]);
+  let price =0
 
   useEffect(() => {
     console.log("cart");
@@ -14,6 +15,12 @@ const Cart = () => {
       setCart(items);
     }
   }, [localStorage.getItem("cart")]);
+  
+  cart.map((key) => {
+    price = price + key.qty*(key.itemId.price)
+    
+  })
+
 
   return (
     <div className="container">
@@ -23,7 +30,10 @@ const Cart = () => {
           return <CartItemCard cart={key} />;
         })}
       </div>
-      <div className="row p-5">
+      <div className="text-end mx-5 mt-3">
+        <h5><span className="fw-bold">Total Cost:</span> Rs. {price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h5>
+      </div>
+      <div className="row px-5 my-3">
         <div className="col-md-9"></div>
         <button className="btn btn-dark col-md-3">Proceed To Order</button>
       </div>
