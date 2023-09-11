@@ -6,6 +6,7 @@ import ItemCard from '../Component/ItemCard';
 import ProductEditeCard from '../Component/ProductEditeCard';
 import { AddItem } from '../Component/AddItem';
 import AddCategory from '../Component/AddCategory';
+import EditCategory from '../Component/EditCategory';
 
 const Products = () => {
   const [items, setItems] = useState([]);
@@ -44,7 +45,9 @@ const Products = () => {
     <div>
       <div className='row px-5 my-2'>
         <AddItem/>
+        <div className='col-sm-6 col-md-3' />
         <AddCategory/>
+        <EditCategory/>
       </div>
       <div className="row px-5">
         {items.map((key) => {
