@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import axios from '../api/axios'
+import DeleteCategory from './DeleteCategory'
 
 const EditCategory = () => {
     const [categoryName, setCategoryName] = useState()
@@ -114,6 +115,7 @@ const EditCategory = () => {
                   
                 </div>
                 <div class="modal-footer">
+                  <DeleteCategory id={categoryId}/>
                   <button
                     type="submit"
                     class="btn btn-dark"
