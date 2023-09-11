@@ -3,10 +3,11 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import ItemCard from "./ItemCard";
+import ProductEditeCard from "./ProductEditeCard";
 
 const Items = (props) => {
   const [items, setItems] = useState([]);
-  const token = Cookies.get("token");
+  const role = Cookies.get("role");
   const url = props.url;
   useEffect(() => {
     let isMounted = true;
@@ -39,9 +40,15 @@ const Items = (props) => {
 
   return (
       <div className="row px-5">
-        {items.map((key) => {
+        {(role === "ROLE_ADMIN")?(
+          items.map((key) => {
+          return <ProductEditeCard item={key} />;
+        })
+        ):(
+          items.map((key) => {
           return <ItemCard item={key} />;
-        })}
+        })
+        )}
       </div>
   );
 };
