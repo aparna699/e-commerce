@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { AddressCart } from "../Component/AddressCart";
 import axios from "../api/axios";
+import { AddAddress } from "../Component/AddAddress";
 
 const Address = () => {
   const id = Cookies.get("userId");
@@ -41,6 +42,7 @@ const Address = () => {
   }, []);
   return (
     <div className="container">
+      <AddAddress className="my-3"/>
       <div className="row">
         {
           address.map((key) => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { DeleteAddress } from './DeleteAddress'
 
 export const AddressCart = (props) => {
     const address = props.address
@@ -9,15 +10,15 @@ export const AddressCart = (props) => {
                 <div className='col-md-9'>
                     <h5 className=''>
                         <span className='fw-bold'>
-                            Address: {address.id}
+                            Address: {address.unit}
                         </span><br/>
-                        {` ${address.unit} ${address.line1} ${address.line2}`}
+                        {` ${address.line1} ${address.line2}`}
                     </h5>
                     <p>{address.pinCode} {address.city} {address.state} {address.country} </p>
                 </div>
                 <div className="col-md-3">
                     <button className='btn btn-outline-dark col-sm-12 my-2'>Edit</button> <br/>
-                    <button className='btn btn-dark col-sm-12 my-2'>Delete</button>
+                    <DeleteAddress id={address.id}/>
                 </div>
             </div>
         </div>
