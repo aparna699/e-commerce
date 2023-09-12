@@ -1,5 +1,6 @@
 import React from 'react'
 import { DeleteAddress } from './DeleteAddress'
+import { EditAddress } from './EditAddress'
 
 export const AddressCart = (props) => {
     const address = props.address
@@ -17,7 +18,7 @@ export const AddressCart = (props) => {
                     <p>{address.pinCode} {address.city} {address.state} {address.country} </p>
                 </div>
                 <div className="col-md-3">
-                    <button className='btn btn-outline-dark col-sm-12 my-2'>Edit</button> <br/>
+                    <EditAddress address ={address}/> 
                     <DeleteAddress id={address.id}/>
                 </div>
             </div>
