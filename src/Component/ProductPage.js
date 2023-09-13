@@ -32,19 +32,15 @@ export const ProductPage = (props) => {
           <h7 className="fw-bold">Discriptiom: </h7>
           <p>{item.description}</p>
         </div>
-        <div className="my-5">
-          {role == "ROLE_CUSTOMER" ? (
-            cart.find((c) => c.itemId.id === item.id) ? (
-              <EditQtyButton cart={cart.find((c) => c.itemId.id === item.id)} />
-            ) : (
-              <div className="d-flex justify-content-end">
-                <AddToCartButton item={item} />
-              </div>
-            )
-          ) : (
-            // <button className="btn btn-dark" onClick={addToCart}>Add To Cart</button>
-            <div></div>
-          )}
+        <div className="row my-5 p-3">
+            <div className="col-sm-9">
+            <h7>{'Rs. ' + item.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h7>
+            </div>
+            <div className="col-sm-3">
+                <div className="">
+                <AddToCartButton item= {item}/>
+                </div>
+            </div>
         </div>
       </div>
     </div>
