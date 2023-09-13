@@ -18,6 +18,7 @@ import axios from "./api/axios";
 import Address from "./Routs/Address";
 import Register from "./Routs/Register";
 import { Ordering } from "./Routs/Ordering";
+import { ProductPage } from "./Component/ProductPage";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -26,6 +27,15 @@ function App() {
   const token = Cookies.get("token");
   const [items, setItems] = useState([]);
   let count = 0;
+
+  useEffect(() => {
+    console.log("items");
+    const item = JSON.parse(localStorage.getItem("items"));
+    if (item) {
+      setItems(item);
+    }
+  }, [localStorage.getItem("items")]);
+
 
   useEffect(() => {
     // localStorage.setItem("cart", JSON.stringify("cart"));
@@ -66,7 +76,7 @@ function App() {
       isMounted = false;
       controller.abort();
     };
-  }, [items]);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -127,6 +137,16 @@ function App() {
               />
             );
           })}
+          {
+            items.map((key)=> {
+              return(
+                <Route
+                  path={`/items/${key.id}`}
+                  element={<ProductPage item={key}/>}
+                />
+              )
+            })
+          }
         </Route>
         {/* public routs */}
         <Route path="/login" element={<LogIn />} />

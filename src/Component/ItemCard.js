@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { EditQtyButton } from "./EditQtyButton";
-import axios from "../api/axios";
+import { AddToCartButton } from "./AddToCartButton";
 
 const ItemCard = (props) => {
   const item = props.item;
@@ -19,34 +19,7 @@ const ItemCard = (props) => {
     }
   }, [localStorage.getItem("cart")]);
 
-  const addToCart = async (e) => {
-    e.preventDefault();
-    let isMounted = true;
-    try {
-      const header = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      };
-      const data =  JSON.stringify({
-          "userId": `${userId}`,
-          "itemId": `${item.id}`,
-          "qty": 1
-        })
-
-      const response = await axios.post(url, 
-        data, 
-        {
-          headers: header,
-          withCredentials: false,
-      });
-      console.log(response.data);
-      isMounted && window.location.reload(true);
-      console.log("Add");
-    } catch (err) {
-      console.log(err);
-    }
-    
-  };
+  
 
   return (
     <div className="col-md-3 col-sm-6 p-2" >
@@ -66,16 +39,14 @@ const ItemCard = (props) => {
           <p className="card-text overflow-hidden" style={{ height: "50px" }}>
             {`${item.description}`}
           </p>
-          {role == "ROLE_CUSTOMER" ? (
+          {role === "ROLE_CUSTOMER" ? (
             cart.find((c) => c.itemId.id === item.id) ? (
               <EditQtyButton
                 cart={cart.find((c) => c.itemId.id === item.id)}
               />
             ) : (
               <div className="d-flex justify-content-end">
-                <button className="btn btn-dark " onClick={addToCart}>
-                  Add To Cart
-                </button>
+                <AddToCartButton item= {item}/>
               </div>
             )
           ) : (

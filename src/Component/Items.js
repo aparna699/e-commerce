@@ -24,6 +24,7 @@ const Items = (props) => {
         });
 
         console.log(response.data);
+        localStorage.setItem("items", JSON.stringify(response.data))
         isMounted && setItems(response.data);
       } catch (err) {
         console.log(err);
