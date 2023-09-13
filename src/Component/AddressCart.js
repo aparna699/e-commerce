@@ -9,12 +9,12 @@ export const AddressCart = (props) => {
         <div className='card p-3 m-2'>
             <div className="row">
                 <div className='col-md-9'>
-                    <h5 className=''>
+                    <h7 className=''>
                         <span className='fw-bold'>
-                            Address: {address.unit}
+                            {address.unit}
                         </span><br/>
                         {` ${address.line1} ${address.line2}`}
-                    </h5>
+                    </h7>
                     <p>{address.pinCode} {address.city} {address.state} {address.country} </p>
                 </div>
                 <div className="col-md-3">

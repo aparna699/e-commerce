@@ -54,3 +54,17 @@ a.nav-link:hover {
 .card-img:hover img {
   transform: scale(1.2);
 }
+
+.accordion {
+      --bs-accordion-btn-focus-box-shadow: 0 0 0 0 !important ;
+}
+
+.accordion-button:not(.collapsed){
+  color: black !important;
+  background-color: rgb(252, 252, 252) !important;
+  border-color: white  !important;
+}
+
+.accordion-button:focus{
+  border-color: white !important;
+}

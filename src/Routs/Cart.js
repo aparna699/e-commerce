@@ -35,7 +35,7 @@ const Cart = () => {
       </div>
       <div className="row px-5 my-3">
         <div className="col-md-9"></div>
-        <button className="btn btn-dark col-md-3">Proceed To Order</button>
+        <a className="col-md-3" href="/ordering"><button className="btn btn-dark col-md-12">Proceed To Order</button></a>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ import Profile from "./Routs/Profile";
 import axios from "./api/axios";
 import Address from "./Routs/Address";
 import Register from "./Routs/Register";
+import { Ordering } from "./Routs/Ordering";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -102,6 +103,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
             <Route path="/MyOrders" element={<MyOrders />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/ordering" element= {<Ordering/>}/>
             <Route path="/address" element={<Address />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>

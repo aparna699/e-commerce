@@ -14,8 +14,6 @@ export const EditAddress = (props) => {
   const [state, setState] = useState();
   const [country, setCountry] = useState();
 
-  console.log(address);
-
   const editAddess = async(e) => {
     e.preventDefault()
     let isMounted = true

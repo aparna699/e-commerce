@@ -10,7 +10,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import HomeIcon from "@mui/icons-material/Home";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
-// import axios from "../api/axios";
+import axios from "../api/axios";
 import CategoryDropdown from "../Component/CategoryDropdown";
 import AddressSelect from "../Component/AddressSelect";
 
@@ -19,6 +19,7 @@ const Navbar = () => {
 
   const token = Cookies.get("token");
   const role = Cookies.get("role");
+  const userId = Cookies.get("userId");
 
   const user = ["MyOrders"];
   const admin = ["Products", "Orders", "Users"];
@@ -31,6 +32,37 @@ const Navbar = () => {
     Cookies.remove("role");
     Cookies.remove("userId");
   };
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getAddress = async () => {
+      console.log("get Address");
+      console.log(userId);
+      try {
+        const header = {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        };
+        const response = await axios.get(
+          `/api/address/user/${userId}`, {
+          headers: header,
+        });
+  
+        console.log(response.data);
+        isMounted && localStorage.setItem("addressList", JSON.stringify(response.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAddress();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  },[])
 
   console.log(token);
 
