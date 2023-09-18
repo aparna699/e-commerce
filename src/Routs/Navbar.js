@@ -94,7 +94,7 @@ const Navbar = () => {
               {navbar.map((key) => {
                 return (
                   <li class="nav-item">
-                    <a class="nav-link" href={`${key}`}>
+                    <a class="nav-link" href={`/${key}`}>
                       {key}
                     </a>
                   </li>

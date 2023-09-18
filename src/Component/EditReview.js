@@ -49,7 +49,7 @@ export const EditReview = (props) => {
     <div>
       <button
         type="button"
-        class="btn btn-dark btn-sm"
+        className="btn btn-dark btn-sm"
         data-bs-toggle="modal"
         data-bs-target={`#Review${review.id}`}
       >

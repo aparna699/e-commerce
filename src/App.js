@@ -109,6 +109,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
+          <Route path="MyOrders" element={<MyOrders />} />
+        </Route> */}
         <Route path="/" element={<Navbar />}>
           <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
             <Route path="/MyOrders" element={<MyOrders />} />

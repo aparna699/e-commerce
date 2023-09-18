@@ -28,7 +28,9 @@ export const ReviewCard = (props) => {
         <p className='p-1'>{review.comment}</p>
         {
             ((review.userId.id).toString() === userId)?(
-                <EditReview review={review}/>
+                <div className='d-flex justify-content-end'>
+                    <EditReview review={review}/>
+                </div>
             ):(
                 <div></div>
             )
