@@ -189,7 +189,7 @@ const Navbar = () => {
                     style={{
                       color: " #8c9aca",
                     }}
-                    href="login"
+                    href="/login"
                     onClick={logout}
                   >
                     logout

@@ -39,7 +39,7 @@ const CartItemCard = (props) => {
             <a href={`/items/${item.id}`}>
               <img
                 src={item.imgUrl[0]}
-                class="card-img-top overflow-hidden"
+                class="card-img-top"
                 alt="..."
                 style={{ height: "160px"}}
               />
