@@ -174,7 +174,7 @@ const EditButton = (props) => {
                 <div class="modal-footer">
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-dark"
                     data-bs-dismiss="modal"
                   >
                     Save changes

@@ -4,9 +4,12 @@ import Box from "@mui/material/Box";
 import { Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { green, red } from '@mui/material/colors';
+import Cookies from 'js-cookie';
+import { EditReview } from './EditReview';
 
 export const ReviewCard = (props) => {
     const review = props.review
+    const userId = (Cookies.get("userId"))
     
   return (
     <div className='card p-3 mx-5 my-2 '>
@@ -23,7 +26,14 @@ export const ReviewCard = (props) => {
         />
         <h7 className='fw-bolder p-1'>{review.title}</h7>
         <p className='p-1'>{review.comment}</p>
-        
+        {
+            ((review.userId.id).toString() === userId)?(
+                <EditReview review={review}/>
+            ):(
+                <div></div>
+            )
+
+        }
     </div>
   )
 }
