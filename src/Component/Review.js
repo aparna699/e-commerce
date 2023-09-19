@@ -52,9 +52,15 @@ export const Review = (props) => {
             )
         }
 
-        <WriteReview
-            id={id}
-        />
+        {
+            (userId === undefined )? (
+                <div/>
+            ):(
+                <WriteReview
+                    id={id}
+                />
+            )
+        }
     </div>
   )
 }

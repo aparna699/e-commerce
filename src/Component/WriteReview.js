@@ -40,6 +40,7 @@ export const WriteReview = (props) => {
             data, { headers: header });
         console.log(response);
         console.log("Add Review");
+        window.location.reload(true)
       } catch (err) {
         console.log(err);
       }

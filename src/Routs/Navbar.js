@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 //MUI
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -115,7 +115,7 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <form class="d-flex px-2">
+            {/* <form class="d-flex px-2">
               <input
                 class="form-control me-2"
                 type="search"
@@ -125,7 +125,7 @@ const Navbar = () => {
               <button class="btn btn-outline-success" type="submit">
                 <SearchIcon />
               </button>
-            </form>
+            </form> */}
             {/* Address */}
             {role === "ROLE_CUSTOMER" ? (
               <div
@@ -177,7 +177,7 @@ const Navbar = () => {
                     style={{
                       color: " #8c9aca",
                     }}
-                    href="login"
+                    href="/login"
                     onClick={logout}
                   >
                     login
