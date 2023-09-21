@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import axios from '../api/axios';
+import { DeleteReview } from './DeleteReview';
 
 export const EditReview = (props) => {
   const review = props.review
@@ -103,6 +104,7 @@ export const EditReview = (props) => {
                 />
                 
                 <div class="modal-footer">
+                  <DeleteReview reviewId={review.id}/>
                   <button
                     type="submit"
                     class="btn btn-dark"

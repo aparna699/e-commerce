@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "../api/axios";
+import dateFormat from 'dateformat'; 
 import { DeleteUser } from "./DeleteUser";
 
 export const DisplayUsers = () => {
@@ -75,7 +76,7 @@ export const DisplayUsers = () => {
               <h6>{user.phoneNumber}</h6>
             </div>
             <div className="col-sm-2">
-              <h7>{user.dOB.substring(0,10)}</h7>
+              <h7>{dateFormat(user.dOB, "mmm dS, yyyy")}</h7>
             </div>
             <div className="col-sm-1">
               {

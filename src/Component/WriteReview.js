@@ -92,6 +92,7 @@ export const WriteReview = (props) => {
                   style={{ "--bs-border-opacity": ".5" }}
                 />
                 <button type="submit" onClick={addReview} className="btn btn-dark my-2"> Submit </button>
+                
               </div>
             </form>
           </div>

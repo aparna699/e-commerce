@@ -156,7 +156,7 @@ const Navbar = () => {
               ) : (
                 <div></div>
               )}
-              {role === undefined ? (
+              {role !== undefined ? (
                 <li>
                   <a
                     class="nav-link active px-2"

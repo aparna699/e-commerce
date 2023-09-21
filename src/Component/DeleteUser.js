@@ -27,7 +27,7 @@ export const DeleteUser = (props) => {
     }
   };
   return (
-    <div>
+    // <div>
       <button
         className="btn btn-outline-dark btn-sm"
         style={{
@@ -37,6 +37,6 @@ export const DeleteUser = (props) => {
       >
         Delete
       </button>
-    </div>
+    // </div>
   );
 };
