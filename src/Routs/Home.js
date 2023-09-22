@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import CategoryCards from "../Component/CategoryCards";
+import CategoryCards from "../Component/Category/CategoryCards";
 import axios from "../api/axios";
-import Items  from "../Component/Items";
+import Items  from "../Component/Items/Items";
 
 const Home = () => {
   const [category, setCategory] = useState([]);

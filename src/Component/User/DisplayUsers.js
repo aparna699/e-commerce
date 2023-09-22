@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import dateFormat from 'dateformat'; 
 import { DeleteUser } from "./DeleteUser";
 

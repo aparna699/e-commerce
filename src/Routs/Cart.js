@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import CartItemCard from "../Component/CartItemCard";
+import CartItemCard from "../Component/Cart/CartItemCard";
 
 const Cart = () => {
   const userId = Cookies.get("userId");

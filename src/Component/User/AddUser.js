@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Input from "react-phone-number-input/input";
-import axios from '../api/axios';
+import axios from '../../api/axios';
 
 export const AddUser = () => {
   const [role, setRole] = useState()
@@ -100,8 +100,8 @@ export const AddUser = () => {
                                     checked={isChecked}
                                     onChange= {handleToggle}
                                     />
-                                <label c
-                                    lass="form-check-label" 
+                                <label 
+                                    class="form-check-label" 
                                     for="flexSwitchCheckDefault"> Create Admin User</label>
                             </div>
                             <input

@@ -1,7 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import EditItemsQty from "./EditItemsQty";
 
 const ProductEditeCard = (props) => {

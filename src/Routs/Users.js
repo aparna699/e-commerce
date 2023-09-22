@@ -1,6 +1,6 @@
 import React from 'react'
-import { AddUser } from '../Component/AddUser';
-import { DisplayUsers } from '../Component/DisplayUsers';
+import { AddUser } from '../Component/User/AddUser';
+import { DisplayUsers } from '../Component/User/DisplayUsers';
 
 const Users = () => {
   return (

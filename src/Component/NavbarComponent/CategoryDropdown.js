@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { useEffect , useState} from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 const CategoryDropdown = () => {
   const [category, setCategory] = useState([]);

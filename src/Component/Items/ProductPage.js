@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { AddToCartButton } from "./AddToCartButton";
-import { EditQtyButton } from "./EditQtyButton";
-import { Review } from "./Review";
+import { AddToCartButton } from "../Cart/AddToCartButton";
+import { EditQtyButton } from "../Cart/EditQtyButton";
+import { Review } from "../Review/Review";
 
 export const ProductPage = (props) => {
   const item = props.item;

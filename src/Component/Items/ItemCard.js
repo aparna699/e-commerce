@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { EditQtyButton } from "./EditQtyButton";
-import { AddToCartButton } from "./AddToCartButton";
+// import { EditQtyButton } from "../EditQtyButton";
+import { AddToCartButton } from "../Cart/AddToCartButton";
 
 const ItemCard = (props) => {
   const item = props.item;

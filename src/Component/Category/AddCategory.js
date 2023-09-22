@@ -1,29 +1,23 @@
 import Cookies from 'js-cookie'
-import React, { useEffect, useState } from 'react'
-import axios from '../api/axios'
-import DeleteCategory from './DeleteCategory'
+import React, { useState } from 'react'
+import axios from '../../api/axios'
 
-const EditCategory = () => {
+const AddCategory = () => {
     const [categoryName, setCategoryName] = useState()
     const [imgUrl, setImgUrl] = useState()
     const token = Cookies.get('token')
+    const url = '/api/category'
 
-    const [categoryId, setCategoryId] = useState();
-    const [category, setCategory] = useState([]);
-
-  useEffect(() => {
-    console.log("category");
-    const items = JSON.parse(localStorage.getItem("category"));
-    if (items) {
-      setCategory(items);
-    }
-  }, [localStorage.getItem("category")]);
-    
-    const editeCategory = async(e) => {
+    const addCategory = async(e) => {
         e.preventDefault()
+        // if(imgUrl == undefined){
+        //   setImgUrl("https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg")
+        // }
         const data = {
             categoryName: categoryName,
-            categoryImgUrl: imgUrl
+            categoryImgUrl: (imgUrl === undefined)?
+            ("https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg"):
+            (imgUrl)
         }
         console.log(data)
         const header = {
@@ -31,12 +25,11 @@ const EditCategory = () => {
             "Content-Type": "application/json",
           }
           try {
-            const response = await axios.put(
-                `/api/category/${categoryId}`, 
-                data, 
-                { headers: header });
-            console.log(response)
-            console.log("Edite Item");
+            const response = await axios.post(
+                url, 
+                data, { headers: header });
+            console.log(response);
+            console.log("Add Category");
           } catch (err) {
             console.log(err);
           }
@@ -48,14 +41,14 @@ const EditCategory = () => {
         type="button"
         className="btn btn-outline-dark col-sm-12"
         data-bs-toggle="modal"
-        data-bs-target="#Category"
+        data-bs-target="#AddCategory"
       >
-        Edit Category
+        Add Category
       </button>
 
       <div
         class="modal fade"
-        id="Category"
+        id="AddCategory"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -63,7 +56,7 @@ const EditCategory = () => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title"> Edite Category </h5>
+              <h5 class="modal-title"> Add Category </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -73,26 +66,8 @@ const EditCategory = () => {
             </div>
 
             <div class="modal-body">
-              <form onSubmit={editeCategory}>
+              <form onSubmit={addCategory}>
                 <div className="container-fluid">
-                <div className="row">
-                  <select
-                    class=" col-sm-12 opacity-60 p-2"
-                    aria-label=".form-select-sm example"
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)}
-                    required
-                  >
-                    <option className="col-sm-12"> Select Category </option>
-                    {category.map((key) => {
-                      return (
-                          <option className="col-sm-12" value={`${key.id}`}>
-                            {`${key.categoryName}`}
-                          </option>
-                        )
-                        })}
-                  </select>
-                </div>
                   <div className="row my-2">
                     <input
                       className="col-sm-12 opacity-60 p-2"
@@ -100,6 +75,7 @@ const EditCategory = () => {
                       onChange={(e) => setCategoryName(e.target.value)}
                       value={categoryName}
                       placeholder= "Category Name"
+                      required
                     />
                   </div>
                   
@@ -108,20 +84,19 @@ const EditCategory = () => {
                       className="col-sm-12 opacity-60 p-2"
                       type="text"
                       onChange={(e) => setImgUrl(e.target.value)}
-                      value={imgUrl}
+                      // value={}
                       placeholder="Category Image"
                     />
                   </div>
                   
                 </div>
                 <div class="modal-footer">
-                  <DeleteCategory id={categoryId}/>
                   <button
                     type="submit"
                     class="btn btn-dark"
                     data-bs-dismiss="modal"
                   >
-                    Edite Category
+                    Add Category
                   </button>
                 </div>
               </form>
@@ -133,4 +108,4 @@ const EditCategory = () => {
   )
 }
 
-export default EditCategory;
+export default AddCategory;

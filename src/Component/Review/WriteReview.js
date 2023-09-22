@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import Cookies from "js-cookie";
-import axios from '../api/axios'
+import axios from '../../api/axios'
 
 export const WriteReview = (props) => {
   const id = props.id;

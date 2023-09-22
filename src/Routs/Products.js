@@ -2,11 +2,11 @@ import React from 'react'
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
-import ItemCard from '../Component/ItemCard';
-import ProductEditeCard from '../Component/ProductEditeCard';
-import { AddItem } from '../Component/AddItem';
-import AddCategory from '../Component/AddCategory';
-import EditCategory from '../Component/EditCategory';
+// import ItemCard from '../Component/Items/ItemCard';
+import ProductEditeCard from '../Component/Items/ProductEditeCard';
+import { AddItem } from '../Component/Items/AddItem';
+import AddCategory from '../Component/Category/AddCategory';
+import EditCategory from '../Component/Category/EditCategory';
 
 const Products = () => {
   const [items, setItems] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { ReviewCard } from './ReviewCard';
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';

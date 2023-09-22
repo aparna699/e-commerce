@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { DeleteReview } from './DeleteReview';
 
 export const EditReview = (props) => {

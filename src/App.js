@@ -18,7 +18,7 @@ import axios from "./api/axios";
 import Address from "./Routs/Address";
 import Register from "./Routs/Register";
 import { Ordering } from "./Routs/Ordering";
-import { ProductPage } from "./Component/ProductPage";
+import { ProductPage } from "./Component/Items/ProductPage";
 
 function App() {
   const [category, setCategory] = useState([]);

@@ -1,13 +1,14 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import React from 'react'
-import axios from '../api/axios'
+import axios from '../../api/axios';
 
-export const DeleteAddress = (props) => {
-    const id = props.id
-    const token = Cookies.get('token')
-    
-    const deleteAddress = async(e) => {
-        e.preventDefault()
+export const DeleteReview = (props) => {
+    const id = props.reviewId;
+    const token = Cookies.get("token")
+
+    const deleteReview = async (e) => {
+        e.preventDefault();
+
         let isMounted = true
         console.log(`Delete ${id}`)
         try {
@@ -16,7 +17,7 @@ export const DeleteAddress = (props) => {
               "Content-Type": "application/json",
             };
             const response = await axios.delete(
-                `/api/address/${id}` , {
+                `/api/review/${id}` , {
               headers: header,
               withCredentials: false
             });
@@ -26,10 +27,15 @@ export const DeleteAddress = (props) => {
           } catch (err) {
             console.log(err);
           }
+
     }
+
   return (
-    <div>
-        <button onClick={deleteAddress} className='btn btn-dark col-sm-12 my-2'>Delete</button>
-    </div>
+    <button
+        className='btn btn-outline-dark'
+        onClick={deleteReview}
+    >
+        Delete
+    </button>
   )
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { AddAddress } from "../Component/AddAddress";
-import { AddressCart } from "../Component/AddressCart";
+import { AddAddress } from "../Component/Address/AddAddress";
+import { AddressCart } from "../Component/Address/AddressCart";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { OrderButton } from "../Component/OrderButton";
+import { OrderButton } from "../Component/Order/OrderButton";
 
 
 export const Ordering = () => {

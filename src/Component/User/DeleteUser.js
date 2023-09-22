@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 export const DeleteUser = (props) => {
   const id = props.userId;

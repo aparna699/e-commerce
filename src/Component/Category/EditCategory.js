@@ -1,14 +1,25 @@
 import Cookies from 'js-cookie'
-import React, { useState } from 'react'
-import axios from '../api/axios'
+import React, { useEffect, useState } from 'react'
+import axios from '../../api/axios'
+import DeleteCategory from './DeleteCategory'
 
-const AddCategory = () => {
+const EditCategory = () => {
     const [categoryName, setCategoryName] = useState()
     const [imgUrl, setImgUrl] = useState()
     const token = Cookies.get('token')
-    const url = '/api/category'
 
-    const addCategory = async(e) => {
+    const [categoryId, setCategoryId] = useState();
+    const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    console.log("category");
+    const items = JSON.parse(localStorage.getItem("category"));
+    if (items) {
+      setCategory(items);
+    }
+  }, [localStorage.getItem("category")]);
+    
+    const editeCategory = async(e) => {
         e.preventDefault()
         const data = {
             categoryName: categoryName,
@@ -20,11 +31,12 @@ const AddCategory = () => {
             "Content-Type": "application/json",
           }
           try {
-            const response = await axios.post(
-                url, 
-                data, { headers: header });
-            console.log(response);
-            console.log("Add Item");
+            const response = await axios.put(
+                `/api/category/${categoryId}`, 
+                data, 
+                { headers: header });
+            console.log(response)
+            console.log("Edite Item");
           } catch (err) {
             console.log(err);
           }
@@ -36,14 +48,14 @@ const AddCategory = () => {
         type="button"
         className="btn btn-outline-dark col-sm-12"
         data-bs-toggle="modal"
-        data-bs-target="#AddCategory"
+        data-bs-target="#Category"
       >
-        Add Category
+        Edit Category
       </button>
 
       <div
         class="modal fade"
-        id="AddCategory"
+        id="Category"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -51,7 +63,7 @@ const AddCategory = () => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title"> Add Category </h5>
+              <h5 class="modal-title"> Edite Category </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -61,8 +73,26 @@ const AddCategory = () => {
             </div>
 
             <div class="modal-body">
-              <form onSubmit={addCategory}>
+              <form onSubmit={editeCategory}>
                 <div className="container-fluid">
+                <div className="row">
+                  <select
+                    class=" col-sm-12 opacity-60 p-2"
+                    aria-label=".form-select-sm example"
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    required
+                  >
+                    <option className="col-sm-12"> Select Category </option>
+                    {category.map((key) => {
+                      return (
+                          <option className="col-sm-12" value={`${key.id}`}>
+                            {`${key.categoryName}`}
+                          </option>
+                        )
+                        })}
+                  </select>
+                </div>
                   <div className="row my-2">
                     <input
                       className="col-sm-12 opacity-60 p-2"
@@ -70,7 +100,6 @@ const AddCategory = () => {
                       onChange={(e) => setCategoryName(e.target.value)}
                       value={categoryName}
                       placeholder= "Category Name"
-                      required
                     />
                   </div>
                   
@@ -86,12 +115,13 @@ const AddCategory = () => {
                   
                 </div>
                 <div class="modal-footer">
+                  <DeleteCategory id={categoryId}/>
                   <button
                     type="submit"
                     class="btn btn-dark"
                     data-bs-dismiss="modal"
                   >
-                    Add Category
+                    Edite Category
                   </button>
                 </div>
               </form>
@@ -103,4 +133,4 @@ const AddCategory = () => {
   )
 }
 
-export default AddCategory;
+export default EditCategory;

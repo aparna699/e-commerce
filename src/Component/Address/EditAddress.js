@@ -1,9 +1,10 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
-export const AddAddress = () => {
-  const userId = Cookies.get("userId");
+export const EditAddress = (props) => {
+  const address = props.address
+
   const token = Cookies.get("token");
   const [unit, setUnit] = useState();
   const [line1, setLine1] = useState();
@@ -13,11 +14,10 @@ export const AddAddress = () => {
   const [state, setState] = useState();
   const [country, setCountry] = useState();
 
-  const addAddress = async(e) => {
-    e.preventDefault();
+  const editAddess = async(e) => {
+    e.preventDefault()
     let isMounted = true
     const data = {
-      userId: userId,
       unit: unit,
       line1: line1,
       line2: line2,
@@ -25,37 +25,39 @@ export const AddAddress = () => {
       city: city,
       state: state,
       country: country,
-    };
-    console.log(data);
+    }
     const header = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-    };
+    }
     try {
-      const response = await axios.post(
-          '/api/address',
+      const response = await axios.put(
+          `/api/address/${address.id}`,
           data,
           { headers: header });
       console.log(response)
-      console.log("Add Item")
+      console.log("Edit Item")
       isMounted && window.location.reload(true)
     } catch (err) {
       console.log(err);
     }
-  };
+
+    console.log(address.id)
+  }
+
   return (
-    <div className="m-2">
+    <div>
       <button
         type="button"
-        className="btn btn-dark"
+        className='btn btn-outline-dark col-sm-12 my-2'
         data-bs-toggle="modal"
-        data-bs-target="#AddAddress"
+        data-bs-target="#EditAddress"
       >
-        Add Address
+        Edit 
       </button>
       <div
         class="modal fade"
-        id="AddAddress"
+        id="EditAddress"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -63,7 +65,7 @@ export const AddAddress = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 class="modal-title"> Add Address </h5>
+              <h5 class="modal-title"> Edit Address </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -73,13 +75,13 @@ export const AddAddress = () => {
             </div>
 
             <div className="modal-body">
-              <form onSubmit={addAddress}>
+              <form onSubmit={editAddess}>
                 <input
                   className="col-sm-12 opacity-60 p-2 my-2"
                   type="text"
                   onChange={(e) => setUnit(e.target.value)}
                   value={unit}
-                  placeholder="Unit"
+                  defaultValue= {address.unit}
                   required
                 />
                 <input
@@ -87,7 +89,7 @@ export const AddAddress = () => {
                   type="text"
                   onChange={(e) => setLine1(e.target.value)}
                   value={line1}
-                  placeholder="Address Line 1"
+                  defaultValue={address.line1}
                   required
                 />
                 <input
@@ -95,7 +97,7 @@ export const AddAddress = () => {
                   type="text"
                   onChange={(e) => setLine2(e.target.value)}
                   value={line2}
-                  placeholder="Address Line 2"
+                  defaultValue={address.line2}
                   required
                 />
                 <input
@@ -103,7 +105,7 @@ export const AddAddress = () => {
                   type="text"
                   onChange={(e) => setPinCode(e.target.value)}
                   value={pinCode}
-                  placeholder="Pin Code"
+                  defaultValue= {address.pinCode}
                   required
                 />
 
@@ -112,7 +114,7 @@ export const AddAddress = () => {
                   type="city"
                   onChange={(e) => setCity(e.target.value)}
                   value={city}
-                  placeholder="City"
+                  defaultValue={address.city}
                   required
                 />
                 <input
@@ -120,7 +122,7 @@ export const AddAddress = () => {
                   type="state"
                   onChange={(e) => setState(e.target.value)}
                   value={state}
-                  placeholder="State"
+                  defaultValue={address.state}
                   required
                 />
                 <input
@@ -128,7 +130,7 @@ export const AddAddress = () => {
                   type="country"
                   onChange={(e) => setCountry(e.target.value)}
                   value={country}
-                  placeholder="Country"
+                  defaultValue={address.country}
                   required
                 />
                 <div></div>
@@ -138,7 +140,7 @@ export const AddAddress = () => {
                     class="btn btn-dark"
                     data-bs-dismiss="modal"
                   >
-                    Add Address
+                    Edit Address
                   </button>
                 </div>
               </form>
@@ -147,5 +149,5 @@ export const AddAddress = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

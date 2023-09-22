@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { useState } from "react";
 import { EditQtyButton } from "./EditQtyButton";
 

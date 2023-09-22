@@ -1,18 +1,15 @@
 import Cookies from "js-cookie";
-// import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+
 //MUI
-// import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import HomeIcon from "@mui/icons-material/Home";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 import axios from "../api/axios";
-import CategoryDropdown from "../Component/CategoryDropdown";
-import AddressSelect from "../Component/AddressSelect";
+import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
 
 const Navbar = () => {
   const cartQty = localStorage.getItem('totalQty');

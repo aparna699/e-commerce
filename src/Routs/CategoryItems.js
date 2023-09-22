@@ -1,6 +1,6 @@
 import React from 'react'
-import ItemCard from '../Component/ItemCard';
-import Items from '../Component/Items';
+// import ItemCard from '../Component/Items/ItemCard';
+import Items from '../Component/Items/Items';
 
 const CategoryItems = (props) => {
   const items = props.category.id;

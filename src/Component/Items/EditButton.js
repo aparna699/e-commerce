@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 const EditButton = (props) => {
   const item = props.items;
