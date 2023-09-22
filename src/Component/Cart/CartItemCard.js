@@ -24,7 +24,7 @@ const CartItemCard = (props) => {
         });
         console.log(response.data);
         isMounted && window.location.reload(true);
-        console.log("delete");
+        console.log("Delete cart item");
       } catch (err) {
         console.log(err);
       }

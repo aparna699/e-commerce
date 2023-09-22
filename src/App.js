@@ -29,7 +29,7 @@ function App() {
   let count = 0;
 
   useEffect(() => {
-    console.log("items");
+    // console.log("items");
     const item = JSON.parse(localStorage.getItem("items"));
     if (item) {
       setItems(item);

@@ -36,7 +36,7 @@ const Navbar = () => {
 
     const getAddress = async () => {
       console.log("get Address");
-      console.log(userId);
+      // console.log("UserId : ",userId);
       try {
         const header = {
           Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const Navbar = () => {
           headers: header,
         });
   
-        console.log(response.data);
+        // console.log(response.data);
         isMounted && localStorage.setItem("addressList", JSON.stringify(response.data));
       } catch (err) {
         console.log(err);
@@ -61,7 +61,6 @@ const Navbar = () => {
     };
   },[])
 
-  console.log(token);
 
   return (
     <div>

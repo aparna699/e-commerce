@@ -41,7 +41,7 @@ export const AddToCartButton = (props) => {
       });
       console.log(response.data);
       isMounted && window.location.reload(true);
-      console.log("Add");
+      console.log("Item Added to cart");
     } catch (err) {
       console.log(err);
     }
