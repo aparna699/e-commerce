@@ -3,7 +3,7 @@ import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { ProfileInfo } from '../Component/User/ProfileInfo'
 import { DeleteUser } from "../Component/User/DeleteUser";
-import { ChangePassword } from "../Component/ChangePassword";
+import { ChangePassword } from "../Component/Password/ChangePassword";
 
 const Profile = () => {
   return (

@@ -1,17 +1,43 @@
 import React, { useState } from "react";
+import axios from "../../api/axios";
+import Cookies from "js-cookie";
 
 export const ChangePassword = (props) => {
   const id = props.userId;
-  
+  const token = Cookies.get("token");
+  const url = `/api/users/${id}`;
+
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const changePassword = (e) => {
+  const changePassword = async (e) => {
     e.preventDefault();
     console.log(id);
+    let isMounted = true;
     const data = {
       password: password,
     };
+    const header = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    if(password === confirmPassword){
+      try{
+        const response = await axios.put(url,data, {
+          headers: header,
+          withCredentials: false,
+        });
+        console.log(response);
+        isMounted && window.location.reload(true);
+        console.log("change password");
+       } catch (err) {
+        console.log(err);
+      }
+    }else{
+      alert("Password Mismatch")
+    }
+
   };
   return (
     // btn btn-dark btn-sm mx-2
@@ -63,6 +89,8 @@ export const ChangePassword = (props) => {
                   placeholder="Confirm New Password"
                   required
                 />
+                
+                
                 
                 <div class=" my-4">
                   <button
