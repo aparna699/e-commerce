@@ -42,17 +42,6 @@ const Items = (props) => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   items.filter(post => {
-  //     if (query === "") {
-  //       //if query is empty
-  //       return post;
-  //     } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
-  //       //returns filtered array
-  //       return post;
-  //     }
-  //   });
-  // },[query])
 
   return (
     <div>

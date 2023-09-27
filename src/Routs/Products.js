@@ -7,9 +7,12 @@ import ProductEditeCard from '../Component/Items/ProductEditeCard';
 import { AddItem } from '../Component/Items/AddItem';
 import AddCategory from '../Component/Category/AddCategory';
 import EditCategory from '../Component/Category/EditCategory';
+import SearchIcon from "@mui/icons-material/Search";
 
 const Products = () => {
   const [items, setItems] = useState([]);
+  const [query, setQuery] = useState("");
+
   const token = Cookies.get("token");
   const url = '/api/items';
   useEffect(() => {
@@ -49,10 +52,33 @@ const Products = () => {
         <AddCategory/>
         <EditCategory/>
       </div>
+
       <div className="row px-5">
-        {items.map((key) => {
-          return <ProductEditeCard item={key} />;
-        })}
+      <form class="d-flex px-2">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          onChange={(e) => setQuery(e.target.value)}
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">
+          <SearchIcon color="success"/>
+        </button>
+      </form>
+
+        {
+          items.filter(post => {
+            if (query === "") {
+              //if query is empty
+              return post;
+            } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
+              //returns filtered array
+              return post;
+            }}).map((key) => {
+            return <ProductEditeCard item={key} />;
+          })
+        }
       </div>
     </div>
   )

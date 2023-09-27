@@ -19,7 +19,8 @@ const Navbar = () => {
   const userId = Cookies.get("userId");
 
   const user = ["MyOrders"];
-  const admin = ["Products", "Orders", "Users"];
+  // const admin = ["Products", "Orders", "Users"];
+  const admin = ["Products", "Users"];
 
   const navbar =
     role == "ROLE_CUSTOMER" ? user : role == "ROLE_ADMIN" ? admin : [];
