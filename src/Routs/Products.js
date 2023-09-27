@@ -72,7 +72,7 @@ const Products = () => {
             if (query === "") {
               //if query is empty
               return post;
-            } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
+            } else if (post.description.toLowerCase().includes(query.toLowerCase())) {
               //returns filtered array
               return post;
             }}).map((key) => {

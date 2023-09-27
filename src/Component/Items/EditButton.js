@@ -81,7 +81,7 @@ const EditButton = (props) => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Edit Product {`${item.id}`}</h5>
+              <h5 class="modal-title fw-bold">Edit:  {`${item.productName}`}</h5>
               <button
                 type="button"
                 class="btn-close"
