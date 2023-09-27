@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "../../api/axios";
 import Cookies from "js-cookie";
 
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 export const ChangePassword = (props) => {
   const id = props.userId;
   const token = Cookies.get("token");
@@ -9,6 +12,19 @@ export const ChangePassword = (props) => {
 
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordShown2, setPasswordShown2] = useState(false);
+
+  const togglePasswordVisiblity = (e) => {
+    e.preventDefault();
+    setPasswordShown(passwordShown ? false : true);
+  };
+
+  const togglePasswordVisiblity2 = (e) => {
+    e.preventDefault();
+    setPasswordShown2(passwordShown2 ? false : true);
+  };
 
   const changePassword = async (e) => {
     e.preventDefault();
@@ -22,22 +38,21 @@ export const ChangePassword = (props) => {
       "Content-Type": "application/json",
     };
 
-    if(password === confirmPassword){
-      try{
-        const response = await axios.put(url,data, {
+    if (password === confirmPassword) {
+      try {
+        const response = await axios.put(url, data, {
           headers: header,
           withCredentials: false,
         });
         console.log(response);
         isMounted && window.location.reload(true);
         console.log("change password");
-       } catch (err) {
+      } catch (err) {
         console.log(err);
       }
-    }else{
-      alert("Password Mismatch")
+    } else {
+      alert("Password Mismatch");
     }
-
   };
   return (
     // btn btn-dark btn-sm mx-2
@@ -71,33 +86,52 @@ export const ChangePassword = (props) => {
             </div>
             <div class="modal-body">
               <form onSubmit={changePassword}>
+                <div className="col-sm-12">
+                  <input
+                    type={passwordShown ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    className="col-sm-12 opacity-60 p-2 my-2"
+                    placeholder="New Password"
+                    style={{ minWidth: "450px" }}
+                    required
+                  />
+                  <a
+                    style={{ "margin-left": "-30px" }}
+                    onClick={togglePasswordVisiblity}
+                  >
+                    {passwordShown ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </a>
+                </div>
 
-                <input
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  className="col-sm-12 opacity-60 p-2 my-2"
-                  placeholder="New Password"
-                  required
-                />
+                <div className="col-sm-12">
+                  <input
+                    type={passwordShown2 ? "text" : "password"}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
+                    className="col-sm-12 opacity-60 p-2 my-2"
+                    placeholder="Confirm New Password"
+                    style={{ minWidth: "450px" }}
+                    required
+                  />
+                  <a
+                    style={{ "margin-left": "-30px" }}
+                    onClick={togglePasswordVisiblity2}
+                  >
+                    {passwordShown2 ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <VisibilityIcon />
+                    )}
+                  </a>
+                </div>
 
-                <input
-                  type="password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  value={confirmPassword}
-                  className="col-sm-12 opacity-60 p-2 my-2"
-                  placeholder="Confirm New Password"
-                  required
-                />
-                
-                
-                
                 <div class=" my-4">
                   <button
                     type="submit"
                     class="btn btn-dark btn-block col-md-12"
                   >
-                    Create User
+                    Reset Password
                   </button>
                 </div>
               </form>

@@ -13,7 +13,7 @@ const Profile = () => {
 
       <div className="d-flex justify-content-end">
         <ChangePassword userId={Cookies.get("userId")}/>
-        <DeleteUser  userId={Cookies.get("userId")}/>
+        <DeleteUser text="Delete Account" userId={Cookies.get("userId")}/>
       </div>
     </div>
   )

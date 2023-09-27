@@ -89,7 +89,11 @@ export const DisplayUsers = () => {
               
             </div>
             <div className="col-sm-1 mb-2">
-              <DeleteUser userId = {user.id}/>
+              <DeleteUser 
+              style={{
+                width: "90px",
+              }}
+              text= "Delete" userId = {user.id}/>
             </div>
             
           </div>

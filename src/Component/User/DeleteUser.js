@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 
 export const DeleteUser = (props) => {
   const id = props.userId;
+  const text = props.text
   const url = `/api/users/${id}`;
   const token = Cookies.get("token");
 
@@ -30,12 +31,10 @@ export const DeleteUser = (props) => {
     // <div>
       <button
         className="btn btn-outline-dark btn-sm"
-        style={{
-          width: "90px",
-        }}
+        
         onClick={deleteUser}
       >
-        Delete
+        {text}
       </button>
     // </div>
   );

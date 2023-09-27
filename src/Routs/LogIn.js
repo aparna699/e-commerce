@@ -5,6 +5,8 @@ import axios from "../api/axios";
 import Cookies from 'js-cookie'
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 
 const LogIn = () => {
     const {setAuth} = useAuth();
@@ -100,7 +102,6 @@ const LogIn = () => {
                 <div class="form-outline mb-4 ">
                     <div className="col-sm-12">
                         <input 
-                        // type="password"
                         type={passwordShown ? "text" : "password"}
                         id="password"
                         onChange= {(e) => setPwd(e.target.value)}
@@ -114,7 +115,13 @@ const LogIn = () => {
                         <a
                         style={{"margin-left": "-30px"}}
                         onClick={togglePasswordVisiblity}> 
-                            <VisibilityIcon/> 
+                            {
+                                passwordShown ? (
+                                    <VisibilityOffIcon /> 
+                                ):(
+                                    <VisibilityIcon /> 
+                                )
+                            } 
                         </a>{" "}
                     </div>
                 </div>
