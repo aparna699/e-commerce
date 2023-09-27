@@ -4,6 +4,7 @@ import useAuth from "../Hooks/useAuth";
 import axios from "../api/axios";
 import Cookies from 'js-cookie'
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const LogIn = () => {
     const {setAuth} = useAuth();
@@ -19,7 +20,12 @@ const LogIn = () => {
     const [password, setPwd] = useState();
     const [errMsg, setErrMsg] = useState('');
 
-
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePasswordVisiblity = (e) => {
+        e.preventDefault()
+      setPasswordShown(passwordShown ? false : true);
+    };
+  
     
     // useEffect(() => {
     //     userRef.current.focus();
@@ -86,21 +92,31 @@ const LogIn = () => {
                     value= {email}
                     className="col-sm-12 border-start border-top border-end opacity-70 p-2"
                     placeholder="Enter email"
+                    style={{"width":"460px"}}
                     required
                     />            
                 </div>
 
-                <div class="form-outline mb-4">
-                    <input 
-                    type="password"
-                    id="password"
-                    onChange= {(e) => setPwd(e.target.value)}
-                    value= {password}
-                    autoComplete= "off"
-                    className="col-sm-12 border-start border-top border-end opacity-70 p-2"
-                    placeholder="Enter password"
-                    required
-                    />
+                <div class="form-outline mb-4 ">
+                    <div className="col-sm-12">
+                        <input 
+                        // type="password"
+                        type={passwordShown ? "text" : "password"}
+                        id="password"
+                        onChange= {(e) => setPwd(e.target.value)}
+                        value= {password}
+                        autoComplete= "off"
+                        className=" border-start border-top border-end opacity-70 p-2"
+                        placeholder="Enter password"
+                        style={{"width":"460px"}}
+                        required
+                        />
+                        <a
+                        style={{"margin-left": "-30px"}}
+                        onClick={togglePasswordVisiblity}> 
+                            <VisibilityIcon/> 
+                        </a>{" "}
+                    </div>
                 </div>
 
                 <div class="row mb-4">
