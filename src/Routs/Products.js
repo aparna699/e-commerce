@@ -45,17 +45,17 @@ const Products = () => {
   }, []);
 
   return (
-    <div>
-      <div className='row px-5 my-2'>
+    <div className='px-4'>
+      <div className='row my-2'>
         <AddItem/>
         <div className='col-sm-6 col-md-3' />
-        <div className='col-sm-6 d-flex justify-content-end'>
+        <div className='col-md-6 col-12 d-flex justify-content-end'>
           <AddCategory/>
           <EditCategory/>
         </div>
       </div>
 
-      <div className="row px-5">
+      <div className="row">
       <form class="d-flex my-2">
         <div 
           class="p-2 card rounded-start border-1 bg-light" 

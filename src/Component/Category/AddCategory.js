@@ -38,7 +38,7 @@ const AddCategory = () => {
     }
 
   return (
-    <div className='mx-2  d-flex justify-content-end'>
+    <div className='my-2 d-flex justify-content-end'>
       <button
         type="button"
         className="btn btn-outline-dark"

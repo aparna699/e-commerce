@@ -45,7 +45,7 @@ const EditCategory = () => {
     }
 
   return (
-    <div className='mx'>
+    <div className='my-2 ' style={{"marginLeft": "10px"}}>
       <button
         type="button"
         className="btn btn-outline-dark "

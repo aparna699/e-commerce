@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Input from "react-phone-number-input/input";
 import axios from '../../api/axios';
 
+import AddIcon from '@mui/icons-material/Add';
+
 export const AddUser = () => {
   const [role, setRole] = useState()
 //   const [role, setRole] = useState("ROLE_CUSTOMER")
@@ -61,14 +63,14 @@ export const AddUser = () => {
   }
 
   return (
-    <div className='row m-2'>
+    <div className=''>
         <button
             type="button"
-            className="btn btn-dark col-sm-3"
+            className="btn btn-dark "
             data-bs-toggle="modal"
             data-bs-target="#AddUser"
         >
-            Add User
+           <AddIcon style={{"fill": "lightgray"}}/> Add User
         </button>
 
         <div

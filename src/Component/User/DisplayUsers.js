@@ -3,7 +3,10 @@ import Cookies from "js-cookie";
 import axios from "../../api/axios";
 import dateFormat from "dateformat";
 import { DeleteUser } from "./DeleteUser";
+
 import SearchIcon from "@mui/icons-material/Search";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import PersonIcon from '@mui/icons-material/Person';
 
 export const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
@@ -41,7 +44,7 @@ export const DisplayUsers = () => {
 
   return (
     <div>
-      <div className="px-2 py-1">
+      <div className=" py-1">
         <form class="d-flex my-2">
           <div
             class="p-2 card rounded-start border-1 bg-light"
@@ -63,8 +66,9 @@ export const DisplayUsers = () => {
           />
         </form>
       </div>
-      <div className="card p-2 m-2">
-        <div className="row">
+      <div className="card my-2 ">
+        <div className="card m-0 p-2 bg-light border-0">
+        <div className="row ">
           <div className="col-sm-1">
             <h6 className="fw-bold">ID</h6>
           </div>
@@ -84,7 +88,8 @@ export const DisplayUsers = () => {
             <h6 className="fw-bold">Role</h6>
           </div>
         </div>
-        <div className="col-sm-12 card my-2"></div>
+        </div>
+        {/* <div className="col-sm-12 card my-2"></div> */}
         {users.filter(post => {
             const searchList= post.id + post.firstName + post.lastName + post.email;
             if (query === "") {
@@ -95,9 +100,9 @@ export const DisplayUsers = () => {
               return post;
             }}).map((user) => {
           return (
-            <div className="row">
+            <div className="row p-2">
               <div className="col-sm-1">
-                <h6>{user.id}</h6>
+                <h6 className=" px-2">{user.id}</h6>
               </div>
               <div className="col-sm-2">
                 <h6>
@@ -111,16 +116,22 @@ export const DisplayUsers = () => {
                 <h6>{user.phoneNumber}</h6>
               </div>
               <div className="col-sm-2">
-                <h7>{dateFormat(user.dOB, "mmm dS, yyyy")}</h7>
+                <small>{dateFormat(user.dOB, "mmm dS, yyyy")}</small>
               </div>
-              <div className="col-sm-1">
+              <div className="col-sm-1 px-1">
                 {user.role === "ROLE_ADMIN" ? (
-                  <h7 className="fw-bold col-sm-6">ADMIN</h7>
+                  <h7 className="fw-bold d-flex justify-content-center">
+                    <AdminPanelSettingsIcon />
+                    <small>Admin</small>
+                  </h7>
                 ) : (
-                  <h7 className="col-sm-6">CUSTOMER</h7>
+                  <h7 className="d-flex justify-content-center">
+                    <PersonIcon />
+                    <small>User</small>
+                  </h7>
                 )}
               </div>
-              <div className="col-sm-1 mb-2">
+              <div className="col-sm-1 mb-2 d-flex justify-content-end">
                 <DeleteUser
                   style={{
                     width: "90px",

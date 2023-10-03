@@ -2,9 +2,10 @@ import Cookies from "js-cookie";
 import React from "react";
 import axios from "../../api/axios";
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export const DeleteUser = (props) => {
   const id = props.userId;
-  const text = props.text
   const url = `/api/users/${id}`;
   const token = Cookies.get("token");
 
@@ -30,11 +31,11 @@ export const DeleteUser = (props) => {
   return (
     // <div>
       <button
-        className="btn btn-outline-dark btn-sm"
+        className="btn btn-sm border-0 m-0 p-0"
         
         onClick={deleteUser}
       >
-        {text}
+        <DeleteIcon style={{"fill": "#D10000"}}/>
       </button>
     // </div>
   );
