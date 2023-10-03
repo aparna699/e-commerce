@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import axios from "../../api/axios";
 import { EditQtyButton } from "./EditQtyButton";
 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 export const AddToCartButton = (props) => {
   const item = props.item;
   const token = Cookies.get("token");
@@ -59,7 +61,7 @@ export const AddToCartButton = (props) => {
           <div className="d-flex justify-content-end">
             {/* <AddToCartButton item= {item}/> */}
             <button onClick={addItemToCart} className="btn btn-dark ">
-              Add To Cart
+              <ShoppingCartIcon style={{fill: "white"}}/> Add To Cart
             </button>
           </div>
         )

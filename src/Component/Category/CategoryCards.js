@@ -2,7 +2,7 @@ import React from "react";
 
 const CategoryCards = (props) => {
   return (
-    <div className="col-md-2 py-3">
+    <div className="col-md-2">
       {/* CategoryCards: {`${props.categoryId} ${props.categoryName}`} */}
       <div class="card" style={{"width": "auto"}}>
         <a href={`/${props.categoryName}`} >

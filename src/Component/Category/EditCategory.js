@@ -1,7 +1,9 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import axios from '../../api/axios'
+
 import DeleteCategory from './DeleteCategory'
+import EditIcon from '@mui/icons-material/Edit';
 
 const EditCategory = () => {
     const [categoryName, setCategoryName] = useState()
@@ -43,14 +45,14 @@ const EditCategory = () => {
     }
 
   return (
-    <div className='col-sm-6 col-md-3'>
+    <div className='mx'>
       <button
         type="button"
-        className="btn btn-outline-dark col-sm-12"
+        className="btn btn-outline-dark "
         data-bs-toggle="modal"
         data-bs-target="#Category"
       >
-        Edit Category
+        <EditIcon style={{"fill": "gray"}}/>  Edit Category
       </button>
 
       <div

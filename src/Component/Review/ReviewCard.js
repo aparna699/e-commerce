@@ -12,7 +12,7 @@ export const ReviewCard = (props) => {
     const userId = (Cookies.get("userId"))
     
   return (
-    <div className='card p-3 mx-5 my-2 '>
+    <div className='card p-3 my-2 '>
         <small className='text-end text-secondary fw-lighter fs-6'>{review.date.substring(0,10)} </small>
         <h6 className='fw-bold p-1'>{review.userId.firstName} {review.userId.lastName}  </h6> 
         <Rating

@@ -9,7 +9,7 @@ const CategoryItems = (props) => {
   console.log(items)
   return (
     <div className="">
-      <h3>{props.category.categoryName}</h3>
+      <h3 className='mx-4 mt-2'>{props.category.categoryName}</h3>
       <Items url={url}/>
     </div>
   )

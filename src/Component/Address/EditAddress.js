@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "../../api/axios";
 
+import EditIcon from '@mui/icons-material/Edit';
+
 export const EditAddress = (props) => {
   const address = props.address
 
@@ -46,14 +48,14 @@ export const EditAddress = (props) => {
   }
 
   return (
-    <div>
+    <div className="d-flex justify-content-end">
       <button
         type="button"
-        className='btn btn-outline-dark col-sm-12 my-2'
+        className='btn btn-outline-dark my-2 '
         data-bs-toggle="modal"
         data-bs-target="#EditAddress"
       >
-        Edit 
+        <EditIcon /> 
       </button>
       <div
         class="modal fade"

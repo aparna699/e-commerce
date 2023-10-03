@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "../../api/axios";
 
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+
 export const AddAddress = () => {
   const userId = Cookies.get("userId");
   const token = Cookies.get("token");
@@ -51,7 +53,7 @@ export const AddAddress = () => {
         data-bs-toggle="modal"
         data-bs-target="#AddAddress"
       >
-        Add Address
+        <AddLocationIcon style={{"fill": "white"}}/> Add Address
       </button>
       <div
         class="modal fade"

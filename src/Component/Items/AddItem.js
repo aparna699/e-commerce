@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 
+import AddIcon from '@mui/icons-material/Add';
+
 export const AddItem = () => {
   const [productName, setProductName] = useState();
   const [price, setPrice] = useState();
@@ -46,11 +48,11 @@ export const AddItem = () => {
     <div className="col-sm-6 col-md-3">
       <button
         type="button"
-        className="btn btn-dark col-sm-12"
+        className="btn btn-dark "
         data-bs-toggle="modal"
         data-bs-target="#Add"
       >
-        Add Item
+        <AddIcon style={{"fill": "gray"}}/> Add Item
       </button>
 
       <div

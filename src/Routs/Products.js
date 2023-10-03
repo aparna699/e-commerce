@@ -49,22 +49,31 @@ const Products = () => {
       <div className='row px-5 my-2'>
         <AddItem/>
         <div className='col-sm-6 col-md-3' />
-        <AddCategory/>
-        <EditCategory/>
+        <div className='col-sm-6 d-flex justify-content-end'>
+          <AddCategory/>
+          <EditCategory/>
+        </div>
       </div>
 
       <div className="row px-5">
-      <form class="d-flex px-2">
+      <form class="d-flex my-2">
+      <div class="p-2">
+          <SearchIcon />
+        </div>
         <input
-          class="form-control me-2"
+          class="form-control"
           type="search"
-          placeholder="Search"
+          // placeholder={"Search"}
+          placeholder="Search" 
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search"
         />
-        <button class="btn btn-outline-success" type="submit">
-          <SearchIcon color="success"/>
-        </button>
+        {/* <button class="btn border-0" type="submit" 
+        // style={{"margin-left": "-50px"}}
+        onClick={(e) => setQuery(e.target.value)}
+        >
+          <SearchIcon />
+        </button> */}
       </form>
 
         {

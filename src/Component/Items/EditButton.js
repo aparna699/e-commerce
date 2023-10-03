@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import axios from "../../api/axios";
 
+import EditIcon from '@mui/icons-material/Edit';
+
 const EditButton = (props) => {
   const item = props.items;
   const itemId = item.id;
@@ -68,7 +70,7 @@ const EditButton = (props) => {
         data-bs-toggle="modal"
         data-bs-target={`#Edit${item.id}`}
       >
-        Edit
+        <EditIcon style={{"fill": "white"}}/>
       </button>
       {/* Modal */}
       <div

@@ -7,7 +7,7 @@ const ItemCard = (props) => {
   const item = props.item;
 
   return (
-    <div className="col-md-3 col-sm-6 p-2" >
+    <div className="col-md-3 col-sm-6 my-2" >
       <div className="card justify-content-center" style={{ width: "auto" }}>
         <a href={`/items/${item.id}`}>
           <div className="card-img">

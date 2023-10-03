@@ -67,11 +67,12 @@ export const WriteReview = (props) => {
             <form action="">
               <div className="row ">
                 <Rating
-                  name="simple-controlled"
+                  name="simple-controlled "
                   value={rate}
                   onChange={(e) => setRate(e.target.value)}
                   precision={0.5}
                   emptyIcon={<StarIcon style={{ opacity: 0.55 }} />}
+                  style= {{"padding": "0px"}}
                 />
                 {/* {console.log(rate)} */}
                 <input

@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import axios from '../../api/axios'
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export const DeleteAddress = (props) => {
     const id = props.id
     const token = Cookies.get('token')
@@ -28,8 +30,10 @@ export const DeleteAddress = (props) => {
           }
     }
   return (
-    <div>
-        <button onClick={deleteAddress} className='btn btn-dark col-sm-12 my-2'>Delete</button>
+    <div className="d-flex justify-content-end">
+        <button onClick={deleteAddress} className='btn border-0 my-2'>
+          <DeleteIcon />
+        </button>
     </div>
   )
 }

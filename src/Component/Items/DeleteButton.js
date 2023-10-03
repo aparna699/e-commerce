@@ -2,6 +2,8 @@ import React from "react";
 import axios from "../../api/axios";
 import Cookies from "js-cookie";
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
 const DeleteButton = (props) => {
   const itemId = props.itemId;
   const url = `/api/items/${itemId}`;
@@ -29,8 +31,8 @@ const DeleteButton = (props) => {
 
   return (
     <div>
-      <button className="btn btn-outline-dark btn-sm mx-2" onClick={deleteItem}>
-        Delete
+      <button className="btn btn-sm border-0 mx-2" onClick={deleteItem}>
+        <DeleteIcon style={{"fill": "#D10000"}}/>
       </button>
     </div>
   );

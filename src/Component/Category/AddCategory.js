@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import axios from '../../api/axios'
 
+import AddIcon from '@mui/icons-material/Add';
+
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState()
     const [imgUrl, setImgUrl] = useState()
@@ -36,14 +38,14 @@ const AddCategory = () => {
     }
 
   return (
-    <div className='col-sm-6 col-md-3'>
+    <div className='mx-2  d-flex justify-content-end'>
       <button
         type="button"
-        className="btn btn-outline-dark col-sm-12"
+        className="btn btn-outline-dark"
         data-bs-toggle="modal"
         data-bs-target="#AddCategory"
       >
-        Add Category
+        <AddIcon style={{"fill": "gray"}}/> Add Category
       </button>
 
       <div

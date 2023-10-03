@@ -30,13 +30,13 @@ const Cart = () => {
           return <CartItemCard cart={key} />;
         })}
       </div>
-      <div className="text-end mx-5 mt-3">
+      {/* <div className="text-end  mt-3">
         <h5><span className="fw-bold">Total Cost:</span> Rs. {price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h5>
       </div>
-      <div className="row px-5 my-3">
+      <div className="row my-3">
         <div className="col-md-9"></div>
         <a className="col-md-3" href="/ordering"><button className="btn btn-dark col-md-12">Proceed To Order</button></a>
-      </div>
+      </div> */}
     </div>
   );
 };

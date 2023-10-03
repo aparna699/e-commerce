@@ -33,8 +33,8 @@ const Home = () => {
   return (
     <div>
       <Outlet />
-      <div className="container-fluid py-2">
-        <div className="scroller row flex-row flex-nowrap overflow-auto" >
+      <div className=" py-2">
+        <div className="scroller row flex-row flex-nowrap overflow-auto px-4" >
           {
           category.map((key) => {
             return (

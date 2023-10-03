@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 //MUI
+import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material-next/Badge";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -85,7 +86,7 @@ const Navbar = () => {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">
-                  Home
+                  <HomeIcon/>
                 </a>
               </li>
               {navbar.map((key) => {

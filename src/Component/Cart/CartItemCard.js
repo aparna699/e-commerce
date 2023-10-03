@@ -4,6 +4,10 @@ import axios from "../../api/axios";
 import { useState } from "react";
 import { EditQtyButton } from "./EditQtyButton";
 
+import StarIcon from '@mui/icons-material/Star';
+import Rating from "@mui/material/Rating";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 const CartItemCard = (props) => {
   const item = props.cart.itemId;
   const qty = props.cart.qty;
@@ -32,37 +36,52 @@ const CartItemCard = (props) => {
   };
 
   return (
-    <div className="col-md-12 " >{/*px-5 m-2*/}
-      <div className="card mx-5 my-2" > {/*m-1*/}
-        <div className="row " style={{ height: "160px"}}>
-          <div className="col-md-3" >
+    <div className="col-md-12 col-sm-12" >{/*px-5 m-2*/}
+      <div className="card  my-2" > {/*m-1*/}
+        <div className="row " 
+        style={{ height: "200px"}}
+        >
+          <div className="col-md-3 col-6" >
             <a href={`/items/${item.id}`}>
               <img
                 src={item.imgUrl[0]}
-                class="card-img-top"
+                class="card-img"
                 alt="..."
-                style={{ height: "160px"}}
+                // style={{ "minHeight": "200px", "maxHeight": "200px"}}
+                style={{height: "200px"}}
               />
             </a>
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 col-6">
             
-            <div className="card-body my-3 ">
+            <div className="card-body " style={{padding: "10px"}}>
+              <span className="d-flex justify-content-end">
+              <Rating
+                  name="simple-controlled"
+                  value={4}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55,}} />
+              }
+              style={{"color": "yellow"}}
+              />
+              </span>
               <a href={`/items/${item.id}`} className='text-dark text-decoration-none'>
                 <h5 className="fw-bolder ">
                   {item.productName}
                 </h5>
               </a>
+              
               <h7><span className="fw-bold">Qty:</span> {qty}</h7><br/>
               <h7>{'Rs. ' + item.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h7>
               <div className="d-flex justify-content-end">
                 <EditQtyButton cart={props.cart} />
                 <button
-                  className="btn btn-dark btn-sm mx-2"
+                  className="btn boder-0 btn-sm mx-2"
                   onClick={deleteItem}
                   style={{ height: "30px" }}
                 >
-                  Delete
+                  <DeleteIcon style={{"fill": "#D10000"}}/>
                 </button>
               </div>
             </div>

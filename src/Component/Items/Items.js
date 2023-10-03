@@ -15,7 +15,6 @@ const Items = (props) => {
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    console.log("hi");
     const getItems = async () => {
       try {
         const header = {
@@ -42,24 +41,30 @@ const Items = (props) => {
     };
   }, []);
 
-
   return (
-    <div>
-      <div className="mx-5 my-2">
-      <form class="d-flex px-2">
+    <div className="px-4">
+      <div className=" my-2">
+      <form class="d-flex">
+      <div class="p-2">
+          <SearchIcon />
+        </div>
         <input
-          class="form-control me-2"
+          class="form-control"
           type="search"
-          placeholder="Search"
+          // placeholder={"Search"}
+          placeholder="Search" 
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search"
         />
-        <button class="btn btn-outline-success" type="submit">
-          <SearchIcon color="success"/>
-        </button>
+        {/* <button class="btn border-0" type="submit" 
+        // style={{"margin-left": "-50px"}}
+        onClick={(e) => setQuery(e.target.value)}
+        >
+          <SearchIcon />
+        </button> */}
       </form>
       </div>
-      <div className="row px-5">
+      <div className="row">
         {role === "ROLE_ADMIN"
           ? (
             items.filter(post => {
