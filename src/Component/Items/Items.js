@@ -66,6 +66,23 @@ const Items = (props) => {
         />
       </form>
       </div>
+      {
+          (items.length === 0)?(
+            <div className="card border-0">
+            <div >
+              <div className="pt-4 d-flex justify-content-center">
+                <img 
+                src="https://app.lssquare.com/static/media/empty_product_banner.c076afe7.png"
+                style={{width: "300px"}}
+                />
+              </div>
+            </div>
+            <div className="card-body d-flex justify-content-center"><h5 className="fw-bold">No Items Found</h5></div>
+            </div>
+          ):(
+            <div/>
+          )
+        }
       <div className="row">
         {role === "ROLE_ADMIN"
           ? (
