@@ -68,3 +68,9 @@ a.nav-link:hover {
 .accordion-button:focus{
   border-color: white !important;
 }
+
+
+.form-control:focus {
+  border-color: black !important;
+  box-shadow:none !important;
+}

@@ -44,24 +44,26 @@ const Items = (props) => {
   return (
     <div className="px-4">
       <div className=" my-2">
-      <form class="d-flex">
-      <div class="p-2">
-          <SearchIcon />
+      <form class="d-flex ">
+        <div 
+          class="p-2 card rounded-start border-1 bg-light" 
+          style={{
+            "borderRadius": "0%", 
+            // "backgroundColor": "lightgray" 
+          }} >
+            <SearchIcon 
+              style={{"fill": "gray"}}
+            />
         </div>
         <input
-          class="form-control"
+          class="form-control rounded-end"
           type="search"
           // placeholder={"Search"}
+          style={{"borderRadius": "0%" }}
           placeholder="Search" 
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search"
         />
-        {/* <button class="btn border-0" type="submit" 
-        // style={{"margin-left": "-50px"}}
-        onClick={(e) => setQuery(e.target.value)}
-        >
-          <SearchIcon />
-        </button> */}
       </form>
       </div>
       <div className="row">
