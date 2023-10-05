@@ -39,47 +39,6 @@ function App() {
 
 
   useEffect(() => {
-    // localStorage.setItem("cart", JSON.stringify("cart"));
-    let isMounted = true;
-    const controller = new AbortController();
-    const url = `/api/cart-item/user/${userId}`;
-
-    const getCartItems = async () => {
-      let isMounted = true
-      try {
-        const header = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get(url, {
-          header: header,
-        });
-        console.log(response.data);
-        isMounted && localStorage.setItem("cart", JSON.stringify(response.data));
-        
-        // count = response.data.length
-        response.data.map((key) => {
-          count = count + key.qty
-        })
-        isMounted && localStorage.setItem("totalQty",count)
-        count =0
-
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    if(userId != undefined){
-      getCartItems();
-    }
-
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
-  }, []);
-
-  useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 

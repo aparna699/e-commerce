@@ -8,19 +8,6 @@ const initialState = {
   errorMessage: "",
 };
 
-// extraReducers: (builder) => {
-//     builder.addCase(getItemsList.pending, (state) => {
-//      state.isLoading = true;
-//     })
-//     builder.addCase(getItemsList.fulfilled, (state, action) => {
-//      state.isLoading = false;
-//      state.data = action.payload;
-//     })
-//     builder.addCase(getItemsList.rejected, (state, action) => {
-//      state.isError = true;
-//     })
-//    }
-
 export const itemsSlice = createSlice({
   name: "items",
   initialState: initialState,

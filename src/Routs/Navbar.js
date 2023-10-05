@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI
 import HomeIcon from '@mui/icons-material/Home';
@@ -11,10 +12,11 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 import axios from "../api/axios";
 import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
+import { getCartList } from "../store/Cart/actions";
 
 const Navbar = () => {
-  const cartQty = localStorage.getItem('totalQty');
-
+  // const cartQty = localStorage.getItem('totalQty');
+  const [cartQty, setCartQty] = useState(0)
   const token = Cookies.get("token");
   const role = Cookies.get("role");
   const userId = Cookies.get("userId");
@@ -33,6 +35,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    dispatch(getCartList(userId));
     let isMounted = true;
     const controller = new AbortController();
 
@@ -62,7 +65,11 @@ const Navbar = () => {
       controller.abort();
     };
   },[])
-
+  const cartList = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setCartQty(cartList.qty);
+  }, [cartList]);
 
   return (
     <div>
