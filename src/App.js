@@ -3,6 +3,7 @@ import "./App.css";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import LogIn from "./Routs/LogIn";
 import Navbar from "./Routs/Navbar";
 import Home from "./Routs/Home";
