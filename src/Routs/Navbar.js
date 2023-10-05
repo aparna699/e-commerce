@@ -31,6 +31,7 @@ const Navbar = () => {
     Cookies.remove("token");
     Cookies.remove("role");
     Cookies.remove("userId");
+    localStorage.removeItem("addressList");
   };
 
   useEffect(() => {
@@ -38,26 +39,26 @@ const Navbar = () => {
     let isMounted = true;
     const controller = new AbortController();
 
-    const getAddress = async () => {
-      console.log("get Address");
-      // console.log("UserId : ",userId);
-      try {
-        const header = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get(
-          `/api/address/user/${userId}`, {
-          headers: header,
-        });
+    // const getAddress = async () => {
+    //   console.log("get Address");
+    //   // console.log("UserId : ",userId);
+    //   try {
+    //     const header = {
+    //       Authorization: `Bearer ${token}`,
+    //       "Content-Type": "application/json",
+    //     };
+    //     const response = await axios.get(
+    //       `/api/address/user/${userId}`, {
+    //       headers: header,
+    //     });
   
-        // console.log(response.data);
-        isMounted && localStorage.setItem("addressList", JSON.stringify(response.data));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getAddress();
+    //     // console.log(response.data);
+    //     isMounted && localStorage.setItem("addressList", JSON.stringify(response.data));
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // getAddress();
 
     return () => {
       isMounted = false;
