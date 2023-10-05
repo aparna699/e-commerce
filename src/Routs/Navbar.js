@@ -15,7 +15,6 @@ import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
 import { getCartList } from "../store/Cart/actions";
 
 const Navbar = () => {
-  // const cartQty = localStorage.getItem('totalQty');
   const [cartQty, setCartQty] = useState(0)
   const token = Cookies.get("token");
   const role = Cookies.get("role");

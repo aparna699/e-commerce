@@ -1,42 +1,20 @@
 import Cookies from "js-cookie";
 import { useEffect , useState} from "react";
-import axios from "../../api/axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getCategoryList } from "../../store/Category/actions";
+
 
 const CategoryDropdown = () => {
   const [category, setCategory] = useState([]);
   const token = Cookies.get("token");
-  const [items, setItems] = useState([]);
-
+  const categoryList = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    
-    const getCategory = async () => {
-     
-      console.log("get Category");
-      try {
-        const header = {
-          // Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get("/api/category", {
-          header: header,
-        });
-        console.log(response.data);
-        localStorage.setItem("category", JSON.stringify(response.data));
-        isMounted && setCategory(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getCategory();
-
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
+    dispatch(getCategoryList());
   }, []);
+  useEffect(() => {
+    setCategory(categoryList.data);
+  }, [categoryList]);
 
   return (
     <div>

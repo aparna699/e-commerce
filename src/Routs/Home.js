@@ -1,53 +1,48 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import CategoryCards from "../Component/Category/CategoryCards";
-import axios from "../api/axios";
-import Items  from "../Component/Items/Items";
+import { useSelector, useDispatch } from "react-redux";
+
+import Items from "../Component/Items/Items";
+import { getCategoryList } from "../store/Category/actions";
+import { Loading } from "../Component/Loading";
 
 const Home = () => {
   const [category, setCategory] = useState([]);
+  const categoryList = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const getCategory = async () => {
-      console.log("get Category");
-      try {
-        const header = {
-          // Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get("/api/category", {
-          header: header,
-        });
-        console.log(response.data);
-        isMounted && setCategory(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getCategory();
+    dispatch(getCategoryList());
   }, []);
+  useEffect(() => {
+    setCategory(categoryList.data);
+  }, [categoryList]);
 
   return (
     <div>
       <Outlet />
+      {console.log(categoryList)}
       <div className=" py-2">
-        <div className="scroller row flex-row flex-nowrap overflow-auto px-4" >
-          {
-          category.map((key) => {
-            return (
-              <CategoryCards
-                categoryId={key.id}
-                categoryName={key.categoryName}
-                img={key.categoryImgUrl}
-              />
-            );
-          })}
-        </div>
+        {
+            (categoryList.isLoading)?(
+              <Loading/>
+             ):(
+            <div className="scroller row flex-row flex-nowrap overflow-auto px-4">
+              {category.map((key) => {
+                return (
+                  <CategoryCards
+                    categoryId={key.id}
+                    categoryName={key.categoryName}
+                    img={key.categoryImgUrl}
+                  />
+                );
+              })}
+            </div>
+            )
+
+        }
       </div>
-      <Items url="/api/items"/>
+      <Items url="/api/items" />
     </div>
   );
 };

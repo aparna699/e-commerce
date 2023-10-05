@@ -3,6 +3,7 @@ import "./App.css";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
 
 import LogIn from "./Routs/LogIn";
 import Navbar from "./Routs/Navbar";
@@ -20,6 +21,8 @@ import Address from "./Routs/Address";
 import Register from "./Routs/Register";
 import { Ordering } from "./Routs/Ordering";
 import { ProductPage } from "./Component/Items/ProductPage";
+import { getCategoryList } from "./store/Category/actions";
+import { getItemsList } from "./store/items/actions";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -27,48 +30,62 @@ function App() {
   const userId = Cookies.get("userId");
   const token = Cookies.get("token");
   const [items, setItems] = useState([]);
-  let count = 0;
 
+  const categoryList = useSelector((state) => state.category);
+  const itemsList = useSelector((state) => state.items);
+  const dispatch = useDispatch();
   useEffect(() => {
-    // console.log("items");
-    const item = JSON.parse(localStorage.getItem("items"));
-    if (item) {
-      setItems(item);
-    }
-  }, [localStorage.getItem("items")]);
-
-
-  useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const getCategory = async () => {
-      console.log("get Category in routs");
-      try {
-        const header = {
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get("/api/category", {
-          header: header,
-        });
-        console.log(response.data);
-        isMounted && setCategory(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getCategory();
-
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
+    dispatch(getCategoryList());
+    dispatch(getItemsList("/api/items"));
   }, []);
+  useEffect(() => {
+    setCategory(categoryList.data);
+  }, [categoryList]);
+
+  useEffect(() => {
+    setItems(itemsList.data);
+  }, [itemsList]);
+  // useEffect(() => {
+  //   // console.log("items");
+  //   const item = JSON.parse(localStorage.getItem("items"));
+  //   if (item) {
+  //     setItems(item);
+  //   }
+  // }, [localStorage.getItem("items")]);
+
+
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   const controller = new AbortController();
+
+  //   const getCategory = async () => {
+  //     console.log("get Category in routs");
+  //     try {
+  //       const header = {
+  //         "Content-Type": "application/json",
+  //       };
+  //       const response = await axios.get("/api/category", {
+  //         header: header,
+  //       });
+  //       console.log(response.data);
+  //       isMounted && setCategory(response.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+
+  //   getCategory();
+
+  //   return () => {
+  //     isMounted = false;
+  //     controller.abort();
+  //   };
+  // }, []);
 
   return (
     <BrowserRouter>
       <Routes>
+        {console.log(categoryList)}
         {/* <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
           <Route path="MyOrders" element={<MyOrders />} />
         </Route> */}
