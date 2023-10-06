@@ -9,6 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonIcon from '@mui/icons-material/Person';
 import { getUsersList } from "../../store/Users/actions";
+import { Loading } from "../Loading";
 
 export const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
@@ -70,8 +71,12 @@ export const DisplayUsers = () => {
           </div>
         </div>
         </div>
-        {/* <div className="col-sm-12 card my-2"></div> */}
-        {users.filter(post => {
+        {
+          (userList.isLoading)?(
+            <Loading/>
+          ):(
+            <div>
+              {users.filter(post => {
             const searchList= post.id + post.firstName + post.lastName + post.email + dateFormat(post.dOB, "mmm dS, yyyy");
             if (query === "") {
               //if query is empty
@@ -124,6 +129,9 @@ export const DisplayUsers = () => {
             </div>
           );
         })}
+            </div>
+          )
+        }
       </div>
     </div>
   );
