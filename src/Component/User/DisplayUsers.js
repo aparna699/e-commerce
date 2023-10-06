@@ -15,35 +15,6 @@ export const DisplayUsers = () => {
   const [query, setQuery] = useState("");
   const token = Cookies.get("token");
 
-  // useEffect(() => {
-  //   let isMounted = true;
-  //   const controller = new AbortController();
-  //   const url = `/api/users`;
-
-  //   // const getUsers = async () => {
-  //   //   console.log("get Users");
-  //   //   try {
-  //   //     const header = {
-  //   //       Authorization: `Bearer ${token}`,
-  //   //       "Content-Type": "application/json",
-  //   //     };
-  //   //     const response = await axios.get(url, {
-  //   //       headers: header,
-  //   //     });
-
-  //   //     console.log("users", response.data);
-  //   //     isMounted && setUsers(response.data);
-  //   //   } catch (err) {
-  //   //     console.log(err);
-  //   //   }
-  //   // };
-  //   // getUsers();
-  //   return () => {
-  //     isMounted = false;
-  //     controller.abort();
-  //   };
-  // }, []);
-
   const userList = useSelector((state) => state.users);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -61,8 +32,7 @@ export const DisplayUsers = () => {
           <div
             class="p-2 card rounded-start border-1 bg-light"
             style={{
-              borderRadius: "0%",
-              // "backgroundColor": "lightgray"
+              borderRadius: "0%"
             }}
           >
             <SearchIcon style={{ fill: "gray" }} />
@@ -70,7 +40,6 @@ export const DisplayUsers = () => {
           <input
             class="form-control rounded-end"
             type="search"
-            // placeholder={"Search"}
             style={{ borderRadius: "0%" }}
             placeholder="Search"
             onChange={(e) => setQuery(e.target.value)}
@@ -103,7 +72,7 @@ export const DisplayUsers = () => {
         </div>
         {/* <div className="col-sm-12 card my-2"></div> */}
         {users.filter(post => {
-            const searchList= post.id + post.firstName + post.lastName + post.email;
+            const searchList= post.id + post.firstName + post.lastName + post.email + dateFormat(post.dOB, "mmm dS, yyyy");
             if (query === "") {
               //if query is empty
               return post;
