@@ -3,6 +3,7 @@ import { addressSlice } from "./Address/addressSlice";
 import { cartSlice } from "./Cart/cartSlice";
 import { categorySlice } from "./Category/categorySlice";
 import { itemsSlice } from "./items/itemsSlice";
+import { usersSlice } from "./Users/usersSlice";
 
 
 export const store = configureStore({
@@ -11,5 +12,6 @@ export const store = configureStore({
         cart: cartSlice.reducer,
         category: categorySlice.reducer,
         address: addressSlice.reducer,
+        users: usersSlice.reducer,
     },
   });

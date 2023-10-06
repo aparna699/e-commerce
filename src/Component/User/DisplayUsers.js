@@ -1,46 +1,58 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import axios from "../../api/axios";
+import { useSelector, useDispatch } from "react-redux";
+
 import dateFormat from "dateformat";
 import { DeleteUser } from "./DeleteUser";
 
 import SearchIcon from "@mui/icons-material/Search";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonIcon from '@mui/icons-material/Person';
+import { getUsersList } from "../../store/Users/actions";
 
 export const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
   const token = Cookies.get("token");
 
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   const controller = new AbortController();
+  //   const url = `/api/users`;
+
+  //   // const getUsers = async () => {
+  //   //   console.log("get Users");
+  //   //   try {
+  //   //     const header = {
+  //   //       Authorization: `Bearer ${token}`,
+  //   //       "Content-Type": "application/json",
+  //   //     };
+  //   //     const response = await axios.get(url, {
+  //   //       headers: header,
+  //   //     });
+
+  //   //     console.log("users", response.data);
+  //   //     isMounted && setUsers(response.data);
+  //   //   } catch (err) {
+  //   //     console.log(err);
+  //   //   }
+  //   // };
+  //   // getUsers();
+  //   return () => {
+  //     isMounted = false;
+  //     controller.abort();
+  //   };
+  // }, []);
+
+  const userList = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const url = `/api/users`;
-
-    const getUsers = async () => {
-      console.log("get Users");
-      try {
-        const header = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.get(url, {
-          headers: header,
-        });
-
-        console.log("users", response.data);
-        isMounted && setUsers(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUsers();
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
+    dispatch(getUsersList());
   }, []);
+  useEffect(() => {
+    setUsers(userList.data);
+  }, [userList]);
+
 
   return (
     <div>
