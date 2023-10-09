@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "../../api/axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import AddLocationIcon from '@mui/icons-material/AddLocation';
-import { addAddressList } from "../../store/Address/actions";
 import { addressActions } from "../../store/Address/addressSlice";
 
 export const AddAddress = () => {
@@ -20,10 +19,10 @@ export const AddAddress = () => {
   const [country, setCountry] = useState();
 
   const dispatch = useDispatch();
+  const addressList = useSelector((state) => state.address);
 
   const addAddress = async(e) => {
     e.preventDefault();
-    let isMounted = true
     const data = {
       userId: userId,
       unit: unit,
@@ -36,7 +35,9 @@ export const AddAddress = () => {
     };
     console.log(data);
     dispatch(addressActions.addUserAddress(data));
-    window.location.reload(true)
+    if(addressList.isSuccess) {
+      window.location.reload(true)
+    }
   };
   return (
     <div className="m-2">

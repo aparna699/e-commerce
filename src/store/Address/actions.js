@@ -5,10 +5,12 @@ import axios from "../../api/axios";
 function createExtraActions() {
   return {
     getAllAddress: getAllAddress(),
-    addUserAddress: addUserAddress()
+    addUserAddress: addUserAddress(),
+    // editeAddress:,
+    deleteAddress: deleteAddress(),
   };
-
-   function getAllAddress()  {
+    
+  function getAllAddress()  {
     return createAsyncThunk(
       "address/getAddressLsit", 
       async (userId, { rejectWithValue }) => {
@@ -33,10 +35,11 @@ function createExtraActions() {
   }
 
 
-   function addUserAddress() {
+  function addUserAddress() {
     return createAsyncThunk(
       "address/addAddressList",
       async(data, {rejectWithValue}) => {
+        console.log("Add")
         try{
           const token = Cookies.get("token")
           const header = {
@@ -57,6 +60,28 @@ function createExtraActions() {
         }
       }
     )
+  }
+
+  function deleteAddress(){
+    return createAsyncThunk(
+      "address/deleteAddress",
+      async(id, {rejectWithValue}) => {
+        const token = Cookies.get('token')
+        try {
+          const header = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          };
+          const response = await axios.delete(
+              `/api/address/${id}` , {
+            headers: header,
+            withCredentials: false
+          });
+          return response.data
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      })
   }
 }
 

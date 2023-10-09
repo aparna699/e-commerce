@@ -13,7 +13,6 @@ const initialState = {
   errorMessage: "",
 };
 const extraActions = createExtraActions();
-// const extraActions = extraActionsAddress();
 const extraReducers = createExtraReducers();
 const addressSlice = createSlice({ name, initialState, extraReducers });
 
@@ -23,77 +22,11 @@ export const addressReducer = addressSlice.reducer;
 
 // implementation
 
-// function createInitialState() {
-//   return {
-//     data: [],
-//     isLoading: false,
-//     isSuccess: false,
-//     errorMessage: "",
-//   }
-// }
-
-// function createExtraActions() {
-//   return {
-//     getAllAddress: getAllAddress(),
-//     addUserAddress: addUserAddress()
-//   };
-
-//   // function getAllAddress()  {
-//   //   return createAsyncThunk(
-//   //     "address/getAddressLsit", 
-//   //     async (userId, { rejectWithValue }) => {
-//   //       const token = Cookies.get("token")
-//   //       try {
-//   //         //api call
-//   //         const header = {
-//   //           Authorization: `Bearer ${token}`,
-//   //           "Content-Type": "application/json",
-//   //         };
-//   //         const response = await axios.get(
-//   //           `/api/address/user/${userId}`, {
-//   //           headers: header,
-//   //         });
-//   //         return response.data;
-//   //       } catch (error) {
-//   //         console.log("error: ", error);
-//   //         return rejectWithValue(error.message);
-//   //       }
-//   //     }
-//   //   );
-//   // }
-
-
-//   // function addUserAddress() {
-//   //   return createAsyncThunk(
-//   //     "address/addAddressList",
-//   //     async(data, {rejectWithValue}) => {
-//   //       try{
-//   //         const token = Cookies.get("token")
-//   //         const header = {
-//   //           Authorization: `Bearer ${token}`,
-//   //           "Content-Type": "application/json",
-//   //         };
-    
-//   //         const response = await axios.post(
-//   //           '/api/address',
-//   //           data,
-//   //           { headers: header }
-//   //         );
-    
-//   //         return response.data
-    
-//   //       } catch (error) {
-//   //         return rejectWithValue(error.message);
-//   //       }
-//   //     }
-//   //   )
-//   // }
-// }
-
 function createExtraReducers() {
   return (builder) => {
     getAllAddress();
     addUserAddress();
+    deleteAddress();
 
     function getAllAddress() {
       var { pending, fulfilled, rejected } = extraActions.getAllAddress;
@@ -115,6 +48,24 @@ function createExtraReducers() {
 
     function addUserAddress() {
       var { pending, fulfilled, rejected } = extraActions.addUserAddress;
+
+      builder
+        .addCase(pending, (state) => {
+          state.isLoading = true; 
+        })
+        .addCase(fulfilled, (state, { payload }) => {
+          state.isLoading = false;
+          state.isSuccess = true;
+        })
+        .addCase(rejected, (state, action) => {
+          state.isLoading = false;
+          state.isSuccess = false;
+          state.errorMessage = action;
+        })
+    }
+
+    function deleteAddress() {
+      var { pending, fulfilled, rejected } = extraActions.deleteAddress;
 
       builder
         .addCase(pending, (state) => {
