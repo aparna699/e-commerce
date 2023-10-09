@@ -1,8 +1,12 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "../../api/axios";
+import { useSelector, useDispatch } from "react-redux";
+
 
 import AddLocationIcon from '@mui/icons-material/AddLocation';
+import { addAddressList } from "../../store/Address/actions";
+import { addressActions } from "../../store/Address/addressSlice";
 
 export const AddAddress = () => {
   const userId = Cookies.get("userId");
@@ -14,6 +18,8 @@ export const AddAddress = () => {
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [country, setCountry] = useState();
+
+  const dispatch = useDispatch();
 
   const addAddress = async(e) => {
     e.preventDefault();
@@ -29,21 +35,8 @@ export const AddAddress = () => {
       country: country,
     };
     console.log(data);
-    const header = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-    try {
-      const response = await axios.post(
-          '/api/address',
-          data,
-          { headers: header });
-      console.log(response)
-      console.log("Add Item")
-      isMounted && window.location.reload(true)
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(addressActions.addUserAddress(data));
+    window.location.reload(true)
   };
   return (
     <div className="m-2">
