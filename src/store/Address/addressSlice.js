@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import axios from "../../api/axios";
+import { EditAddress } from "../../Component/Address/EditAddress";
 import createExtraActions, {   addAddressList, addUserAddress, getAddressLsit, getAllAddress } from "./actions";
 
 
@@ -26,6 +27,7 @@ function createExtraReducers() {
   return (builder) => {
     getAllAddress();
     addUserAddress();
+    editAddess();
     deleteAddress();
 
     function getAllAddress() {
@@ -49,6 +51,23 @@ function createExtraReducers() {
     function addUserAddress() {
       var { pending, fulfilled, rejected } = extraActions.addUserAddress;
 
+      builder
+        .addCase(pending, (state) => {
+          state.isLoading = true; 
+        })
+        .addCase(fulfilled, (state, { payload }) => {
+          state.isLoading = false;
+          state.isSuccess = true;
+        })
+        .addCase(rejected, (state, action) => {
+          state.isLoading = false;
+          state.isSuccess = false;
+          state.errorMessage = action;
+        })
+    }
+
+    function editAddess() {
+      var { pending, fulfilled, rejected } = extraActions.editAddress;
       builder
         .addCase(pending, (state) => {
           state.isLoading = true; 

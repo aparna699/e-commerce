@@ -1,8 +1,10 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-import axios from "../../api/axios";
+import { useSelector, useDispatch } from "react-redux";
+
 
 import EditIcon from '@mui/icons-material/Edit';
+import { addressActions } from "../../store/Address/addressSlice";
 
 export const EditAddress = (props) => {
   const address = props.address
@@ -16,9 +18,12 @@ export const EditAddress = (props) => {
   const [state, setState] = useState();
   const [country, setCountry] = useState();
 
+  const dispatch = useDispatch();
+  const addressList = useSelector((state) => state.address);
+
+
   const editAddess = async(e) => {
     e.preventDefault()
-    let isMounted = true
     const data = {
       unit: unit,
       line1: line1,
@@ -28,23 +33,15 @@ export const EditAddress = (props) => {
       state: state,
       country: country,
     }
-    const header = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+    console.log(data)
+    const editInfo = {
+      addressId: address.id,
+      data: data
     }
-    try {
-      const response = await axios.put(
-          `/api/address/${address.id}`,
-          data,
-          { headers: header });
-      console.log(response)
-      console.log("Edit Item")
-      isMounted && window.location.reload(true)
-    } catch (err) {
-      console.log(err);
+    dispatch(addressActions.editAddress(editInfo))
+    if(addressList.isSuccess) {
+      window.location.reload(true)
     }
-
-    console.log(address.id)
   }
 
   return (
@@ -53,13 +50,13 @@ export const EditAddress = (props) => {
         type="button"
         className='btn btn-outline-dark my-2 '
         data-bs-toggle="modal"
-        data-bs-target="#EditAddress"
+        data-bs-target={`#EditAddress${address.id}`}
       >
         <EditIcon /> 
       </button>
       <div
         class="modal fade"
-        id="EditAddress"
+        id={`EditAddress${address.id}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"

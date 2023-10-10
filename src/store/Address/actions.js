@@ -6,7 +6,7 @@ function createExtraActions() {
   return {
     getAllAddress: getAllAddress(),
     addUserAddress: addUserAddress(),
-    // editeAddress:,
+    editAddress:editAddress(),
     deleteAddress: deleteAddress(),
   };
     
@@ -55,6 +55,31 @@ function createExtraActions() {
     
           return response.data
     
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      }
+    )
+  }
+
+  function editAddress() {
+    return createAsyncThunk(
+      "address/editAddress",
+      async(info,{rejectWithValue}) => {
+        const token = Cookies.get('token')
+        console.log(info.data)
+        try {
+          const header = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+
+          const response = await axios.put(
+            `/api/address/${info.addressId}`,
+            info.data,
+            { headers: header });
+          
+            return response.data
         } catch (error) {
           return rejectWithValue(error.message);
         }
