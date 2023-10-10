@@ -21,10 +21,10 @@ const Address = () => {
   
   return (
     <div className="container">
-      <div><strong>Is Loading: </strong>{JSON.stringify(addressList.isLoading)}</div>
+      {/* <div><strong>Is Loading: </strong>{JSON.stringify(addressList.isLoading)}</div>
       <div><strong>Is Success: </strong>{JSON.stringify(addressList.isSuccess)}</div>
       <div><strong>Error Message: </strong>{JSON.stringify(addressList.errorMessage)}</div>
-      <div><strong>Data: </strong>{JSON.stringify(addressList.data)}</div>
+      <div><strong>Data: </strong>{JSON.stringify(addressList.data)}</div> */}
       <AddAddress className="my-3"/>
       <div className="row">
         {

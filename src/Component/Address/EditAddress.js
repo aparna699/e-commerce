@@ -1,7 +1,5 @@
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 
 import EditIcon from '@mui/icons-material/Edit';
 import { addressActions } from "../../store/Address/addressSlice";
@@ -9,7 +7,6 @@ import { addressActions } from "../../store/Address/addressSlice";
 export const EditAddress = (props) => {
   const address = props.address
 
-  const token = Cookies.get("token");
   const [unit, setUnit] = useState();
   const [line1, setLine1] = useState();
   const [line2, setLine2] = useState();

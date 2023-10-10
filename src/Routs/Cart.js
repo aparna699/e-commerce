@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import CartItemCard from "../Component/Cart/CartItemCard";
 import { getCartList } from "../store/Cart/actions";
+import { cartActions } from "../store/Cart/cartSlice";
 
 const Cart = () => {
   const userId = Cookies.get("userId");
@@ -15,7 +16,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCartList(userId));
+    dispatch(cartActions.getCartList(userId));
   }, []);
 
   useEffect(() => {

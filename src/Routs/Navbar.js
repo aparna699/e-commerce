@@ -13,6 +13,7 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from "../api/axios";
 import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
 import { getCartList } from "../store/Cart/actions";
+import { cartActions } from "../store/Cart/cartSlice";
 
 const Navbar = () => {
   const [cartQty, setCartQty] = useState(0)
@@ -35,7 +36,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    dispatch(getCartList(userId));
+    dispatch(cartActions.getCartList(userId));
     let isMounted = true;
     const controller = new AbortController();
 
