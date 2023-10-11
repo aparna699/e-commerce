@@ -89,7 +89,8 @@ const EditCategory = () => {
                     {category.map((key) => {
                       return (
                           <option className="col-sm-12" value={`${key.id}`}>
-                            {`${key.categoryName}`}
+                            {`${key.categoryName}`} 
+                            {/* {`${key.id}`} */}
                           </option>
                         )
                         })}

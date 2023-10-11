@@ -6,25 +6,23 @@ import { useSelector, useDispatch } from "react-redux";
 import Items from "../Component/Items/Items";
 import { getCategoryList } from "../store/Category/actions";
 import { Loading } from "../Component/Loading";
+import { categoryActions } from "../store/Category/categorySlice";
 
 const Home = () => {
   const [category, setCategory] = useState([]);
   const categoryList = useSelector((state) => state.category);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoryList());
-    if(categoryList.isSccess){
+    if(categoryList.isSuccess){
       setCategory(categoryList.data);
     }
+  // }, [categoryList]);
   }, []);
-  // useEffect(() => {
-  //   setCategory(categoryList.data);
-  // }, []);
 
   return (
     <div>
       <Outlet />
-      {/* {console.log(categoryList)} */}
+      {/* {console.log(categoryList.isSuccess)} */}
       <div className=" py-2">
         {
             (categoryList.isLoading)?(

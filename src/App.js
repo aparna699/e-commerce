@@ -23,19 +23,17 @@ import { Ordering } from "./Routs/Ordering";
 import { ProductPage } from "./Component/Items/ProductPage";
 import { getCategoryList } from "./store/Category/actions";
 import { getItemsList } from "./store/items/actions";
+import { categoryActions } from "./store/Category/categorySlice";
 
 function App() {
   const [category, setCategory] = useState([]);
-
-  const userId = Cookies.get("userId");
-  const token = Cookies.get("token");
   const [items, setItems] = useState([]);
 
   const categoryList = useSelector((state) => state.category);
   const itemsList = useSelector((state) => state.items);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoryList());
+    dispatch(categoryActions.getCategoryList());
     dispatch(getItemsList("/api/items"));
     if(categoryList.isSuccess){
       setCategory(categoryList.data);

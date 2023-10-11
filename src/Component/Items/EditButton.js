@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import Popup from "reactjs-popup";
 import axios from "../../api/axios";
 
 import EditIcon from '@mui/icons-material/Edit';
@@ -8,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const EditButton = (props) => {
   const item = props.items;
   const itemId = item.id;
-  console.log(item.id);
+  // console.log(item.id);
 
   const url = `/api/items/${itemId}`;
   const token = Cookies.get("token");

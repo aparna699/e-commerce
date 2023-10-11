@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
+import { useSelector } from "react-redux";
 
 import AddIcon from '@mui/icons-material/Add';
 
@@ -13,13 +14,13 @@ export const AddItem = () => {
   const [category, setCategory] = useState([]);
   const url = "/api/items";
 
+  const categoryList = useSelector((state) => state.category)
+
   useEffect(() => {
-    console.log("category");
-    const items = JSON.parse(localStorage.getItem("category"));
-    if (items) {
-      setCategory(items);
+    if(categoryList.isSuccess){
+      setCategory(categoryList.data);
     }
-  }, [localStorage.getItem("category")]);
+  }, [categoryList]);
 
   const addItem = async (e) => {
     e.preventDefault();
@@ -139,7 +140,8 @@ export const AddItem = () => {
                         return (
                           <option className="col-sm-12" value={`${key.id}`}>
                             {" "}
-                            {`${key.categoryName}`}{" "}
+                            {`${key.categoryName}`}{" "} 
+                            {/* {`${key.id}`} */}
                           </option>
                         );
                       })}

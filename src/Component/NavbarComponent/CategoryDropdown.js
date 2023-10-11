@@ -9,9 +9,9 @@ const CategoryDropdown = () => {
   const token = Cookies.get("token");
   const categoryList = useSelector((state) => state.category);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCategoryList());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCategoryList());
+  // }, []);
   useEffect(() => {
     setCategory(categoryList.data);
   }, [categoryList]);
