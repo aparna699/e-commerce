@@ -9,8 +9,10 @@ import { addressActions } from "../store/Address/addressSlice";
 const Address = () => {
   const [address, setAddress] = useState([])
   const userId = Cookies.get("userId");
+
   const addressList = useSelector((state) => state.address);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(addressActions.getAllAddress(userId));
   }, []);

@@ -37,10 +37,13 @@ function App() {
   useEffect(() => {
     dispatch(getCategoryList());
     dispatch(getItemsList("/api/items"));
+    if(categoryList.isSuccess){
+      setCategory(categoryList.data);
+    }
   }, []);
-  useEffect(() => {
-    setCategory(categoryList.data);
-  }, [categoryList]);
+  // useEffect(() => {
+  //   setCategory(categoryList.data);
+  // }, []);
 
   useEffect(() => {
     setItems(itemsList.data);
@@ -85,7 +88,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {console.log(categoryList)}
+        {/* {console.log("categoryList")} */}
         {/* <Route element={<RequireAuth allowedRoles={["ROLE_CUSTOMER"]} />}>
           <Route path="MyOrders" element={<MyOrders />} />
         </Route> */}
@@ -112,6 +115,7 @@ function App() {
           {category.map((key) => {
             return (
               <Route
+                key= {key.id}
                 path={`/${key.categoryName}`}
                 element={<CategoryItems category={key} />}
               />

@@ -2,43 +2,28 @@ import React from "react";
 import Cookies from "js-cookie";
 import axios from "../../api/axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/Cart/cartSlice";
 
 export const EditQtyButton = (props) => {
   const item = props.cart.itemId;
   const qty = props.cart.qty;
 
   const token = Cookies.get("token");
-  const [errMsg, setErrMsg] = useState("");
   const totalQty = item.qty;
   const url = `/api/cart-item/${props.cart.id}`;
+
+  const dispatch = useDispatch();
+  const cartList = useSelector((state) => state.cart);
+
   const editCart = async (newQty) => {
-    let isMounted = true;
     const data = JSON.stringify({
       qty: newQty,
     });
-    const header = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await axios.put(url, data, {
-        headers: header,
-        withCredentials: true,
-      });
-      console.log(response);
-
-      isMounted && window.location.reload(true);
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing user or password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("user add fail");
-      }
+    dispatch(cartActions.editQty({url,data}));
+    
+    if(cartList.isSuccess && !cartList.isLoading){
+      window.location.reload(true)
     }
   };
 

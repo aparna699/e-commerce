@@ -4,7 +4,7 @@ import axios from "../../api/axios";
 export const getItemsList = createAsyncThunk("user/getItemsList", async (url, { rejectWithValue }) => {
     try {
       //api call
-      console.log("getItems", url);
+      // console.log("getItems", url);
       const header = {
         // Authorization not required
         "Content-Type": "application/json",

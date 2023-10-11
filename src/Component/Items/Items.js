@@ -26,7 +26,7 @@ const Items = (props) => {
   }, []);
   useEffect(() => {
     setItems(itemsList.data);
-  }, [itemsList]);
+  }, [itemsList.data]);
 
   return (
     <div className="px-4">

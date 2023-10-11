@@ -54,7 +54,6 @@ function createExtraActions() {
           );
     
           return response.data
-    
         } catch (error) {
           return rejectWithValue(error.message);
         }

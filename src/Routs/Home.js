@@ -13,15 +13,18 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategoryList());
+    if(categoryList.isSccess){
+      setCategory(categoryList.data);
+    }
   }, []);
-  useEffect(() => {
-    setCategory(categoryList.data);
-  }, [categoryList]);
+  // useEffect(() => {
+  //   setCategory(categoryList.data);
+  // }, []);
 
   return (
     <div>
       <Outlet />
-      {console.log(categoryList)}
+      {/* {console.log(categoryList)} */}
       <div className=" py-2">
         {
             (categoryList.isLoading)?(
