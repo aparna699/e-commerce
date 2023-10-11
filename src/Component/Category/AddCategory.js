@@ -8,8 +8,6 @@ import { categoryActions } from '../../store/Category/categorySlice';
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState()
     const [imgUrl, setImgUrl] = useState()
-    const token = Cookies.get('token')
-    const url = '/api/category'
 
     const dispatch = useDispatch((state) => state.category)
 
@@ -22,7 +20,7 @@ const AddCategory = () => {
             (imgUrl)
         }
         dispatch(categoryActions.addCategory(data))
-        
+
     }
 
   return (

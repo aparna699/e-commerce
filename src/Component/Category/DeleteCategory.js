@@ -1,31 +1,25 @@
 import React from 'react'
 import axios from "../../api/axios";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from 'react-redux'
+import { categoryActions } from '../../store/Category/categorySlice';
 
 const DeleteCategory =  (props) => {
     const id = props.id
     const token = Cookies.get("token")
 
+    const dispatch = useDispatch()
+    const categoryList = useSelector((state) => state.category)
+
     const deleteCategory = async (e) => {
-        e.preventDefault()
-        let isMounted = true
-        console.log(`Delete ${id}`)
-        try {
-            const header = {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            };
-            const response = await axios.delete(
-                `/api/category/${id}` , {
-              headers: header,
-              withCredentials: false
-            });
-            console.log(response);
-            isMounted && window.location.reload(true);
-            console.log("delete");
-          } catch (err) {
-            console.log(err);
-          }
+      e.preventDefault()
+      const url =  `/api/category/${id}`;
+        
+      dispatch(categoryActions.deleteCategory(url))
+
+      if(categoryList.isSuccess && !categoryList.isLoading){
+        window.location.reload(true)
+      }
     }
   return (
     <button onClick={deleteCategory} className='btn btn-outline-dark'>Delete</button>
