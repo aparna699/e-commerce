@@ -10,7 +10,7 @@ function createExtraReducers() {
             var { pending, fulfilled, rejected } = extraActions.getCategoryList;
             builder
             .addCase(pending, (state) => {
-                        state.isLoading = true
+                state.isLoading = true
             })
             .addCase(fulfilled, (state, { payload }) => {
                 state.isLoading = false;
@@ -22,7 +22,10 @@ function createExtraReducers() {
                 state.isSuccess = false;
                 state.errorMessage = action;
             })
-            }
+        }
+        
+        
+
     }
 }
 

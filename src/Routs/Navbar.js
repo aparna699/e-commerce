@@ -14,6 +14,7 @@ import axios from "../api/axios";
 import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
 import { getCartList } from "../store/Cart/actions";
 import { cartActions } from "../store/Cart/cartSlice";
+import { categoryReducer } from "../store/Category/categorySlice";
 
 const Navbar = () => {
   const [cartQty, setCartQty] = useState(0)
@@ -33,6 +34,8 @@ const Navbar = () => {
     Cookies.remove("role");
     Cookies.remove("userId");
     localStorage.removeItem("addressList");
+    localStorage.removeItem("category");
+    
   };
 
   useEffect(() => {

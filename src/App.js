@@ -32,57 +32,26 @@ function App() {
   const categoryList = useSelector((state) => state.category);
   const itemsList = useSelector((state) => state.items);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(categoryActions.getCategoryList());
     dispatch(getItemsList("/api/items"));
-    if(categoryList.isSuccess){
+    // if(categoryList.isSuccess){
+    //   setCategory(categoryList.data);
+    // }
+  }, []);
+  useEffect(() => {
+    if(categoryList.isSuccess && !categoryList.isLoading){
       setCategory(categoryList.data);
     }
-  }, []);
-  // useEffect(() => {
-  //   setCategory(categoryList.data);
-  // }, []);
+    console.log(category)
+    console.log(categoryList.data)
+  }, [categoryList]);
 
   useEffect(() => {
     setItems(itemsList.data);
   }, [itemsList]);
-  // useEffect(() => {
-  //   // console.log("items");
-  //   const item = JSON.parse(localStorage.getItem("items"));
-  //   if (item) {
-  //     setItems(item);
-  //   }
-  // }, [localStorage.getItem("items")]);
-
-
-  // useEffect(() => {
-  //   let isMounted = true;
-  //   const controller = new AbortController();
-
-  //   const getCategory = async () => {
-  //     console.log("get Category in routs");
-  //     try {
-  //       const header = {
-  //         "Content-Type": "application/json",
-  //       };
-  //       const response = await axios.get("/api/category", {
-  //         header: header,
-  //       });
-  //       console.log(response.data);
-  //       isMounted && setCategory(response.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   getCategory();
-
-  //   return () => {
-  //     isMounted = false;
-  //     controller.abort();
-  //   };
-  // }, []);
-
+  
   return (
     <BrowserRouter>
       <Routes>
