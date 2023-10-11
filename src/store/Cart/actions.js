@@ -7,6 +7,7 @@ function createExtraActions() {
     getCartList: getCartList(),
     addToCart: addToCart(),
     editQty: editQty(),
+    deleteCartItem: deleteCartItem()
   }
 
   function getCartList() {
@@ -76,6 +77,28 @@ function createExtraActions() {
         }
       }
       
+    )
+  }
+
+  function deleteCartItem() {
+    return createAsyncThunk(
+      "cart/deleteCartItem",
+      async (url, {rejectWithValue}) => {
+        const token = Cookies.get("token")
+        try {
+          const header = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          };
+          const response = await axios.delete(url , {
+            headers: header,
+            withCredentials: false
+          })
+          return response.data;
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      }
     )
   }
 }

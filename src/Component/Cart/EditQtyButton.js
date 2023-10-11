@@ -9,7 +9,6 @@ export const EditQtyButton = (props) => {
   const item = props.cart.itemId;
   const qty = props.cart.qty;
 
-  const token = Cookies.get("token");
   const totalQty = item.qty;
   const url = `/api/cart-item/${props.cart.id}`;
 
@@ -22,7 +21,7 @@ export const EditQtyButton = (props) => {
     });
     dispatch(cartActions.editQty({url,data}));
     
-    if(cartList.isSuccess && !cartList.isLoading){
+    if(cartList.isSuccess ){
       window.location.reload(true)
     }
   };
@@ -50,22 +49,10 @@ export const EditQtyButton = (props) => {
   };
 
   const deleteItem = async () => {
-    let isMounted = true
-    try {
-        const header = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        };
-        const response = await axios.delete(url , {
-          headers: header,
-          withCredentials: false
-        });
-        console.log(response.data);
-        isMounted && window.location.reload(true);
-        console.log("delete");
-      } catch (err) {
-        console.log(err);
-      }
+    dispatch(cartActions.deleteCartItem(url))
+    if(cartList.isSuccess && !cartList.isLoading){
+      // window.location.reload(true)
+    }
     return "deleted";
   };
 

@@ -5,6 +5,9 @@ const extraActions = createExtraActions();
 function createExtraReducers() {
     return (builder) => {
         getCartList();
+        addToCart();
+        editQty();
+        deleteCartItem();
 
         function getCartList() {
             var { pending, fulfilled, rejected } = extraActions.getCartList;
@@ -26,6 +29,57 @@ function createExtraReducers() {
                         qty = qty + key.qty;
                     })
                     state.qty = qty
+                }) 
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = JSON.stringify(action.payload);
+                })
+        }
+
+        function addToCart() {
+            var { pending, fulfilled, rejected } = extraActions.addToCart;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                })
+                .addCase(fulfilled, (state, {payload})=> {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                }) 
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = JSON.stringify(action.payload);
+                })
+        }
+
+        function editQty(){
+            var { pending, fulfilled, rejected } = extraActions.editQty;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                })
+                .addCase(fulfilled, (state, {payload})=> {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                }) 
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = JSON.stringify(action.payload);
+                })
+        }
+
+        function deleteCartItem(){
+            var { pending, fulfilled, rejected } = extraActions.deleteCartItem;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                })
+                .addCase(fulfilled, (state, {payload})=> {
+                    state.isLoading = false;
+                    state.isSuccess = true;
                 }) 
                 .addCase(rejected, (state, action) => {
                     state.isLoading = false;
