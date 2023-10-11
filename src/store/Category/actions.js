@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import axios from "../../api/axios";
 
 function createExtraActions() {
     return {
         getCategoryList: getCategoryList(),
-
+        addCategory: addCategory(),
     }
 
     function getCategoryList() {
@@ -25,6 +26,30 @@ function createExtraActions() {
                 }  
             }
             );
+    }
+
+    function addCategory() {
+        return createAsyncThunk(
+            "category/addCategory", 
+            async (data, {rejectWithValue}) => {
+                const url = '/api/category'
+                const token = Cookies.get('token')
+                try{
+                    const header = {
+                        'Authorization': `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    }
+                    const response = await axios.post(
+                        url, 
+                        data, { headers: header }
+                    );
+                    return response.data;
+                } catch (error) {
+                    console.log("error2: ", error);
+                    return rejectWithValue(error.message);
+                }  
+            }
+        )
     }
 
     

@@ -15,6 +15,7 @@ import CategoryDropdown from "../Component/NavbarComponent/CategoryDropdown";
 import { getCartList } from "../store/Cart/actions";
 import { cartActions } from "../store/Cart/cartSlice";
 import { categoryReducer } from "../store/Category/categorySlice";
+import { revertAll } from "../store/reset";
 
 const Navbar = () => {
   const [cartQty, setCartQty] = useState(0)
@@ -29,13 +30,15 @@ const Navbar = () => {
   const navbar =
     role == "ROLE_CUSTOMER" ? user : role == "ROLE_ADMIN" ? admin : [];
 
+    const dispatch = useDispatch();
+
   const logout = () => {
     Cookies.remove("token");
     Cookies.remove("role");
     Cookies.remove("userId");
     localStorage.removeItem("addressList");
     localStorage.removeItem("category");
-    
+    // dispatch(revertAll())
   };
 
   useEffect(() => {
@@ -70,7 +73,7 @@ const Navbar = () => {
     };
   },[])
   const cartList = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  
   useEffect(() => {
     setCartQty(cartList.qty);
   }, [cartList]);

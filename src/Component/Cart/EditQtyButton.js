@@ -16,9 +16,9 @@ export const EditQtyButton = (props) => {
   const cartList = useSelector((state) => state.cart);
 
   const editCart = async (newQty) => {
-    const data = JSON.stringify({
+    const data = {
       qty: newQty,
-    });
+    };
     dispatch(cartActions.editQty({url,data}));
     
     if(cartList.isSuccess ){

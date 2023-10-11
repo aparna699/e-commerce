@@ -3,6 +3,7 @@ import { addressReducer } from "./Address/addressSlice";
 import { cartReducer } from "./Cart/cartSlice";
 import { categoryReducer, categorySlice } from "./Category/categorySlice";
 import { itemsSlice } from "./items/itemsSlice";
+import { someSlice } from "./reset";
 import { usersSlice } from "./Users/usersSlice";
 
 
@@ -13,5 +14,6 @@ export const store = configureStore({
         category: categoryReducer,
         address: addressReducer,
         users: usersSlice.reducer,
+        reset: someSlice.reducer,
     },
   });

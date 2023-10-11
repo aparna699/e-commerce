@@ -16,8 +16,8 @@ const Home = () => {
     if(categoryList.isSuccess){
       setCategory(categoryList.data);
     }
-  // }, [categoryList]);
-  }, []);
+  }, [categoryList]);
+  // }, []);
 
   return (
     <div>

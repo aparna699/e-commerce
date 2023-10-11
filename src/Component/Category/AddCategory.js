@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie'
 import React, { useState } from 'react'
-import axios from '../../api/axios'
+import { useDispatch } from 'react-redux'
 
 import AddIcon from '@mui/icons-material/Add';
+import { categoryActions } from '../../store/Category/categorySlice';
 
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState()
@@ -10,31 +11,18 @@ const AddCategory = () => {
     const token = Cookies.get('token')
     const url = '/api/category'
 
+    const dispatch = useDispatch((state) => state.category)
+
     const addCategory = async(e) => {
         e.preventDefault()
-        // if(imgUrl == undefined){
-        //   setImgUrl("https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg")
-        // }
         const data = {
             categoryName: categoryName,
             categoryImgUrl: (imgUrl === undefined)?
             ("https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg"):
             (imgUrl)
         }
-        console.log(data)
-        const header = {
-            'Authorization': `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-          try {
-            const response = await axios.post(
-                url, 
-                data, { headers: header });
-            console.log(response);
-            console.log("Add Category");
-          } catch (err) {
-            console.log(err);
-          }
+        dispatch(categoryActions.addCategory(data))
+        
     }
 
   return (

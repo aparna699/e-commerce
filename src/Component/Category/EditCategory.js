@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import axios from '../../api/axios'
+import { useSelector } from "react-redux"
 
 import DeleteCategory from './DeleteCategory'
 import EditIcon from '@mui/icons-material/Edit';
@@ -13,13 +14,13 @@ const EditCategory = () => {
     const [categoryId, setCategoryId] = useState();
     const [category, setCategory] = useState([]);
 
+    const categoryList = useSelector((state) => state.category)
+
   useEffect(() => {
-    console.log("category");
-    const items = JSON.parse(localStorage.getItem("category"));
-    if (items) {
-      setCategory(items);
+    if (categoryList.isSuccess && !categoryList.isLoading) {
+      setCategory(categoryList.data);
     }
-  }, [localStorage.getItem("category")]);
+  },[categoryList])
     
     const editeCategory = async(e) => {
         e.preventDefault()
