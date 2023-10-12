@@ -14,7 +14,6 @@ import { Loading } from "../Loading";
 export const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
-  const token = Cookies.get("token");
 
   const userList = useSelector((state) => state.users);
   const dispatch = useDispatch();

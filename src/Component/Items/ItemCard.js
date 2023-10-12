@@ -20,7 +20,9 @@ const ItemCard = (props) => {
           </div>
         </a>
         <div className="card-body ">
-          <p className="card-title fw-bolder">{`${item.productName}`}</p>
+          <p className="card-title fw-bolder">
+            {`${item.productName}`}
+          </p>
           <p className="card-text overflow-hidden" style={{ height: "50px" }}>
             {`${item.description}`}
           </p>

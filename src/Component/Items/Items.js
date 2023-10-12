@@ -89,11 +89,15 @@ const Items = (props) => {
             {role === "ROLE_ADMIN"
               ? items
                   .filter((post) => {
+                    const searchList = 
+                      post.productName + " " +
+                      post.description + " " +
+                      post.categoryId.categoryName
                     if (query === "") {
                       //if query is empty
                       return post;
                     } else if (
-                      post.productName
+                      searchList
                         .toLowerCase()
                         .includes(query.toLowerCase())
                         // && post.categoryId.id === category
@@ -111,7 +115,7 @@ const Items = (props) => {
                       //if query is empty
                       return post;
                     } else if (
-                      post.productName
+                      (post.description )
                         .toLowerCase()
                         .includes(query.toLowerCase())
                         // && post.categoryId.id === category
