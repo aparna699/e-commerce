@@ -54,7 +54,7 @@ function createExtraActions() {
 
     function deleteCategory() {
         return createAsyncThunk(
-            "category/addCategory", 
+            "category/deleteCategory", 
             async (url, {rejectWithValue}) => {
                 const token = Cookies.get("token")
                 try {

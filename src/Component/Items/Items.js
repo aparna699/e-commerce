@@ -10,6 +10,7 @@ import { getItemsList } from "../../store/items/actions";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Loading } from "../Loading";
+import { itemsActions } from "../../store/items/itemsSlice";
 
 const Items = (props) => {
   const [items, setItems] = useState([]);
@@ -18,15 +19,17 @@ const Items = (props) => {
   const url = props.url;
 
   const itemsList = useSelector((state) => state.items);
-
-  // console.log(useSelector(state => state.items))
   const dispatch = useDispatch();
+  
   useEffect(() => {
-    dispatch(getItemsList(url));
+    dispatch(itemsActions.getItemsList(url));
   }, []);
+
   useEffect(() => {
-    setItems(itemsList.data);
-  }, [itemsList.data]);
+    if(itemsList.isSuccess && !itemsList.isLoading){
+      setItems(itemsList.data);
+    }
+  }, [itemsList]);
 
   return (
     <div className="px-4">

@@ -1,12 +1,9 @@
 import React from 'react'
-import axios from "../../api/axios";
-import Cookies from "js-cookie";
 import { useDispatch, useSelector } from 'react-redux'
 import { categoryActions } from '../../store/Category/categorySlice';
 
 const DeleteCategory =  (props) => {
     const id = props.id
-    const token = Cookies.get("token")
 
     const dispatch = useDispatch()
     const categoryList = useSelector((state) => state.category)

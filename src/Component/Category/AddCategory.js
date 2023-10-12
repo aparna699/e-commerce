@@ -1,6 +1,5 @@
-import Cookies from 'js-cookie'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import AddIcon from '@mui/icons-material/Add';
 import { categoryActions } from '../../store/Category/categorySlice';
@@ -9,7 +8,8 @@ const AddCategory = () => {
     const [categoryName, setCategoryName] = useState()
     const [imgUrl, setImgUrl] = useState()
 
-    const dispatch = useDispatch((state) => state.category)
+    const dispatch = useDispatch()
+    const categoryList = useSelector((state) => state.category)
 
     const addCategory = async(e) => {
         e.preventDefault()
@@ -20,7 +20,9 @@ const AddCategory = () => {
             (imgUrl)
         }
         dispatch(categoryActions.addCategory(data))
-
+        if(categoryList.isSuccess && !categoryList.isLoading){
+          window.location.reload(true)
+        }
     }
 
   return (

@@ -24,6 +24,7 @@ import { ProductPage } from "./Component/Items/ProductPage";
 import { getCategoryList } from "./store/Category/actions";
 import { getItemsList } from "./store/items/actions";
 import { categoryActions } from "./store/Category/categorySlice";
+import { itemsActions } from "./store/items/itemsSlice";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -35,7 +36,7 @@ function App() {
 
   useEffect(() => {
     dispatch(categoryActions.getCategoryList());
-    dispatch(getItemsList("/api/items"));
+    dispatch(itemsActions.getItemsList("/api/items"));
     // if(categoryList.isSuccess){
     //   setCategory(categoryList.data);
     // }
@@ -49,7 +50,9 @@ function App() {
   }, [categoryList]);
 
   useEffect(() => {
-    setItems(itemsList.data);
+    if(itemsList.isSuccess && !itemsList.isLoading){
+      setItems(itemsList.data);
+    }
   }, [itemsList]);
   
   return (
