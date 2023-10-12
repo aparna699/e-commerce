@@ -7,6 +7,7 @@ function createExtraActions() {
     getItemsList: getItemsList(),
     addItems: addItems(),
     editItems: editItems(),
+    deleteItems: deleteItems(),
   }
 
   function getItemsList() {
@@ -68,6 +69,30 @@ function createExtraActions() {
             headers: header,
             withCredentials: true,
           });
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      }
+    )
+  }
+
+  function deleteItems() {
+    return createAsyncThunk(
+      "items/deleteItems",
+      async (itemId, { rejectWithValue }) => {
+        const token = Cookies.get("token");
+        const url = `/api/items/${itemId}`;
+        try {
+          const header = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          };
+          const response = await axios.delete(
+            url , {
+            headers: header,
+            withCredentials: false
+          });
+          return response.data
         } catch (error) {
           return rejectWithValue(error.message);
         }

@@ -6,6 +6,8 @@ function createExtraReducers() {
     return (builder) => {
         getItemsList();
         addItems();
+        editItems();
+        deleteItems();
 
         function getItemsList() {
             var { pending, fulfilled, rejected } = extraActions.getItemsList;
@@ -28,6 +30,42 @@ function createExtraReducers() {
 
         function addItems() {
             var { pending, fulfilled, rejected } = extraActions.addItems;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                    state.data = [];
+                })
+                .addCase(fulfilled, (state, { payload }) => {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                })
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = action;
+                })
+        }
+
+        function editItems() {
+            var { pending, fulfilled, rejected } = extraActions.editItems;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                    state.data = [];
+                })
+                .addCase(fulfilled, (state, { payload }) => {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                })
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = action;
+                })
+        }
+
+        function deleteItems() {
+            var { pending, fulfilled, rejected } = extraActions.deleteItems;
             builder
                 .addCase(pending, (state) => {
                     state.isLoading = true;
