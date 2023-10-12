@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../api/axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddIcon from '@mui/icons-material/Add';
+import { itemsActions } from "../../store/items/itemsSlice";
 
 export const AddItem = () => {
   const [productName, setProductName] = useState();
@@ -12,10 +12,10 @@ export const AddItem = () => {
   const [imgUrl, setImgUrl] = useState();
   const [categoryId, setCategoryId] = useState();
   const [category, setCategory] = useState([]);
-  const url = "/api/items";
-
+  
   const categoryList = useSelector((state) => state.category)
-
+  const itemsList = useSelector((state) => state.items)
+  const dispatch = useDispatch();
   useEffect(() => {
     if(categoryList.isSuccess){
       setCategory(categoryList.data);
@@ -24,6 +24,11 @@ export const AddItem = () => {
 
   const addItem = async (e) => {
     e.preventDefault();
+    if(imgUrl === undefined) {
+      alert("Product not added as no product image")
+      return 
+    }
+
     const data = {
       productName: productName,
       price: price,
@@ -32,16 +37,9 @@ export const AddItem = () => {
       imgUrl: [imgUrl],
       categoryId: categoryId,
     };
-    console.log(data);
-    const header = {
-      "Content-Type": "application/json",
-    };
-    try {
-      const response = await axios.post(url, data, { headers: header });
-      console.log(response);
-      console.log("Add Item");
-    } catch (err) {
-      console.log(err);
+    dispatch(itemsActions.addItems(data))
+    if(itemsList.isSuccess && !itemsList.isLoading){
+      window.location.reload(true)
     }
   };
 
@@ -84,7 +82,7 @@ export const AddItem = () => {
                       type="text"
                       onChange={(e) => setProductName(e.target.value)}
                       value={productName}
-                      placeholder="Product Name"
+                      placeholder="Product Name *"
                       required
                     />
                   </div>
@@ -95,7 +93,7 @@ export const AddItem = () => {
                       step={500}
                       onChange={(e) => setPrice(e.target.value)}
                       value={price}
-                      placeholder="Price"
+                      placeholder="Price *"
                       required
                     />
                   </div>
@@ -105,7 +103,7 @@ export const AddItem = () => {
                       type="number"
                       onChange={(e) => setQty(e.target.value)}
                       value={qty}
-                      placeholder="Quantity"
+                      placeholder="Quantity *"
                       required
                     />
                   </div>
@@ -115,7 +113,8 @@ export const AddItem = () => {
                       type="text"
                       onChange={(e) => setImgUrl(e.target.value)}
                       value={imgUrl}
-                      placeholder="Image"
+                      placeholder="Image *"
+                      required
                     />
                   </div>
                   <div className="row my-2">
@@ -135,7 +134,7 @@ export const AddItem = () => {
                       onChange={(e) => setCategoryId(e.target.value)}
                       required
                     >
-                      <option className="col-sm-12"> Select Category </option>
+                      <option className="col-sm-12"> Select Category *</option>
                       {category.map((key) => {
                         return (
                           <option className="col-sm-12" value={`${key.id}`}>

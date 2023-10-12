@@ -5,6 +5,7 @@ const extraActions = createExtraActions();
 function createExtraReducers() {
     return (builder) => {
         getItemsList();
+        addItems();
 
         function getItemsList() {
             var { pending, fulfilled, rejected } = extraActions.getItemsList;
@@ -17,6 +18,24 @@ function createExtraReducers() {
                     state.isLoading = false;
                     state.isSuccess = true;
                     state.data = payload;
+                })
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = action;
+                })
+        }
+
+        function addItems() {
+            var { pending, fulfilled, rejected } = extraActions.addItems;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
+                    state.data = [];
+                })
+                .addCase(fulfilled, (state, { payload }) => {
+                    state.isLoading = false;
+                    state.isSuccess = true;
                 })
                 .addCase(rejected, (state, action) => {
                     state.isLoading = false;

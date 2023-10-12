@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch, useSelector } from "react-redux";
+import { itemsActions } from "../../store/items/itemsSlice";
 
 const EditButton = (props) => {
   const item = props.items;
   const itemId = item.id;
-  // console.log(item.id);
 
   const url = `/api/items/${itemId}`;
-  const token = Cookies.get("token");
 
   const [productName, setProductName] = useState();
   const [price, setPrice] = useState();
@@ -20,40 +20,31 @@ const EditButton = (props) => {
   const [categoryId, setCategoryId] = useState();
   const [category, setCategory] = useState([]);
 
+  const dispatch = useDispatch();
+  const itemsList = useSelector((state) => state.items)
+  const categoryList = useSelector((state) => state.category)
+
   useEffect(() => {
-    console.log("category");
-    const items = JSON.parse(localStorage.getItem("category"));
-    if (items) {
-      setCategory(items);
+    if (categoryList.isSuccess) {
+      setCategory(categoryList.data);
     }
-  }, [localStorage.getItem("category")]);
+  }, [categoryList]);
 
   const edit = async (e) => {
     e.preventDefault();
-    let isMounted = true;
-    const data = JSON.stringify({
+    const data = {
       productName: productName,
       price: price,
       description: description,
       qty: qty,
       imgUrl: (imgUrl)?([imgUrl]):(item.imgUrl),
       categoryId: categoryId,
-    });
-    const header = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     };
 
-    try {
-      const response = await axios.put(url, data, {
-        headers: header,
-        withCredentials: true,
-      });
-      console.log(response);
+    dispatch(itemsActions.editItems({itemId, data}))
 
-      isMounted && window.location.reload(true);
-    } catch (err) {
-      console.log(err);
+    if(itemsList.isSuccess && !itemsList.isLoading){
+      window.location.reload(true)
     }
 
     console.log("Edit: " + item.id);
