@@ -6,6 +6,7 @@ function createExtraActions() {
     return {
         getCategoryList: getCategoryList(),
         addCategory: addCategory(),
+        editeCategory: editeCategory(),
         deleteCategory: deleteCategory(),
     }
 
@@ -48,6 +49,29 @@ function createExtraActions() {
                 } catch (error) {
                     return rejectWithValue(error.message);
                 }  
+            }
+        )
+    }
+
+    function editeCategory() {
+        return createAsyncThunk(
+            "category/editeCategory",
+            async ({categoryId, data}, {rejectWithValue}) => {
+                const token = Cookies.get("token")
+                try {
+                    const header = {
+                        'Authorization': `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    }
+                    const response = await axios.put(
+                        `/api/category/${categoryId}`, 
+                        data, 
+                        { headers: header }
+                    );
+                    return response.data
+                } catch (error) {
+                    return rejectWithValue(error.message);
+                } 
             }
         )
     }

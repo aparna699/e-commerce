@@ -1,10 +1,11 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import axios from '../../api/axios'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import DeleteCategory from './DeleteCategory'
 import EditIcon from '@mui/icons-material/Edit';
+import { categoryActions } from '../../store/Category/categorySlice'
 
 const EditCategory = () => {
     const [categoryName, setCategoryName] = useState()
@@ -14,6 +15,7 @@ const EditCategory = () => {
     const [categoryId, setCategoryId] = useState();
     const [category, setCategory] = useState([]);
 
+    const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category)
 
   useEffect(() => {
@@ -28,21 +30,10 @@ const EditCategory = () => {
             categoryName: categoryName,
             categoryImgUrl: imgUrl
         }
-        console.log(data)
-        const header = {
-            'Authorization': `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-          try {
-            const response = await axios.put(
-                `/api/category/${categoryId}`, 
-                data, 
-                { headers: header });
-            console.log(response)
-            console.log("Edite Item");
-          } catch (err) {
-            console.log(err);
-          }
+        dispatch(categoryActions.editeCategory({categoryId, data}))
+        if(categoryList.isSuccess && !categoryList.isLoading){
+          window.location.reload(true)
+        }
     }
 
   return (

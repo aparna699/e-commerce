@@ -4,9 +4,8 @@ import CategoryCards from "../Component/Category/CategoryCards";
 import { useSelector, useDispatch } from "react-redux";
 
 import Items from "../Component/Items/Items";
-import { getCategoryList } from "../store/Category/actions";
 import { Loading } from "../Component/Loading";
-import { categoryActions } from "../store/Category/categorySlice";
+
 
 const Home = () => {
   const [category, setCategory] = useState([]);
@@ -43,7 +42,7 @@ const Home = () => {
 
         }
       </div>
-      <Items url="/api/items" />
+      <Items category="all" />
     </div>
   );
 };

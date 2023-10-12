@@ -10,7 +10,7 @@ const CategoryItems = (props) => {
   return (
     <div className="">
       <h3 className='mx-4 mt-2'>{props.category.categoryName}</h3>
-      <Items url={url}/>
+      <Items category={props.category.id}/>
     </div>
   )
 }

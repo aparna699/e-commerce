@@ -42,6 +42,22 @@ function createExtraReducers() {
                 })    
         }
 
+        function editeCategory() {
+            var { pending, fulfilled, rejected } = extraActions.editeCategory;
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true
+                })
+                .addCase(fulfilled, (state, { payload }) => {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                })
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                }) 
+        }
+
         function deleteCategory() {
             var { pending, fulfilled, rejected } = extraActions.deleteCategory;
             builder

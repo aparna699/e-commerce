@@ -1,33 +1,39 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import axios from "../../api/axios";
 
 import ItemCard from "./ItemCard";
 import ProductEditeCard from "../Items/ProductEditeCard";
 import SearchIcon from "@mui/icons-material/Search";
-import { getItemsList } from "../../store/items/actions";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Loading } from "../Loading";
-import { itemsActions } from "../../store/items/itemsSlice";
 
 const Items = (props) => {
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState("");
   const role = Cookies.get("role");
-  const url = props.url;
+  const category = props.category;
 
   const itemsList = useSelector((state) => state.items);
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(itemsActions.getItemsList(url));
-  }, []);
 
   useEffect(() => {
     if(itemsList.isSuccess && !itemsList.isLoading){
-      setItems(itemsList.data);
+      console.log(category)
+      if(category === "all"){
+        setItems(itemsList.data)
+      } else {
+        setItems(
+          // itemsList.data
+          itemsList.data
+            .filter( (key) => (key.categoryId.id === category))
+            .map((key) => {
+              return key;
+          })
+        );
+      }
+      
     }
   }, [itemsList]);
 
@@ -90,7 +96,8 @@ const Items = (props) => {
                       post.productName
                         .toLowerCase()
                         .includes(query.toLowerCase())
-                    ) {
+                        // && post.categoryId.id === category
+                        ) {
                       //returns filtered array
                       return post;
                     }
@@ -107,6 +114,7 @@ const Items = (props) => {
                       post.productName
                         .toLowerCase()
                         .includes(query.toLowerCase())
+                        // && post.categoryId.id === category
                     ) {
                       //returns filtered array
                       return post;
