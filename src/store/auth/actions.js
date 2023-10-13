@@ -25,9 +25,9 @@ function createExtraActions() {
                         body,
                         header
                     );
-                    // Cookies.set('token', response?.data?.accessToken)
-                    // Cookies.set('role', response?.data?.role)
-                    // Cookies.set('userId', response?.data?.id)
+                    Cookies.set('token', response?.data?.accessToken)
+                    Cookies.set('role', response?.data?.role)
+                    Cookies.set('userId', response?.data?.id)
                     return response.data
                 } catch (error) {
                     return rejectWithValue(error.message);

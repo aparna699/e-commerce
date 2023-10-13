@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState ,useContext} from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../Hooks/useAuth";
 import axios from "../api/axios";
 import Cookies from 'js-cookie'
 
@@ -11,7 +10,7 @@ import { authActions } from "../store/auth/authSlice";
 
 
 const LogIn = () => {
-    const {setAuth} = useAuth();
+    // const {setAuth} = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -42,10 +41,7 @@ const LogIn = () => {
             const token = authInfo.data.token
             const role = authInfo.data.role
             const id = authInfo.data.userId
-        Cookies.set('token', token)
-        Cookies.set('role', role)
-        Cookies.set('userId', id)
-            setAuth({email, password, token})
+            // setAuth({email, password, token})
             setEmail('')
             setPwd("")
             navigate(from,{replace: true})
