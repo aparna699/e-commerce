@@ -6,6 +6,8 @@ import Cookies from 'js-cookie'
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/auth/authSlice";
 
 
 const LogIn = () => {
@@ -27,45 +29,48 @@ const LogIn = () => {
         e.preventDefault()
       setPasswordShown(passwordShown ? false : true);
     };
-  
-    
-    // useEffect(() => {
-    //     userRef.current.focus();
-    // }, [])
+
+    const dispatch = useDispatch();
+    const authInfo = useSelector((state) => state.auth);
 
     useEffect(() => {
         setErrMsg('');
     },[email, password])
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         try{
-            const LOGIN_URL = '/auth'
-            const body = JSON.stringify({email: email,password:password});
-            const header = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                withCredentials: true,
-            }
-            const response = await axios.post(
-                LOGIN_URL,
-                body,
-                header
-            );
-
-            const accessToken = response?.data?.accessToken
-            const role = response?.data?.role
-            const id = response?.data?.id
-            console.log(response?.data)
-            Cookies.set('token', accessToken)
-            Cookies.set('role', role)
-            Cookies.set('userId', id)
-            setAuth({email, password, accessToken})
-            setEmail('')
-            setPwd("")
+            // const LOGIN_URL = '/auth'
+            const body = {
+                email: email,
+                password:password
+            };
+            // const header = {
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     withCredentials: true,
+            // }
+            // const response = await axios.post(
+            //     LOGIN_URL,
+            //     body,
+            //     header
+            // );
+            dispatch(authActions.logIn(body))
+            // if(authInfo.isSuccess && !authInfo.isLoading){
+                const token = authInfo.token
+                const role = authInfo.role
+                const id = authInfo.userId
+            // Cookies.set('token', token)
+            // Cookies.set('role', role)
+            // Cookies.set('userId', id)
+                setAuth({email, password, token})
+                setEmail('')
+                setPwd("")
+                navigate(from,{replace: true})
+            // }
             
-            navigate(from,{replace: true})
+            
         }catch(err){
             if(!err?.response){
                 setErrMsg('No response');

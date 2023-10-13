@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { addressReducer } from "./Address/addressSlice";
+import { authReducer } from "./auth/authSlice";
 import { cartReducer } from "./Cart/cartSlice";
 import { categoryReducer } from "./Category/categorySlice";
 import { itemsReducer } from "./items/itemsSlice";
@@ -15,5 +16,6 @@ export const store = configureStore({
         address: addressReducer,
         users: usersReducer,
         reset: someSlice.reducer,
+        auth: authReducer,
     },
   });

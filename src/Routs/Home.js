@@ -9,6 +9,7 @@ import { Loading } from "../Component/Loading";
 
 const Home = () => {
   const [category, setCategory] = useState([]);
+
   const categoryList = useSelector((state) => state.category);
   // const dispatch = useDispatch();
   useEffect(() => {
@@ -18,11 +19,12 @@ const Home = () => {
   }, [categoryList]);
   // }, []);
 
+
   return (
     <div>
       <Outlet />
       {/* {console.log(categoryList.isSuccess)} */}
-      <div className=" py-2">
+      <div className=" py-2" >
         {
             (categoryList.isLoading)?(
               <Loading/>
