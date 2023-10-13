@@ -10,6 +10,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonIcon from '@mui/icons-material/Person';
 import { getUsersList } from "../../store/Users/actions";
 import { Loading } from "../Loading";
+import { usersActions } from "../../store/Users/usersSlice";
 
 export const DisplayUsers = () => {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,7 @@ export const DisplayUsers = () => {
   const userList = useSelector((state) => state.users);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUsersList());
+    dispatch(usersActions.getUsersList());
   }, []);
   useEffect(() => {
     setUsers(userList.data);

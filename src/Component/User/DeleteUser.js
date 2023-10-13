@@ -3,29 +3,22 @@ import React from "react";
 import axios from "../../api/axios";
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from "react-redux";
+import { usersActions } from "../../store/Users/usersSlice";
 
 export const DeleteUser = (props) => {
   const id = props.userId;
   const url = `/api/users/${id}`;
   const token = Cookies.get("token");
 
+  const dispatch = useDispatch();
+  const usersList = useSelector((state) => state.users)
+
   const deleteUser = async (e) => {
     e.preventDefault();
-    let isMounted = true;
-    try {
-      const header = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      };
-      const response = await axios.delete(url, {
-        headers: header,
-        withCredentials: false,
-      });
-      console.log(response);
-      isMounted && window.location.reload(true);
-      console.log("delete");
-    } catch (err) {
-      console.log(err);
+    dispatch(usersActions.deleteUser(id));
+    if(usersList.isSuccess && !usersList.isLoading) {
+      window.location.reload(true)
     }
   };
   return (

@@ -7,42 +7,22 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import CakeIcon from '@mui/icons-material/Cake';
 import PersonIcon from '@mui/icons-material/Person';
+import { useDispatch, useSelector } from "react-redux";
+import { usersActions } from "../../store/Users/usersSlice";
 
 export const ProfileInfo = () => {
-
-    const userId = Cookies.get("userId");
-    const token = Cookies.get("token");
     const [user, setUser] = useState();
+
+    const dispatch = useDispatch();
+    const usersList = useSelector((state) => state.users)
   
     useEffect(() => {
-      let isMounted = true;
-      const controller = new AbortController();
-      const url = `/api/users/${userId}`;
-  
-      const getUser = async () => {
-        console.log("get Users");
-        try {
-          const header = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          };
-          const response = await axios.get(url, {
-            headers: header,
-          });
-          console.log("response.data")
-          console.log(response.data);
-          isMounted && setUser(response.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-  
-      getUser()
-      return () => {
-        isMounted = false;
-        controller.abort();
-      };
+      dispatch(usersActions.getProfileInfo())
     }, []);
+
+    useEffect(() => {
+      setUser(usersList.user)
+    },[usersList])
 
   return (
     <div className="row">

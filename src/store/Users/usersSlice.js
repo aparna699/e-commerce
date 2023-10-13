@@ -1,30 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getUsersList } from "./actions";
+import createExtraActions from "./actions";
+import createExtraReducers from "./reducer";
 
-
+const name = "users"
 const initialState = {
     data: [],
+    user:{},
     isLoading: false,
     isSuccess: false,
     errorMessage: "",
 };
 
-export const usersSlice = createSlice({
-    name: "users",
-    initialState: initialState,
-    extraReducers: {
-      [getUsersList.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [getUsersList.fulfilled]: (state, { payload }) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.data = payload;
-      },
-      [getUsersList.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.errorMessage = action;
-      },
-    },
-})
+const extraActions = createExtraActions();
+const extraReducers = createExtraReducers();
+
+const usersSlice = createSlice({ 
+  name, 
+  initialState, 
+  extraReducers 
+});
+
+//export
+export const usersActions = { ...usersSlice.actions, ...extraActions };
+export const usersReducer = usersSlice.reducer;

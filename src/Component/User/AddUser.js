@@ -3,6 +3,8 @@ import Input from "react-phone-number-input/input";
 import axios from '../../api/axios';
 
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from 'react-redux';
+import { usersActions } from '../../store/Users/usersSlice';
 
 export const AddUser = () => {
   const [role, setRole] = useState()
@@ -27,6 +29,9 @@ export const AddUser = () => {
     date < 10 ? `0${date}` : `${date}`
   }`;
 
+  const dispatch = useDispatch();
+  const usersList = useSelector((state) => state.users);
+
   useEffect(() => {
     isChecked ? setRole("ROLE_ADMIN") : setRole("ROLE_CUSTOMER")
   },[isChecked])
@@ -43,23 +48,10 @@ export const AddUser = () => {
         phoneNumber: phoneNum,
         role: role
     }
-    const header = {
-        'Content-Type': 'application/json'
-    }
-    try {
-        const response = await axios.post(
-            url,
-            data,
-            {headers: header}
-        )
-        console.log(response)
-        console.log("Register")
+    dispatch(usersActions.addUsers(data))
+    if(usersList.isSuccess && !usersList.isLoading) {
         window.location.reload(true)
-    }catch(err){
-        console.log(err)
     }
-
-    console.log(data)
   }
 
   return (
