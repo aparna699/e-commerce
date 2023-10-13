@@ -40,6 +40,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    console.log(Cookies.get('role'))
     dispatch(cartActions.getCartList(userId));
   },[])
   const cartList = useSelector((state) => state.cart);

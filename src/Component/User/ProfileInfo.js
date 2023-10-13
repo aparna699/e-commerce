@@ -9,6 +9,7 @@ import CakeIcon from '@mui/icons-material/Cake';
 import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch, useSelector } from "react-redux";
 import { usersActions } from "../../store/Users/usersSlice";
+import { Loading } from "../Loading";
 
 export const ProfileInfo = () => {
     const [user, setUser] = useState();
@@ -21,7 +22,9 @@ export const ProfileInfo = () => {
     }, []);
 
     useEffect(() => {
-      setUser(usersList.user)
+      if(usersList.isSuccess && !usersList.isLoading){
+        setUser(usersList.user)
+      }
     },[usersList])
 
   return (
@@ -40,7 +43,7 @@ export const ProfileInfo = () => {
                     <h5 className="d-flex justify-content-center"><CakeIcon className="mx-2"/> {dateFormat(user.dOB, "mmm dS, yyyy")}</h5>
                 </div>
             ):(
-                <div className="d-flex justify-content-center">Loading ... </div>
+                <Loading/>
             )
         }
         </div>

@@ -37,9 +37,24 @@ const LogIn = () => {
         setErrMsg('');
     },[email, password])
 
+    useEffect(() => {
+        if(authInfo.isSuccess && !authInfo.isLoading){
+            const token = authInfo.data.token
+            const role = authInfo.data.role
+            const id = authInfo.data.userId
+        Cookies.set('token', token)
+        Cookies.set('role', role)
+        Cookies.set('userId', id)
+            setAuth({email, password, token})
+            setEmail('')
+            setPwd("")
+            navigate(from,{replace: true})
+        }
+    },[authInfo])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        try{
+        // try{
             // const LOGIN_URL = '/auth'
             const body = {
                 email: email,
@@ -57,33 +72,23 @@ const LogIn = () => {
             //     header
             // );
             dispatch(authActions.logIn(body))
-            // if(authInfo.isSuccess && !authInfo.isLoading){
-                const token = authInfo.token
-                const role = authInfo.role
-                const id = authInfo.userId
-            // Cookies.set('token', token)
-            // Cookies.set('role', role)
-            // Cookies.set('userId', id)
-                setAuth({email, password, token})
-                setEmail('')
-                setPwd("")
-                navigate(from,{replace: true})
-            // }
             
             
-        }catch(err){
-            if(!err?.response){
-                setErrMsg('No response');
-            } else if(err.response?.status === 400){
-                setErrMsg('Missing user or password');
-            } else if(err.response?.status === 401){
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg("LogIn failed")
-            }
-            console.log(err);
-            // errRef.current.focus();
-        }
+            
+            
+        // }catch(err){
+        //     if(!err?.response){
+        //         setErrMsg('No response');
+        //     } else if(err.response?.status === 400){
+        //         setErrMsg('Missing user or password');
+        //     } else if(err.response?.status === 401){
+        //         setErrMsg('Unauthorized');
+        //     } else {
+        //         setErrMsg("LogIn failed")
+        //     }
+        //     console.log(err);
+        //     // errRef.current.focus();
+        // }
     }
 
     return (
