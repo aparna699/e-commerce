@@ -9,7 +9,7 @@ const initialState = {
         role: undefined,
         userId: undefined
     },
-    
+    isLogedIn: false,
     isLoading: false,
     isSuccess: false,
     errorMessage: "",

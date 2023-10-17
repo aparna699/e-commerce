@@ -22,8 +22,7 @@ function createExtraReducers() {
                 .addCase(fulfilled, (state, { payload }) => {
                     state.isLoading = false;
                     state.isSuccess = true;
-                    // state.data = payload;
-
+                    state.isLogedIn = true
                     state.data.token = payload.accessToken;
                     state.data.role = payload.role;
                     state.data.userId = payload.id;
@@ -40,6 +39,7 @@ function createExtraReducers() {
             builder
                 .addCase(pending, (state) => {
                     state.isLoading = true;
+                    state.isLogedIn = false;
                 })
                 .addCase(fulfilled, (state, { payload }) => {
                     state.isLoading = false;

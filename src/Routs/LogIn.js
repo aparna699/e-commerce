@@ -15,7 +15,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/"
-    console.log("from: ",from)
+    // console.log("from: ",from)
 
     const userRef = useRef();
     const errRef = useRef();
@@ -33,6 +33,13 @@ const LogIn = () => {
     const dispatch = useDispatch()
     const authInfo = useSelector((state) => state.auth);
 
+    useEffect(() => {
+        if(authInfo.isLogedIn){
+            console.log("login")
+            navigate(from,{replace: true})
+        }
+    },[authInfo])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const body = {
@@ -41,7 +48,8 @@ const LogIn = () => {
         };
 
         dispatch(authActions.logIn(body))  
-        navigate(from,{replace: true})
+        console.log(authInfo)
+        // navigate(from,{replace: true})
     }
 
     return (
