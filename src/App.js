@@ -104,7 +104,7 @@ function App() {
         </Route>
         {/* public routs */}
         <Route path="/login" element={<LogIn />} />
-        <Route path="register" element={<Register/>} />
+        <Route path="/register" element={<Register/>} />
         {/* <Route path= '/unauthorized' element= { <Unauthirized/>} />    */}
       </Routes>
     </BrowserRouter>

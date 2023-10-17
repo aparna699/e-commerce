@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "react-phone-number-input/input";
 import  { isValidPhoneNumber } from "react-phone-number-input";
 import { useNavigate} from "react-router-dom";
 import axios from "../api/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/auth/authSlice";
+import { Loading } from "../Component/Loading";
 
 const Register = () => {
   const userRef = useRef();
@@ -16,7 +19,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPwd] = useState();
   const [dob, setDob] = useState();
   const [phoneNum, setPhoneNum] = useState();
-  const url = "/api/users"
+
+  let registered = false;
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -27,16 +31,25 @@ const Register = () => {
   const maxDate = `${year-13}${"-"}${month < 10 ? `0${month}` : `${month}`}${"-"}${
     date < 10 ? `0${date}` : `${date}`
   }`;
-  const handleValidate = (value) => {
-    const isValid = isValidPhoneNumber(value);
-    console.log({ isValid })
-    return isValid
-  }
+
+  const dispatch = useDispatch();
+  const authInfo = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if(registered) {
+      // navigator('login')
+      console.log("Regeistered")
+    }
+  }, [registered])
+
+  // if(registered){
+  //   navigator('/login')
+  //   console.log("Reg")
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // console.log(data);
+
     if (isValidPhoneNumber(phoneNum)) {
         if(password === confirmPassword) {
             const data = {
@@ -48,22 +61,9 @@ const Register = () => {
                 phoneNumber: phoneNum,
                 role: "ROLE_CUSTOMER"
             }
-            const header = {
-                'Content-Type': 'application/json'
-            }
-            try {
-                const response = await axios.post(
-                    url,
-                    data,
-                    {headers: header}
-                )
-                console.log(response)
-                console.log("Register")
-                navigator('/login')
-            }catch(err){
-                console.log(err)
-            }
-            
+            dispatch(authActions.register(data))
+            console.log("Register")
+            navigator('/login')
         }else{
             alert("Password Mismatch")
         }

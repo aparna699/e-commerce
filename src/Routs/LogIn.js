@@ -15,6 +15,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/"
+    console.log("from: ",from)
 
     const userRef = useRef();
     const errRef = useRef();
@@ -29,62 +30,18 @@ const LogIn = () => {
       setPasswordShown(passwordShown ? false : true);
     };
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const authInfo = useSelector((state) => state.auth);
-
-    useEffect(() => {
-        setErrMsg('');
-    },[email, password])
-
-    useEffect(() => {
-        if(authInfo.isSuccess && !authInfo.isLoading){
-            const token = authInfo.data.token
-            const role = authInfo.data.role
-            const id = authInfo.data.userId
-            // setAuth({email, password, token})
-            setEmail('')
-            setPwd("")
-            navigate(from,{replace: true})
-        }
-    },[authInfo])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // try{
-            // const LOGIN_URL = '/auth'
-            const body = {
-                email: email,
-                password:password
-            };
-            // const header = {
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     withCredentials: true,
-            // }
-            // const response = await axios.post(
-            //     LOGIN_URL,
-            //     body,
-            //     header
-            // );
-            dispatch(authActions.logIn(body))
-            
-            
-            
-            
-        // }catch(err){
-        //     if(!err?.response){
-        //         setErrMsg('No response');
-        //     } else if(err.response?.status === 400){
-        //         setErrMsg('Missing user or password');
-        //     } else if(err.response?.status === 401){
-        //         setErrMsg('Unauthorized');
-        //     } else {
-        //         setErrMsg("LogIn failed")
-        //     }
-        //     console.log(err);
-        //     // errRef.current.focus();
-        // }
+        const body = {
+            email: email,
+            password:password
+        };
+
+        dispatch(authActions.logIn(body))  
+        navigate(from,{replace: true})
     }
 
     return (

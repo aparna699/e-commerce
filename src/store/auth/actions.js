@@ -6,6 +6,7 @@ import axios from "../../api/axios";
 function createExtraActions() {
     return {
         logIn: logIn(),
+        register: register(),
     }
 
     function logIn() {
@@ -28,6 +29,28 @@ function createExtraActions() {
                     Cookies.set('token', response?.data?.accessToken)
                     Cookies.set('role', response?.data?.role)
                     Cookies.set('userId', response?.data?.id)
+                    return response.data
+                } catch (error) {
+                    return rejectWithValue(error.message);
+                }
+            }
+        )
+    }
+
+    function register() {
+        return createAsyncThunk(
+            "auth/register",
+            async (data, { rejectWithValue }) => {
+                const url = "/api/users"
+                try{
+                    const header = {
+                        'Content-Type': 'application/json'
+                    }
+                    const response = await axios.post(
+                        url,
+                        data,
+                        {headers: header}
+                    )
                     return response.data
                 } catch (error) {
                     return rejectWithValue(error.message);
