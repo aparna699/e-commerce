@@ -19,7 +19,7 @@ import { revertAll } from "../store/reset";
 
 const Navbar = () => {
   const [cartQty, setCartQty] = useState(0)
-  const token = Cookies.get("token");
+
   const role = Cookies.get("role");
   const userId = Cookies.get("userId");
 

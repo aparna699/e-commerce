@@ -13,8 +13,9 @@ function createExtraActions() {
   function getAllAddress()  {
     return createAsyncThunk(
       "address/getAddressLsit", 
-      async (userId, { rejectWithValue }) => {
+      async ( rejectWithValue ) => {
         const token = Cookies.get("token")
+        const userId =  Cookies.get("userId")
         try {
           //api call
           const header = {

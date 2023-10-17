@@ -32,6 +32,7 @@ function App() {
 
   const categoryList = useSelector((state) => state.category);
   const itemsList = useSelector((state) => state.items);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

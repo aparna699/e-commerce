@@ -3,30 +3,35 @@ import { AddAddress } from "../Component/Address/AddAddress";
 import { AddressCart } from "../Component/Address/AddressCart";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { OrderButton } from "../Component/Order/OrderButton";
+import { useDispatch, useSelector } from "react-redux";
+import { addressActions } from "../store/Address/addressSlice";
 
 export const Ordering = () => {
   const [cart, setCart] = useState([]);
   const [addressList, setAddressList] = useState([]);
   const [address, setAddress] = useState();
-  console.log(cart);
   let price = 0;
   let qty = 0;
 
-  useEffect(() => {
-    console.log("cart");
-    const items = JSON.parse(localStorage.getItem("cart"));
-    if (items) {
-      setCart(items);
-    }
-  }, [localStorage.getItem("cart")]);
+  const dispatch = useDispatch();
+  const cartList = useSelector((state) => state.cart)
+  const addresses = useSelector((state) => state.address)
 
   useEffect(() => {
-    console.log("addressList");
-    const items = JSON.parse(localStorage.getItem("addressList"));
-    if (items) {
-      setAddressList(items);
+    dispatch(addressActions.getAllAddress());
+  })
+
+  useEffect(() => {
+    if (cartList.isSuccess && !cartList.isLoading) {
+      setCart(cartList.data);
     }
-  }, [localStorage.getItem("addressList")]);
+  }, [cartList]);
+
+  useEffect(() => {
+    if (addresses.isSuccess && !addresses.isLoading) {
+      setAddressList(addresses.data);
+    }
+  }, [addresses]);
 
   cart.map((key) => {
     price = price + key.qty * key.itemId.price;
@@ -115,7 +120,7 @@ export const Ordering = () => {
                   <div>
                     <p className="row">
                       <a className="col-sm-3" href={`/items/${k.itemId.id}`}>
-                        <img className="col-sm-12" src={k.itemId.imgUrl[0]} />
+                        <img className="col-sm-12" src={k.itemId.imgUrl[0]} style={{"height": "80px"}} />
                       </a>
                       <span className="col-sm-3 col-md-4 ">
                         {k.itemId.productName}
