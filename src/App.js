@@ -25,6 +25,7 @@ import { getCategoryList } from "./store/Category/actions";
 import { getItemsList } from "./store/items/actions";
 import { categoryActions } from "./store/Category/categorySlice";
 import { itemsActions } from "./store/items/itemsSlice";
+import { Checkout } from "./Routs/Checkout";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -68,6 +69,7 @@ function App() {
             <Route path="/MyOrders" element={<MyOrders />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/ordering" element= {<Ordering/>}/>
+            <Route path="/checkout" element={<Checkout/>} />
             <Route path="/address" element={<Address />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>
