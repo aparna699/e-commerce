@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddAddress } from "../Component/Address/AddAddress";
 import { AddressCart } from "../Component/Address/AddressCart";
 import CartItemCard from "../Component/Cart/CartItemCard";
+import { OrderSummery } from "../Component/Order/OrderSummery";
 import { addressActions } from "../store/Address/addressSlice";
 
 export const Checkout = () => {
   const [address, setAddress] = useState();
   const [addresses, setAddresses] = useState();
-  const [delevaryPrice, setDelevaryPrice] = useState(0);
+
 
   const dispatch = useDispatch();
   const addressList = useSelector((state) => state.address);
@@ -103,57 +104,7 @@ export const Checkout = () => {
           </h6>
         </div>
       </div>
-      {/* Order Summary */}
-      <div className="col-md-4 my-3">
-      <h3 className="fw-bolder">Summary</h3>
-        <div className="card my-2 p-2">
-          <div className="row">
-            <div className="col-md-7">Subtotal</div>
-            <div className="col-md-5 ">
-              <span className="d-flex justify-content-end">
-                Rs.{" "}
-                {cartList.totalPrice
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-7">Delevary Cost</div>
-            <div className="col-md-5 ">
-              <span className="d-flex justify-content-end">
-                Rs.{" "}
-                {delevaryPrice
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-7">Taxes</div>
-            <div className="col-md-5 ">
-              <span className="d-flex justify-content-end">
-                Rs.{" "}
-                {delevaryPrice
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-          </div>
-          <div className="card" />
-          <div className="row fw-bolder">
-            <div className="col-md-7">Total</div>
-            <div className="col-md-5 ">
-              <span className="d-flex justify-content-end">
-                Rs.{" "}
-                {cartList.totalPrice
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <OrderSummery cart={cartList}/>
     </div>
     // </div>
   );

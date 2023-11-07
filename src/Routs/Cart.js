@@ -43,7 +43,14 @@ const Cart = () => {
       </div>
       <div className="row my-3">
         <div className="col-md-9"></div>
-        <a className="col-md-3" href="/checkout"><button className="btn btn-dark col-md-12">Proceed To Order</button></a>
+        <a className="col-md-3" href="/checkout">
+          <button className="btn btn-dark col-md-12">Checkout</button>
+        </a>
+        {/* <form action="/create-checkout-session" method="POST">
+          <button type="submit">
+            Checkout
+          </button>
+        </form> */}
       </div>
     </div>
   );
