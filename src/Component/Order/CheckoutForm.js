@@ -14,14 +14,22 @@ import {loadStripe} from '@stripe/stripe-js';
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersActions } from '../../store/Users/usersSlice';
+import { paymentAction } from '../../store/Payment/paymentSlice';
+import { Loading } from '../Loading';
 
 
 
 export const CheckoutForm = () => {
   //get user email
   const [email, setEmail] = useState();
+  const [cart, setCart] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [body, setBody] = useState({});
+
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.users)
+  // const paymentList = useSelector((state) => state.payment)
+  const cartList = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(usersActions.getProfileInfo())
   }, []);
@@ -31,8 +39,24 @@ export const CheckoutForm = () => {
     }
   },[usersList])
   
+  useEffect(() => {
+    setCart(cartList.data);
+    setPrice(cartList.totalPrice)
+    if( cartList.isSuccess && !cartList.isLoading) {
+     setBody({
+        items: cart,
+        amount: price,
+      })
+    }
+  }, [cartList]);
   //create payment intint
   
+  useEffect(() => {
+    if( cartList.isSuccess && !cartList.isLoading){
+      console.log("body", body)
+      // dispatch(paymentAction.createPaymentIntent(body))
+    }
+  }, []);
 
 
   const stripe = useStripe();
@@ -44,12 +68,12 @@ export const CheckoutForm = () => {
 
   return (
     <div className='my-2'>
-        <form onSubmit={handleSubmit}>
-            <CardSection email={email}/>
-          <div className="d-flex justify-content-end my-2">
-            <button className="btn btn-dark ">Proceed to Buy</button>
-          </div>
-        </form>
-      </div>
+      {/* {cartList.isSuccess ? (
+        <p>Success</p>
+      ):(
+        <p>not Success</p>
+      )} */}
+      <CardSection email={email}/>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import createExtraActions, { getCartList } from "./actions";
+import createExtraActions from "./actions";
 import createExtraReducers from "./reducer";
 
 const name = 'cart';
