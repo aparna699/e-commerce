@@ -6,14 +6,22 @@ import {
   PaymentElement, 
   LinkAuthenticationElement
 } from '@stripe/react-stripe-js';
+import Cookies from 'js-cookie';
 
 export const CardSection = (props) => {
   const defaultEmail = props.email
+  const body = props.body
 
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  
+  
+  useEffect(() => {
+    console.log("body",JSON.parse(body))
+    // dispatch(paymentAction.createPaymentIntent(JSON.parse(body)))
+  }, []);
 
   useEffect(() => {
     if (!stripe) {

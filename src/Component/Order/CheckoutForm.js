@@ -16,20 +16,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { usersActions } from '../../store/Users/usersSlice';
 import { paymentAction } from '../../store/Payment/paymentSlice';
 import { Loading } from '../Loading';
+import Cookies from 'js-cookie';
+import { json } from 'react-router-dom';
 
 
 
 export const CheckoutForm = () => {
   //get user email
   const [email, setEmail] = useState();
-  const [cart, setCart] = useState([]);
-  const [price, setPrice] = useState(0);
-  const [body, setBody] = useState({});
+  const [body, setBody] = useState();
 
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.users)
-  // const paymentList = useSelector((state) => state.payment)
-  const cartList = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(usersActions.getProfileInfo())
   }, []);
@@ -39,23 +37,16 @@ export const CheckoutForm = () => {
     }
   },[usersList])
   
-  useEffect(() => {
-    setCart(cartList.data);
-    setPrice(cartList.totalPrice)
-    if( cartList.isSuccess && !cartList.isLoading) {
-     setBody({
-        items: cart,
-        amount: price,
-      })
-    }
-  }, [cartList]);
   //create payment intint
   
   useEffect(() => {
-    if( cartList.isSuccess && !cartList.isLoading){
-      console.log("body", body)
-      // dispatch(paymentAction.createPaymentIntent(body))
-    }
+    const items = Cookies.get("items");
+    const amount = Cookies.get("amount");
+    setBody({
+      items: JSON.parse(items),
+      amount: amount
+    })
+    // dispatch(paymentAction.createPaymentIntent(body))
   }, []);
 
 
@@ -73,7 +64,13 @@ export const CheckoutForm = () => {
       ):(
         <p>not Success</p>
       )} */}
-      <CardSection email={email}/>
+      {
+        body != undefined ? (
+          <CardSection email={email} body={JSON.stringify(body)}/>
+        ):(
+          <Loading/>
+        )
+      }
     </div>
   )
 }

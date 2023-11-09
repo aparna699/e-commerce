@@ -16,7 +16,7 @@ function createExtraActions() {
                     };
                     const response = await axios.post(
                         `/create-payment-intent`, 
-                        body,
+                        JSON.stringify(body),
                         { headers: header }
                     );
                     return response.data;

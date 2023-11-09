@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import createExtraActions from "./actions";
 
 const extraActions = createExtraActions();
@@ -29,6 +30,12 @@ function createExtraReducers() {
                         qty = qty + key.qty;
                     })
                     state.qty = qty
+                    const body = {
+                        items: payload,
+                        amount: price
+                    }
+                    Cookies.set("items", JSON.stringify(payload))
+                    Cookies.set("amount", price)
                 }) 
                 .addCase(rejected, (state, action) => {
                     state.isLoading = false;
