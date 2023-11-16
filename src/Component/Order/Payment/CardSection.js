@@ -19,7 +19,7 @@ export const CardSection = (props) => {
   
   
   useEffect(() => {
-    console.log("body",JSON.parse(body))
+    // console.log("body",JSON.parse(body))
     // dispatch(paymentAction.createPaymentIntent(JSON.parse(body)))
   }, []);
 

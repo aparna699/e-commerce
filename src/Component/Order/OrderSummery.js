@@ -1,6 +1,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useState } from "react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 
 import { CheckoutForm } from "./CheckoutForm";
 
@@ -17,6 +18,10 @@ export const OrderSummery = (props) => {
     // Customizable with appearance API.
     appearance: {/*...*/},
   };
+
+  const items = Cookies.get("items");
+  const amount = Cookies.get("amount");
+
   return (
     <div className="col-md-4 ">
       <h3 className="fw-bolder">Summary</h3>
@@ -67,7 +72,7 @@ export const OrderSummery = (props) => {
           </div>
         </div>
         <Elements stripe={stripePromise} options={options}>
-            <CheckoutForm />
+            <CheckoutForm items={items} amount={amount}/>
         </Elements>
        
       </div>

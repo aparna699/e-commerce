@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import CartItemCard from "../Component/Cart/CartItemCard";
 import { getCartList } from "../store/Cart/actions";
@@ -24,7 +25,13 @@ const Cart = () => {
     setPrice(cartList.totalPrice)
   }, [cartList]);
   
+  const navigate = useNavigate();
 
+  const handleCheckout = (e) => {
+    e.preventDefault()
+    alert("Checkout")
+    navigate("/checkout")
+  }
 
   return (
     <div className="container">
@@ -39,12 +46,11 @@ const Cart = () => {
       </div>
       <div className="text-end  mt-3">
         <h5><span className="fw-bold">Total Cost:</span> Rs. {price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h5>
-        {console.log(price)}
       </div>
       <div className="row my-3">
         <div className="col-md-9"></div>
         <a className="col-md-3" href="/checkout">
-          <button className="btn btn-dark col-md-12">Checkout</button>
+          <button onClick={handleCheckout} className="btn btn-dark col-md-12">Checkout</button>
         </a>
         {/* <form action="/create-checkout-session" method="POST">
           <button type="submit">

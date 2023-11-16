@@ -7,7 +7,7 @@ const RequireAuth = ({allowedRoles}) => {
     const location = useLocation();
     const token = Cookies.get('token');
     const role = Cookies.get('role');
-    console.log(token)
+    // console.log(token)
     return (
         role === undefined
             ? <Navigate to="/login" state={{from: location}} replace/>

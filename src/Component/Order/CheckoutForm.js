@@ -21,13 +21,22 @@ import { json } from 'react-router-dom';
 
 
 
-export const CheckoutForm = () => {
+export const CheckoutForm = (props) => {
   //get user email
   const [email, setEmail] = useState();
-  const [body, setBody] = useState();
+  // const [body, setBody] = useState();
+  // const items = props.items;
+  // const amount = props.amount;
+  const body = {
+    items: JSON.parse(props.items),
+    amount:  props.amount
+  }
+
+  
 
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.users)
+  const paymentList = useSelector((state) => state.payment)
   useEffect(() => {
     dispatch(usersActions.getProfileInfo())
   }, []);
@@ -40,14 +49,21 @@ export const CheckoutForm = () => {
   //create payment intint
   
   useEffect(() => {
-    const items = Cookies.get("items");
-    const amount = Cookies.get("amount");
-    setBody({
-      items: JSON.parse(items),
-      amount: amount
-    })
-    // dispatch(paymentAction.createPaymentIntent(body))
+    // const items = Cookies.get("items");
+    // const amount = Cookies.get("amount");
+    // setBody({
+    //   items: JSON.parse(items),
+    //   amount: amount
+    // })
+    console.log("body", body)
+    dispatch(paymentAction.createPaymentIntent(body))
   }, []);
+
+  useEffect(() => {
+    if(paymentList.isSuccess){
+      console.log("clientSecret: ",paymentList.clientSecret)
+    }
+  },[paymentList])
 
 
   const stripe = useStripe();
@@ -59,11 +75,6 @@ export const CheckoutForm = () => {
 
   return (
     <div className='my-2'>
-      {/* {cartList.isSuccess ? (
-        <p>Success</p>
-      ):(
-        <p>not Success</p>
-      )} */}
       {
         body != undefined ? (
           <CardSection email={email} body={JSON.stringify(body)}/>
