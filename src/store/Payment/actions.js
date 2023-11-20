@@ -22,6 +22,7 @@ function createExtraActions() {
                         JSON.stringify(body),
                         { headers: header }
                     );
+                    Cookies.set("clientSecret", response.data.clientSecret)
                     return response.data;
                 } catch(error) {
                     return rejectWithValue(error.message); 

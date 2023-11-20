@@ -24,7 +24,6 @@ import { json } from 'react-router-dom';
 export const CheckoutForm = (props) => {
   //get user email
   const [email, setEmail] = useState();
-  // const [body, setBody] = useState();
   // const items = props.items;
   // const amount = props.amount;
   const body = {
@@ -56,23 +55,14 @@ export const CheckoutForm = (props) => {
     //   amount: amount
     // })
     console.log("body", body)
-    dispatch(paymentAction.createPaymentIntent(body))
+    // dispatch(paymentAction.createPaymentIntent(body))
   }, []);
 
-  useEffect(() => {
-    if(paymentList.isSuccess){
-      console.log("clientSecret: ",paymentList.clientSecret)
-    }
-  },[paymentList])
-
-
-  const stripe = useStripe();
-  const elements = useElements();
-  const [errorMessage, setErrorMessage] = useState();
-
- 
-  const stripePromise = loadStripe('pk_test_51O2ptpSDQwswy4FigEMzva0hH8HGBb5uUlxOGhgmzkmDdt4pHvQZyLiVwAmk89w8ys4NbdpbQLlKJNeJIOpGlRy700TmQsH95z');
-
+  // useEffect(() => {
+  //   if(paymentList.isSuccess){
+  //     setClientSecret(paymentList.clientSecret)
+  //   }
+  // },[paymentList])
   return (
     <div className='my-2'>
       {
