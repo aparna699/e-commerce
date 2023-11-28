@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +26,8 @@ export const Checkout = () => {
   }, [addressList]);
 
   useEffect(() => {
-    console.log(address);
+    // console.log("address: ", address);
+    Cookies.set("address", address)
   }, [address]);
 
   return (

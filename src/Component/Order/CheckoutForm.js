@@ -22,16 +22,11 @@ import { json } from 'react-router-dom';
 
 
 export const CheckoutForm = (props) => {
-  //get user email
   const [email, setEmail] = useState();
-  // const items = props.items;
-  // const amount = props.amount;
   const body = {
     items: JSON.parse(props.items),
     amount:  props.amount
   }
-
-  
 
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.users)
@@ -48,21 +43,9 @@ export const CheckoutForm = (props) => {
   //create payment intint
   
   useEffect(() => {
-    // const items = Cookies.get("items");
-    // const amount = Cookies.get("amount");
-    // setBody({
-    //   items: JSON.parse(items),
-    //   amount: amount
-    // })
     console.log("body", body)
-    // dispatch(paymentAction.createPaymentIntent(body))
+    dispatch(paymentAction.createPaymentIntent(body))
   }, []);
-
-  // useEffect(() => {
-  //   if(paymentList.isSuccess){
-  //     setClientSecret(paymentList.clientSecret)
-  //   }
-  // },[paymentList])
   return (
     <div className='my-2'>
       {

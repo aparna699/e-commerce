@@ -4,6 +4,7 @@ import { authReducer } from "./auth/authSlice";
 import { cartReducer } from "./Cart/cartSlice";
 import { categoryReducer } from "./Category/categorySlice";
 import { itemsReducer } from "./items/itemsSlice";
+import { orderReducer } from "./Order/orderSlice";
 import { paymentReducer } from "./Payment/paymentSlice";
 import { someSlice } from "./reset";
 import { usersReducer } from "./Users/usersSlice";
@@ -19,5 +20,6 @@ export const store = configureStore({
         reset: someSlice.reducer,
         auth: authReducer,
         payment: paymentReducer,
+        order: orderReducer,
     },
   });

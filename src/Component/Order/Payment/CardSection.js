@@ -34,7 +34,7 @@ export const CardSection = (props) => {
 
     setIsProcessing(true);
     elements.submit()
-    
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret: clientSecret,
@@ -79,11 +79,13 @@ export const CardSection = (props) => {
     // </form>
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
-      <button disabled={isProcessing || !stripe || !elements} id="submit">
-        <span id="button-text">
+      <div className="d-flex justify-content-end">
+      <button className='btn btn-dark mt-2 ' disabled={isProcessing || !stripe || !elements} id="submit">
+        <span id="button-text" style={{color: "white"}}>
           {isProcessing ? "Processing ... " : "Pay now"}
         </span>
       </button>
+      </div>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>

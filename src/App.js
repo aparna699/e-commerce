@@ -26,7 +26,7 @@ import { getItemsList } from "./store/items/actions";
 import { categoryActions } from "./store/Category/categorySlice";
 import { itemsActions } from "./store/items/itemsSlice";
 import { Checkout } from "./Routs/Checkout";
-import Completion from "./Component/Order/Payment/Completion";
+import Completion from "./Routs/Completion";
 
 function App() {
   const [category, setCategory] = useState([]);
@@ -48,8 +48,6 @@ function App() {
     if(categoryList.isSuccess && !categoryList.isLoading){
       setCategory(categoryList.data);
     }
-    console.log(category)
-    console.log(categoryList.data)
   }, [categoryList]);
 
   useEffect(() => {

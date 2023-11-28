@@ -36,11 +36,13 @@ const Navbar = () => {
     Cookies.remove("token");
     Cookies.remove("role");
     Cookies.remove("userId");
+    Cookies.remove("address");
+    Cookies.remove("items");
+    Cookies.remove("amount");
     dispatch(revertAll())
   };
 
   useEffect(() => {
-    console.log(Cookies.get('role'))
     dispatch(cartActions.getCartList(userId));
   },[])
   const cartList = useSelector((state) => state.cart);
