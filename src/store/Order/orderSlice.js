@@ -6,6 +6,9 @@ const name = "order"
 const initialState = {
     isLoading: false,
     isSuccess: false,
+    orderId: null,
+    isOrderListLoading: false,
+    isOrderListSuccess: false,
     errorMessage: "",
 }
 

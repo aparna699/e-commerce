@@ -29,7 +29,6 @@ const Cart = () => {
 
   const handleCheckout = (e) => {
     e.preventDefault()
-    alert("Checkout")
     navigate("/checkout")
   }
 
