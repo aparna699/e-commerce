@@ -5,6 +5,7 @@ const extraActions = createExtraActions();
 function createExtraReducers() {
     return (builder) => {
         createOrder();
+        createOrderList();
 
         function createOrder() {
             var { pending, fulfilled, rejected } = extraActions.createOrder;
@@ -33,6 +34,7 @@ function createExtraReducers() {
                 .addCase(fulfilled, (state, {payload})=> {
                     state.isOrderListLoading = false;
                     state.isOrderListSuccess = true;
+                    state.items = payload;
                 }) 
                 .addCase(rejected, (state, action) => {
                     state.isOrderListLoading = false;

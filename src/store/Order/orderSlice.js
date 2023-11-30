@@ -7,6 +7,7 @@ const initialState = {
     isLoading: false,
     isSuccess: false,
     orderId: null,
+    items:null,
     isOrderListLoading: false,
     isOrderListSuccess: false,
     errorMessage: "",
