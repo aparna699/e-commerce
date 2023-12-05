@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { orderAction } from "../store/Order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/Cart/cartSlice";
+import { itemsActions } from "../store/items/itemsSlice";
 import { useSelect } from "@mui/base";
 import CartItemCard from "../Component/Cart/CartItemCard";
  
@@ -13,7 +14,7 @@ import {Loading} from "../Component/Loading"
 const Completion = () => {
     const dispatch = useDispatch();
     const orderList = useSelector((state) => state.order)
-
+    let count = 0
     const amount = Cookies.get("amount")
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const Completion = () => {
         console.log("Ordering")
         if(items.length > 0){
             dispatch(orderAction.createOrder(body));
-            dispatch(cartActions.deleteCartItem(`api/cart-item/${userId}`))
+            dispatch(cartActions.deleteCartItem(`api/user-cart-items/${userId}`))
         }
         console.log("delte")
     },[])
@@ -55,14 +56,24 @@ const Completion = () => {
                 )
             })
 
-            if(!orderList.isLoading && orderList.isSuccess && !orderList.isOrderListSuccess){
+            if(!orderList.isLoading && orderList.isSuccess && !orderList.isOrderListSuccess ){
                 console.log("enter")
-                dispatch(orderAction.createOrderLine(arr));
+                if(count == 0){
+                    dispatch(orderAction.createOrderLine(arr));
+                    count = count + 1
+                    arr.map((k) => {
+                        const body = JSON.stringify({
+                            qty: k.qty,
+                        })
+                        const itemId = k.itemId
+                        dispatch(itemsActions.reduceItemQty({itemId ,body}));
+                        // console.log("qty",)
+                    })
+                    console.log("excute1")
+                }
             }
-        }
-        console.log("o:",orderList)
-        
-    }, [orderList])
+        }  
+    }, [orderList.isSuccess])
     const items = JSON.parse(Cookies.get("items"));
     return (
         <div className="d-flex justify-content-center" >

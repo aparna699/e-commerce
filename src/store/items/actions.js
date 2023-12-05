@@ -8,6 +8,7 @@ function createExtraActions() {
     addItems: addItems(),
     editItems: editItems(),
     deleteItems: deleteItems(),
+    reduceItemQty: reduceItemQty(),
   }
 
   function getItemsList() {
@@ -91,6 +92,32 @@ function createExtraActions() {
             url , {
             headers: header,
             withCredentials: false
+          });
+          return response.data
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      }
+    )
+  }
+
+  function reduceItemQty() {
+    return createAsyncThunk(
+      "items/reduceItemQty",
+      async ({itemId, body}, { rejectWithValue }) => {
+        const token = Cookies.get("token");
+        const url = `/api/items/reduceQty/${itemId}`;
+        try {
+          const header = {
+            // Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          };
+          
+          const response = await axios.put(
+            url , 
+            body, {
+            headers: header,
+            withCredentials: false,
           });
           return response.data
         } catch (error) {

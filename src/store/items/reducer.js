@@ -8,6 +8,7 @@ function createExtraReducers() {
         addItems();
         editItems();
         deleteItems();
+        reduceItemQty();
 
         function getItemsList() {
             var { pending, fulfilled, rejected } = extraActions.getItemsList;
@@ -70,6 +71,23 @@ function createExtraReducers() {
                 .addCase(pending, (state) => {
                     state.isLoading = true;
                     state.data = [];
+                })
+                .addCase(fulfilled, (state, { payload }) => {
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                })
+                .addCase(rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.isSuccess = false;
+                    state.errorMessage = action;
+                })
+        }
+
+        function reduceItemQty() {
+            var { pending, fulfilled, rejected } = extraActions.reduceItemQty
+            builder
+                .addCase(pending, (state) => {
+                    state.isLoading = true;
                 })
                 .addCase(fulfilled, (state, { payload }) => {
                     state.isLoading = false;
