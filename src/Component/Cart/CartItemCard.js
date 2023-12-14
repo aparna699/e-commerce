@@ -36,8 +36,8 @@ const CartItemCard = (props) => {
   };
 
   return (
-    <div className="col-md-12 col-sm-12" >{/*px-5 m-2*/}
-      <div className="card  my-2" > {/*m-1*/}
+    <div className="col-md-12 col-sm-12" >
+      <div className="card  my-2" > 
         <div className="row " 
         style={{ height: "200px"}}
         >
@@ -47,7 +47,6 @@ const CartItemCard = (props) => {
                 src={item.imgUrl[0]}
                 class="card-img"
                 alt="..."
-                // style={{ "minHeight": "200px", "maxHeight": "200px"}}
                 style={{height: "200px"}}
               />
             </a>
