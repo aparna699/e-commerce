@@ -19,7 +19,8 @@ export const OrderSummery = (props) => {
     appearance: {/*...*/},
   };
 
-  const items = Cookies.get("items");
+  // const items = Cookies.get("items");
+  const items = localStorage.getItem("items");
   const amount = Cookies.get("amount");
 
   return (

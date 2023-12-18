@@ -34,7 +34,10 @@ function createExtraReducers() {
                         items: payload,
                         amount: price
                     }
-                    Cookies.set("items", JSON.stringify(payload))
+                    // Cookies.set("items", payload)
+                    localStorage.setItem("items", JSON.stringify(payload))
+                    // Cookies.set("items", JSON.stringify([{a:100},{a:100},{a:100},{a:100},{a:100}]))
+                    // console.log(JSON.stringify(payload));
                     Cookies.set("amount", price)
                 }) 
                 .addCase(rejected, (state, action) => {

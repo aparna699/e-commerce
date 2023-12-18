@@ -38,6 +38,7 @@ const Navbar = () => {
     Cookies.remove("userId");
     Cookies.remove("address");
     Cookies.remove("items");
+    localStorage.clear();
     Cookies.remove("amount");
     dispatch(revertAll())
   };

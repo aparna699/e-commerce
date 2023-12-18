@@ -27,6 +27,11 @@ export const CheckoutForm = (props) => {
     items: JSON.parse(props.items),
     amount:  props.amount
   }
+  console.log(body)
+  // const body = {
+  //   items: props.items,
+  //   amount:  props.amount
+  // }
 
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.users)

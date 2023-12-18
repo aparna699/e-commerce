@@ -42,7 +42,7 @@ const Completion = () => {
 
     useEffect(() => {
         console.log("orderId: ", orderList.orderId)
-        const items = JSON.parse(Cookies.get("items"));
+        const items = JSON.parse(localStorage.getItem("items"));
 
         if(items != undefined){
             const arr = items.map((k) => {
@@ -74,7 +74,7 @@ const Completion = () => {
             }
         }  
     }, [orderList.isSuccess])
-    const items = JSON.parse(Cookies.get("items"));
+    const items = JSON.parse(localStorage.getItem("items"));
     return (
         <div className="d-flex justify-content-center" >
             <div className="card w-50 text-center m-5 p-3  border-0" >
