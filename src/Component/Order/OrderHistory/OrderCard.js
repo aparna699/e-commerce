@@ -17,7 +17,8 @@ export const OrderCard = (props) => {
     }, []);
     useEffect(() => {
       if(!orderList.isOrderListLoading && orderList.isOrderListSuccess){
-        setOrders(orderList.orderLines.filter((k) => k.orderId.id == orderId))
+        const order = orderList.orderLines.filter((k) => k.orderId.id == orderId);
+        setOrders(order)
       }
     }, [orderList]);
 
@@ -40,7 +41,7 @@ export const OrderCard = (props) => {
         <div className="card"></div>
         <div className="row row-flex">
         <div className='col-md-10'>
-          {console.log("i", orderId)}
+          {/* <h1>{orders.length}</h1> */}
           <div className="row row-flex p-3">
             {orders.map((k) => {
               return( 
@@ -51,7 +52,7 @@ export const OrderCard = (props) => {
                       src={k.itemId.imgUrl[0]}
                       class="card-img-top"
                       alt="..."
-                      style={{height: "150px"}}
+                      style={{height: "125px"}}
                     />
                     </a>
                     </div>

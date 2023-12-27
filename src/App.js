@@ -27,22 +27,24 @@ import { categoryActions } from "./store/Category/categorySlice";
 import { itemsActions } from "./store/items/itemsSlice";
 import { Checkout } from "./Routs/Checkout";
 import Completion from "./Routs/Completion";
+import { orderAction } from "./store/Order/orderSlice";
+import { OrderPage } from "./Component/Order/OrderHistory/OrderPage";
 
 function App() {
   const [category, setCategory] = useState([]);
   const [items, setItems] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const categoryList = useSelector((state) => state.category);
   const itemsList = useSelector((state) => state.items);
+  const orderList = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(categoryActions.getCategoryList());
     dispatch(itemsActions.getItemsList("/api/items"));
-    // if(categoryList.isSuccess){
-    //   setCategory(categoryList.data);
-    // }
+    dispatch(orderAction.getAllOrders());
   }, []);
   useEffect(() => {
     if(categoryList.isSuccess && !categoryList.isLoading){
@@ -55,6 +57,12 @@ function App() {
       setItems(itemsList.data);
     }
   }, [itemsList]);
+
+  useEffect(() => {
+    if(orderList.isSuccess && !orderList.isLoading){
+      setOrders(orderList.orders);
+    }
+  }, [orderList]);
   
   return (
     <BrowserRouter>
@@ -100,6 +108,16 @@ function App() {
                 <Route
                   path={`/items/${key.id}`}
                   element={<ProductPage item={key}/>}
+                />
+              )
+            })
+          }
+          {
+            orders.map((key)=> {
+              return(
+                <Route
+                  path={`/Orders/${key.id}`}
+                  element={<OrderPage order={key}/>}
                 />
               )
             })

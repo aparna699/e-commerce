@@ -11,11 +11,14 @@ const MyOrders = () => {
     dispatch(orderAction.getOrders());
   }, []);
   useEffect(() => {
-    setOrders(orderList.orders);
+    if(orderList.isSuccess && !orderList.isLoading){
+      setOrders(orderList.items);
+    }
   }, [orderList]);
   return (
     <div className='px-4'>
-      <h1>MyOrders</h1> 
+      <h1>MyOrders</h1>
+      {/* {console.log(orders)}  */}
       {orders.map((k) => {
         return <OrderCard order={k} />
       })}

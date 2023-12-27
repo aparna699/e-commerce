@@ -6,8 +6,10 @@ function createExtraActions() {
     return {
         createOrder: createOrder(),
         createOrderLine: createOrderLine(),
+        getAllOrders: getAllOrders(),
         getOrders: getOrders(),
         getOrderItems: getOrderItems(),
+        getItemsByOrderId: getItemsByOrderId(),
     }
 
     function createOrder() {
@@ -60,6 +62,26 @@ function createExtraActions() {
         )
     }
 
+    function getAllOrders(){
+        return createAsyncThunk(
+            "order/getAllOrders",
+            async (rejectWithValue) => {
+                const url = `/api/order`
+                try {
+                    const header = {
+                        "Content-Type": "application/json",
+                    };
+                    const response = await axios.get(url, {
+                        headers: header,
+                    });
+                    return response.data;
+                } catch (error) {
+                    return rejectWithValue(error.message);
+                }
+            }
+        )
+    }
+
     function getOrders(){
         return createAsyncThunk(
             "order/getOrders",
@@ -94,7 +116,28 @@ function createExtraActions() {
                     const response = await axios.get(url, {
                         headers: header,
                     });
-                    console.log("c",response.data)
+                    // console.log("c",response.data)
+                    return response.data;
+                } catch (error) {
+                    return rejectWithValue(error.message);
+                }
+            }
+        )
+    }
+
+    function getItemsByOrderId(){
+        return createAsyncThunk(
+            "order/getItemsByOrderId",
+            async (orderId , {rejectWithValue}) => {
+                const url = `/api/order-line/orders/${orderId}`;
+                try {
+                    const header = {
+                        "Content-Type": "application/json",
+                    };
+                    const response = await axios.get(url, {
+                        headers: header,
+                    });
+                    // console.log("c",response.data)
                     return response.data;
                 } catch (error) {
                     return rejectWithValue(error.message);

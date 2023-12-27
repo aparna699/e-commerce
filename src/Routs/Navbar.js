@@ -25,7 +25,7 @@ const Navbar = () => {
 
   const user = ["MyOrders"];
   // const admin = ["Products", "Orders", "Users"];
-  const admin = ["Products", "Users"];
+  const admin = ["Products", "Users","Orders"];
 
   const navbar =
     role == "ROLE_CUSTOMER" ? user : role == "ROLE_ADMIN" ? admin : [];

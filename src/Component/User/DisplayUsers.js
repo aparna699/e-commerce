@@ -86,7 +86,7 @@ export const DisplayUsers = () => {
               return post;
             }}).map((user) => {
           return (
-            <div className="row p-2">
+            <div className="row p-2 ">
               <div className="col-sm-1">
                 <h6 className=" px-2">{user.id}</h6>
               </div>

@@ -6,8 +6,10 @@ function createExtraReducers() {
     return (builder) => {
         createOrder();
         createOrderList();
+        getAllOrders();
         getOrders();
         getOrderItems();
+        getItemsByOrderId();
 
         function createOrder() {
             var { pending, fulfilled, rejected } = extraActions.createOrder;
@@ -44,6 +46,24 @@ function createExtraReducers() {
                 })
         }
 
+        function getAllOrders() {
+            var { pending, fulfilled, rejected } = extraActions.getAllOrders;
+            builder
+            .addCase(pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fulfilled, (state, {payload})=> {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.orders = payload;
+            }) 
+            .addCase(rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.errorMessage = JSON.stringify(action.payload);
+            })
+        }
+
         function getOrders() {
             var { pending, fulfilled, rejected } = extraActions.getOrders;
             builder
@@ -53,7 +73,7 @@ function createExtraReducers() {
                 .addCase(fulfilled, (state, {payload})=> {
                     state.isLoading = false;
                     state.isSuccess = true;
-                    state.orders = payload;
+                    state.items = payload;
                 }) 
                 .addCase(rejected, (state, action) => {
                     state.isLoading = false;
@@ -83,6 +103,25 @@ function createExtraReducers() {
                     state.isOrderListSuccess = false;
                     state.errorMessage = JSON.stringify(action.payload);
                 })
+        }
+
+        function getItemsByOrderId(){
+            var { pending, fulfilled, rejected } = extraActions.getItemsByOrderId;
+            builder
+            .addCase(pending, (state) => {
+                state.isOrderListLoading = true;
+                // state.orderLines =[]
+            })
+            .addCase(fulfilled, (state, action)=> {
+                state.isOrderListLoading = false;
+                state.isOrderListSuccess = true;
+                state.items = action.payload;
+            }) 
+            .addCase(rejected, (state, action) => {
+                state.isOrderListLoading = false;
+                state.isOrderListSuccess = false;
+                state.errorMessage = JSON.stringify(action.payload);
+            })
         }
     }
 }
