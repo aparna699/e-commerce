@@ -29,7 +29,7 @@ const Completion = () => {
             orderDate: date,
             addressId: address,
             totalCost: amount,
-            statusId: null
+            statusId: 0
         }
         // const items = JSON.parse(Cookies.get("items"));
         console.log("Ordering")

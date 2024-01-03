@@ -109,17 +109,18 @@ function createExtraReducers() {
             var { pending, fulfilled, rejected } = extraActions.getItemsByOrderId;
             builder
             .addCase(pending, (state) => {
-                state.isOrderListLoading = true;
+                state.isLoading = true;
                 // state.orderLines =[]
             })
             .addCase(fulfilled, (state, action)=> {
-                state.isOrderListLoading = false;
-                state.isOrderListSuccess = true;
+                state.isLoading = false;
+                state.isSuccess = true;
                 state.items = action.payload;
+                console.log(action.payload);
             }) 
             .addCase(rejected, (state, action) => {
-                state.isOrderListLoading = false;
-                state.isOrderListSuccess = false;
+                state.isLoading = false;
+                state.isSuccess = false;
                 state.errorMessage = JSON.stringify(action.payload);
             })
         }

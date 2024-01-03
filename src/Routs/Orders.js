@@ -21,7 +21,7 @@ const Orders = () => {
       setOrders(orderList.orders);
     }
   }, [orderList]);
-
+  console.log(orders)
   return (
     <div className="px-4">
       <div className=" py-1">
@@ -117,7 +117,7 @@ const Orders = () => {
                     </small>
                   </div>
                   <div className="col-sm-2">
-                    <small>{k.statusId.replace("_", " ")}</small>
+                    <small>{k.statusId}</small>
                   </div>
                   <div className="col-sm-1">
                     <a href={`Orders/${k.id}`}>

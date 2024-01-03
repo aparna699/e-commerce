@@ -65,9 +65,13 @@ export const OrderCard = (props) => {
           </div>
         </div>
         <div className="col-md-2">
+          
           <div className='d-flex justify-content-end p-2'>
+            <a href={`Orders/${orderId}`}>
             <button className='btn btn-outline-dark' >Track order</button>
+            </a>
           </div>
+         
         </div>
         </div>
         

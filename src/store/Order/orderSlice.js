@@ -10,6 +10,7 @@ const initialState = {
     isOrderListLoading: false,
     isOrderListSuccess: false,
     orders: [],
+    items: [],
     orderLines:null,
     errorMessage: "",
 }
